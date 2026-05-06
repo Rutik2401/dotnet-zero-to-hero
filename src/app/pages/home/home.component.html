@@ -1,0 +1,91 @@
+<section class="hero">
+  <span class="pill">Beginner → Advanced</span>
+  <span class="pill">Interview Focused</span>
+  <span class="pill">Indian English</span>
+  <h1 class="hero-title">Become a job-ready <span class="brand-text">.NET Developer</span></h1>
+  <p class="hero-sub">
+    A 6–7 month roadmap broken into <strong>9 clear phases</strong>. Each topic comes with
+    real-life examples, runnable code, expected output, interview questions, common mistakes
+    and a pro tip — written in simple Indian English, not formal textbook style.
+  </p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" routerLink="/phase-0">Start with Phase 0 →</a>
+    <a class="btn btn-ghost" href="#roadmap">See full roadmap</a>
+  </div>
+</section>
+
+<section class="value-grid">
+  <div class="value-card">
+    <h4>Real-life Examples</h4>
+    <p>Every concept explained with Swiggy, Amazon, Bank, ATM — examples you actually relate to.</p>
+  </div>
+  <div class="value-card">
+    <h4>Runnable Code + Output</h4>
+    <p>Click <em>See Output</em> to verify what the code prints. Predict first, verify after.</p>
+  </div>
+  <div class="value-card">
+    <h4>Interview Q &amp; A</h4>
+    <p>3–5 main interview questions plus rapid-fire follow-ups for important topics.</p>
+  </div>
+  <div class="value-card">
+    <h4>Pro Tips</h4>
+    <p>One line per topic that makes you sound like a senior engineer in the interview.</p>
+  </div>
+</section>
+
+<section id="roadmap">
+  <h2>The 9-Phase Roadmap</h2>
+  <p class="lead">Follow phases in order. Don't skip Phase 0 even if you "know" basics — interviewers test depth, not whether you've heard the word.</p>
+
+  <div class="phase-grid">
+    @for (p of phases; track p.tag) {
+      @if (p.ready && p.link) {
+        <a class="phase-card" [routerLink]="p.link">
+          <span class="phase-tag">{{ p.tag }} <span class="pill pill-ready">ready</span></span>
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.desc }}</p>
+        </a>
+      } @else if (p.link) {
+        <a class="phase-card phase-card-soon" [routerLink]="p.link">
+          <span class="phase-tag">{{ p.tag }} <span class="pill">soon</span></span>
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.desc }}</p>
+        </a>
+      }
+    }
+  </div>
+</section>
+
+<section>
+  <h2>How to Use This Site</h2>
+  <ol>
+    <li><strong>Read the topic top-to-bottom</strong> — don't jump to code first. Understand <em>why</em> before <em>how</em>.</li>
+    <li><strong>Predict the output</strong> before clicking <em>See Output</em>. This is the closest thing to a real coding round.</li>
+    <li><strong>Re-read the interview questions</strong> the day before any interview. They are the actual questions you'll face.</li>
+    <li><strong>Build a project alongside</strong> — see Phase 7. Theory without project is forgotten in 2 weeks.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Suggested Daily Plan</h2>
+  <div class="plan-grid">
+    <div class="plan-block">
+      <span class="plan-time">2 hrs</span>
+      <p>Read concepts. Take notes. Don't watch videos passively.</p>
+    </div>
+    <div class="plan-block">
+      <span class="plan-time">2 hrs</span>
+      <p>Type the code yourself. No copy-paste. Break it on purpose, see the error.</p>
+    </div>
+    <div class="plan-block">
+      <span class="plan-time">2 hrs</span>
+      <p>Project work. Apply what you learnt today inside a real feature.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <h3>Ready to start?</h3>
+  <p>Phase 0 covers Programming + OOP — the foundation of every other phase.</p>
+  <a class="btn btn-primary" routerLink="/phase-0">Open Phase 0 →</a>
+</section>

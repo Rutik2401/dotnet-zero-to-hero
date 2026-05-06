@@ -1,0 +1,104 @@
+<div class="phase-layout">
+  <div class="phase-content">
+    <section>
+      <span class="pill">Phase 0</span>
+      <span class="pill">Programming + OOP</span>
+      <h1>Phase 0 — Fundamentals</h1>
+      <p class="lead">
+        This is the foundation phase. Here we build the base. If this is weak, everything in C#
+        and ASP.NET later will also feel hard. Don't skip — even if you have done it in college.
+        Read once like a fresher again, then revise before any interview.
+      </p>
+
+      <div class="topic-index">
+        <strong>Topics in this phase</strong>
+        <ol>
+          @for (t of topics; track t.id) {
+            <li>
+              <a [href]="'#' + t.id" (click)="scrollToTopic(t.id, $event)">{{ t.title }}</a>
+            </li>
+          }
+        </ol>
+      </div>
+
+      @for (topic of topics; track topic.id) {
+        <article class="topic-card" [id]="topic.id">
+          <h2 class="topic-title">🔹 {{ topic.title }}</h2>
+
+          <span class="section-label">What is this?</span>
+          @for (line of topic.whatIsThis; track $index) { <p>{{ line }}</p> }
+
+          <span class="section-label">Why do we use it?</span>
+          @for (line of topic.whyUseIt; track $index) { <p>{{ line }}</p> }
+
+          <span class="section-label">Real-life Example</span>
+          @for (line of topic.realLifeExample; track $index) { <p>{{ line }}</p> }
+
+          <span class="section-label">How it works (Step-by-step)</span>
+          <ol>
+            @for (step of topic.howItWorks; track $index) { <li>{{ step }}</li> }
+          </ol>
+
+          <span class="section-label">Code Example (C# / .NET)</span>
+          <pre data-label="Program.cs"><code>{{ topic.codeExample }}</code></pre>
+
+          <div class="output-row">
+            <button type="button"
+                    class="btn-output"
+                    (click)="toggleOutput(topic.id)">
+              {{ isOutputShown(topic.id) ? '▲ Hide Output' : '▼ See Output' }}
+            </button>
+          </div>
+
+          @if (isOutputShown(topic.id)) {
+            <pre class="code-output" data-label="Output"><code>{{ topic.codeOutput }}</code></pre>
+          }
+
+          <span class="section-label">Interview Questions</span>
+          @for (qa of topic.interviewQuestions; track $index) {
+            <div class="qa">
+              <p class="q">Q. {{ qa.q }}</p>
+              <p class="a">{{ qa.a }}</p>
+            </div>
+          }
+
+          @if (topic.followUpQuestions?.length) {
+            <span class="section-label section-label-rapid">⚡ Follow-up Questions (Rapid Fire)</span>
+            <div class="rapid-fire">
+              @for (qa of topic.followUpQuestions; track $index; let i = $index) {
+                <div class="rapid-qa">
+                  <p class="rapid-q"><strong>Q{{ i + 1 }}:</strong> {{ qa.q }}</p>
+                  <p class="rapid-a">👉 {{ qa.a }}</p>
+                </div>
+              }
+            </div>
+          }
+
+          <span class="section-label">Common Mistakes</span>
+          <ul>
+            @for (m of topic.commonMistakes; track $index) { <li>{{ m }}</li> }
+          </ul>
+
+          <span class="section-label">Pro Tip (Interviewer Insight)</span>
+          <div class="callout tip">{{ topic.proTip }}</div>
+
+          <a class="back-top"
+             href="#top"
+             (click)="scrollToTopic('top', $event)">↑ Back to top</a>
+        </article>
+      }
+    </section>
+  </div>
+
+  <aside class="phase-toc">
+    <p class="toc-title">On this page</p>
+    <ol class="toc-list">
+      @for (t of topics; track t.id) {
+        <li>
+          <a [href]="'#' + t.id" (click)="scrollToTopic(t.id, $event)">{{ t.title }}</a>
+        </li>
+      }
+    </ol>
+  </aside>
+</div>
+<span id="top"></span>

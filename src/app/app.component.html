@@ -1,0 +1,41 @@
+<div class="app-shell" [class.sidebar-collapsed]="!sidebarOpen()">
+  <header class="app-header">
+    <button class="btn-burger"
+            type="button"
+            (click)="toggleSidebar()"
+            [attr.aria-label]="sidebarOpen() ? 'Collapse roadmap' : 'Open roadmap'"
+            [title]="sidebarOpen() ? 'Collapse roadmap' : 'Open roadmap'">
+      @if (sidebarOpen()) { <span aria-hidden="true">✕</span> }
+      @else                { <span aria-hidden="true">☰</span> }
+    </button>
+    <a routerLink="/" class="brand">{{ title }}</a>
+    <nav>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/phase-0" routerLinkActive="active">Phase 0</a>
+      <a routerLink="/phase-1" routerLinkActive="active">Phase 1</a>
+      <a routerLink="/phase-2" routerLinkActive="active">Phase 2</a>
+      <a routerLink="/phase-3" routerLinkActive="active">Phase 3</a>
+    </nav>
+  </header>
+
+  <aside class="app-sidebar" [attr.aria-hidden]="!sidebarOpen()">
+    <p class="sidebar-title">Roadmap</p>
+    <ul class="sidebar-list">
+      @for (p of phases; track p.path) {
+        <li>
+          <a [routerLink]="p.path"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: p.path === '/' }"
+             [tabindex]="sidebarOpen() ? 0 : -1">
+            {{ p.label }}
+            @if (!p.ready) { <span class="pill pill-soon">soon</span> }
+          </a>
+        </li>
+      }
+    </ul>
+  </aside>
+
+  <main class="app-main">
+    <router-outlet />
+  </main>
+</div>

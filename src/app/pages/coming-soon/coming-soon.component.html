@@ -1,0 +1,26 @@
+@if (info$ | async; as info) {
+  <section>
+    <span class="pill">{{ info.tag }}</span>
+    <span class="pill" style="background: #fff7ed; color: #b45309;">Coming soon</span>
+    <h1>{{ info.title }}</h1>
+    <p class="lead">{{ info.scope }}</p>
+
+    <div class="callout warn">
+      <strong>This phase is being authored.</strong>
+      Phase 0 is fully ready — start there if you haven't already.
+      Each phase will follow the same structure: real-life example → step-by-step → code with output → interview Q&A → pro tip.
+    </div>
+
+    @if (info.topics.length > 0) {
+      <h2>What this phase will cover</h2>
+      <ul>
+        @for (t of info.topics; track t) { <li>{{ t }}</li> }
+      </ul>
+    }
+
+    <div class="cta-row">
+      <a class="btn btn-primary" routerLink="/phase-0">← Go to Phase 0 (ready)</a>
+      <a class="btn btn-ghost" routerLink="/">Back to home</a>
+    </div>
+  </section>
+}

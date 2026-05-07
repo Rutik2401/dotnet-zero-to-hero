@@ -29,9 +29,21 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/phase-3/phase-3.component').then(m => m.Phase3Component),
     title: 'Phase 3 — SQL + EF Core'
   },
-  { path: 'phase-4', loadComponent: comingSoon, title: 'Phase 4 — Advanced + System Design' },
-  { path: 'phase-5', loadComponent: comingSoon, title: 'Phase 5 — Frontend Basics' },
-  { path: 'phase-6', loadComponent: comingSoon, title: 'Phase 6 — DevOps + Deployment' },
+  {
+    path: 'phase-4',
+    loadComponent: () => import('./pages/phase-4/phase-4.component').then(m => m.Phase4Component),
+    title: 'Phase 4 — Advanced + System Design'
+  },
+  {
+    path: 'phase-5',
+    loadComponent: () => import('./pages/phase-5/phase-5.component').then(m => m.Phase5Component),
+    title: 'Phase 5 — Modern Angular'
+  },
+  {
+    path: 'phase-6',
+    loadComponent: () => import('./pages/phase-6/phase-6.component').then(m => m.Phase6Component),
+    title: 'Phase 6 — DevOps + Deployment'
+  },
   { path: 'phase-7', loadComponent: comingSoon, title: 'Phase 7 — Projects' },
   { path: 'phase-8', loadComponent: comingSoon, title: 'Phase 8 — Interview Preparation' },
   { path: '**', redirectTo: '' }

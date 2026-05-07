@@ -1,6 +1,8 @@
-import { AfterViewInit, Component, ElementRef, effect, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
 import hljs from 'highlight.js/lib/core';
 import csharp from 'highlight.js/lib/languages/csharp';
+import { CodeBlockComponent } from '../../shared/code-block/code-block.component';
+import { PhaseTocService } from '../../shared/phase-toc/phase-toc.service';
 import { phase1Topics } from './phase-1.data';
 
 // Register C# once for the lifetime of the page (lazy-loaded with the component).
@@ -8,7 +10,7 @@ hljs.registerLanguage('csharp', csharp);
 
 @Component({
   selector: 'app-phase-1',
-  imports: [],
+  imports: [CodeBlockComponent],
   templateUrl: './phase-1.component.html'
 })
 export class Phase1Component implements AfterViewInit {
@@ -26,6 +28,10 @@ export class Phase1Component implements AfterViewInit {
       this._outputs();
       queueMicrotask(() => this.highlightCodeBlocks());
     });
+
+    const toc = inject(PhaseTocService);
+    toc.setTopics(this.topics.map(t => ({ id: t.id, title: t.title })));
+    inject(DestroyRef).onDestroy(() => toc.clear());
   }
 
   isOutputShown(id: string): boolean {

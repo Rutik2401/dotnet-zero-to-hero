@@ -1,59 +1,68 @@
-# HelloWorld
+# .NET Roadmap — Zero to Hero
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+An Angular 19 site that walks a fresher through becoming a job-ready .NET developer
+in 6–7 months. Each phase is a topic-by-topic explainer with code examples,
+output, interview Q&A, rapid-fire follow-ups, common mistakes, and pro tips —
+written in simple Indian English with relatable examples (Swiggy, Flipkart,
+Amazon, banking, ATM).
 
-## Development server
+🌐 **Live site:** [github.com/Rutik2401/dotnet-zero-to-hero](https://github.com/Rutik2401/dotnet-zero-to-hero)
 
-To start a local development server, run:
+## Phases
 
-```bash
-ng serve
-```
+| Phase | Topic | Status |
+| ----- | ----- | ------ |
+| 0 | Programming + OOP fundamentals | ✅ Ready |
+| 1 | C# Deep Dive (LINQ, async, collections) | ✅ Ready |
+| 2 | ASP.NET Core (Web API, DI, middleware) | ✅ Ready |
+| 3 | SQL + EF Core | ✅ Ready |
+| 4 | Advanced + System Design | ✅ Ready |
+| 5 | Modern Angular (signals, control flow) | ✅ Ready |
+| 6 | DevOps + Deployment (Git, Docker, Azure) | ✅ Ready |
+| 7 | Portfolio Projects | 🚧 Soon |
+| 8 | Interview Preparation | 🚧 Soon |
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Local development
 
 ```bash
-ng build
+npm install
+npm start          # serves on http://localhost:4200
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Build for production
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+Build output goes to `dist/dotnet-roadmap`.
 
-For end-to-end (e2e) testing, run:
+## Tech stack
 
-```bash
-ng e2e
+- Angular 19 (standalone components, new control flow, signals)
+- highlight.js for code syntax highlighting (C# / TypeScript / bash / YAML / Dockerfile)
+- Lazy-loaded routes — every phase is its own chunk
+- No CSS framework — hand-rolled design tokens in `src/styles.css`
+
+## Project structure
+
+```
+src/app/
+  pages/
+    home/                    # landing page with phase grid
+    phase-0/ ... phase-6/    # one folder per phase
+      phase-N.component.ts
+      phase-N.component.html
+      phase-N.data.ts        # all topics for that phase
+      phase-N.types.ts
+    coming-soon/             # placeholder for unfinished phases
+  app.component.ts           # shell with sidebar + header
+  app.routes.ts              # lazy-loaded route table
+  app.config.ts              # provideRouter, etc.
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Authoring rules
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+See [Rules.md](Rules.md) — every topic page must follow the 9-section structure
+(What is this → Why → Real-life Example → How it works → Code → Output →
+Interview Q&A → Follow-ups → Common Mistakes → Pro Tip).

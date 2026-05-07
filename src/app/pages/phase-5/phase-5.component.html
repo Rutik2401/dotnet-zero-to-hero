@@ -1,14 +1,13 @@
 <div class="phase-content">
   <section>
-    <span class="pill">Phase 3</span>
-      <span class="pill">SQL + EF Core</span>
-      <h1>Phase 3 — Database & Entity Framework Core</h1>
+    <span class="pill">Phase 5</span>
+      <span class="pill">Modern Angular</span>
+      <h1>Phase 5 — Modern Angular</h1>
       <p class="lead">
-        Now we go to the data side. Joins, indexes, normalization, stored procedures and
-        transactions on the SQL side; Code First, migrations, relationships, lazy vs eager
-        loading, LINQ to Entities, query optimization and the famous N+1 problem on the
-        EF Core side. These topics decide whether your API stays fast at scale or falls over
-        in production. Read once, revise rapid-fire before any interview.
+        This is the frontend phase. Here we cover modern Angular (v17+) the way a 1–2 year
+        Angular dev actually uses it daily — standalone components, signals, new control flow
+        (&#64;if / &#64;for / &#64;defer), reactive forms, RxJS, change detection. No old NgModule stuff.
+        Read once, build a small app, then revise these topics before any Angular interview.
       </p>
 
       <div class="topic-index">
@@ -40,8 +39,8 @@
             @for (step of topic.howItWorks; track $index) { <li>{{ step }}</li> }
           </ol>
 
-          <span class="section-label">Code Example (C# / .NET)</span>
-          <app-code-block [code]="topic.codeExample" />
+          <span class="section-label">Code Example (Angular / TypeScript)</span>
+          <app-code-block [code]="topic.codeExample" [label]="'component.ts'" />
 
           <div class="output-row">
             <button type="button"

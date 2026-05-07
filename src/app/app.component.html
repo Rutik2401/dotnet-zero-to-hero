@@ -1,4 +1,6 @@
-<div class="app-shell" [class.sidebar-collapsed]="!sidebarOpen()">
+<div class="app-shell"
+     [class.sidebar-collapsed]="!sidebarOpen()"
+     [class.has-toc]="hasToc()">
   <header class="app-header">
     <button class="btn-burger"
             type="button"
@@ -15,27 +17,22 @@
       <a routerLink="/phase-1" routerLinkActive="active">Phase 1</a>
       <a routerLink="/phase-2" routerLinkActive="active">Phase 2</a>
       <a routerLink="/phase-3" routerLinkActive="active">Phase 3</a>
+      <a routerLink="/phase-4" routerLinkActive="active">Phase 4</a>
     </nav>
   </header>
 
-  <aside class="app-sidebar" [attr.aria-hidden]="!sidebarOpen()">
-    <p class="sidebar-title">Roadmap</p>
-    <ul class="sidebar-list">
-      @for (p of phases; track p.path) {
-        <li>
-          <a [routerLink]="p.path"
-             routerLinkActive="active"
-             [routerLinkActiveOptions]="{ exact: p.path === '/' }"
-             [tabindex]="sidebarOpen() ? 0 : -1">
-            {{ p.label }}
-            @if (!p.ready) { <span class="pill pill-soon">soon</span> }
-          </a>
-        </li>
-      }
-    </ul>
-  </aside>
+  <app-sidebar [phases]="phases" [open]="sidebarOpen()" />
+
+  <!-- Backdrop: tap outside the drawer to close it on mobile -->
+  <div class="sidebar-backdrop"
+       (click)="toggleSidebar()"
+       aria-hidden="true"></div>
 
   <main class="app-main">
     <router-outlet />
   </main>
+
+  @if (hasToc()) {
+    <app-phase-toc />
+  }
 </div>

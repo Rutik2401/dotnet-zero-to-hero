@@ -1,7 +1,6 @@
-<div class="phase-layout">
-  <div class="phase-content">
-    <section>
-      <span class="pill">Phase 2</span>
+<div class="phase-content">
+  <section>
+    <span class="pill">Phase 2</span>
       <span class="pill">ASP.NET Core</span>
       <h1>Phase 2 — ASP.NET Core</h1>
       <p class="lead">
@@ -41,7 +40,7 @@
           </ol>
 
           <span class="section-label">Code Example (C# / .NET)</span>
-          <pre data-label="Program.cs"><code>{{ topic.codeExample }}</code></pre>
+          <app-code-block [code]="topic.codeExample" />
 
           <div class="output-row">
             <button type="button"
@@ -88,18 +87,6 @@
              (click)="scrollToTopic('top', $event)">↑ Back to top</a>
         </article>
       }
-    </section>
-  </div>
-
-  <aside class="phase-toc">
-    <p class="toc-title">On this page</p>
-    <ol class="toc-list">
-      @for (t of topics; track t.id) {
-        <li>
-          <a [href]="'#' + t.id" (click)="scrollToTopic(t.id, $event)">{{ t.title }}</a>
-        </li>
-      }
-    </ol>
-  </aside>
+  </section>
 </div>
 <span id="top"></span>

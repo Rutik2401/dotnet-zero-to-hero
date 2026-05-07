@@ -94,10 +94,14 @@ html, body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
+  overflow-x: hidden;          /* never scroll page sideways */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+/* Long words / URLs inside paragraphs and lists must wrap, not push width */
+p, li, .qa .a, .rapid-a, .callout { overflow-wrap: anywhere; }
 
 html { scroll-behavior: smooth; }
 
@@ -122,19 +126,19 @@ img, svg { display: block; max-width: 100%; }
 /* ===== 3. Scrollbars (modern thin) ============================== */
 .app-sidebar,
 .app-main,
-.phase-toc {
+.app-toc {
   scrollbar-width: thin;
   scrollbar-color: rgba(75, 85, 99, 0.30) transparent;
 }
 .app-sidebar::-webkit-scrollbar,
-.phase-toc::-webkit-scrollbar { width: 8px; }
+.app-toc::-webkit-scrollbar { width: 8px; }
 .app-main::-webkit-scrollbar  { width: 10px; }
 .app-sidebar::-webkit-scrollbar-track,
 .app-main::-webkit-scrollbar-track,
-.phase-toc::-webkit-scrollbar-track { background: transparent; }
+.app-toc::-webkit-scrollbar-track { background: transparent; }
 .app-sidebar::-webkit-scrollbar-thumb,
 .app-main::-webkit-scrollbar-thumb,
-.phase-toc::-webkit-scrollbar-thumb {
+.app-toc::-webkit-scrollbar-thumb {
   background: rgba(75, 85, 99, 0.22);
   border-radius: 8px;
   border: 2px solid transparent;
@@ -143,7 +147,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .app-sidebar::-webkit-scrollbar-thumb:hover,
 .app-main::-webkit-scrollbar-thumb:hover,
-.phase-toc::-webkit-scrollbar-thumb:hover {
+.app-toc::-webkit-scrollbar-thumb:hover {
   background: rgba(75, 85, 99, 0.55);
   background-clip: content-box;
 }
@@ -154,11 +158,18 @@ img, svg { display: block; max-width: 100%; }
   display: grid;
   grid-template-columns: var(--sidebar-w) 1fr;
   grid-template-rows: var(--header-h) 1fr;
-  height: 100vh;
+  height: 100vh;            /* fallback for older browsers */
+  height: 100dvh;           /* dynamic viewport — fixes iOS Safari URL-bar jump */
   overflow: hidden;
   transition: grid-template-columns var(--dur-slow) var(--ease);
 }
+
+/* When the active route has a TOC, expand to 3 columns. */
+.app-shell.has-toc { grid-template-columns: var(--sidebar-w) 1fr var(--toc-w); }
+
 .app-shell.sidebar-collapsed { grid-template-columns: 0 1fr; }
+.app-shell.sidebar-collapsed.has-toc { grid-template-columns: 0 1fr var(--toc-w); }
+
 .app-shell.sidebar-collapsed .app-sidebar {
   visibility: hidden;
   border-right: 0;
@@ -167,15 +178,19 @@ img, svg { display: block; max-width: 100%; }
   overflow: hidden;
 }
 
+/* Mobile drawer backdrop — hidden by default, only shown inside the ≤768px block */
+.sidebar-backdrop { display: none; }
+
 .app-header {
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  padding: 0 var(--space-6);
+  padding: 0 clamp(var(--space-4), 2.5vw, var(--space-6));
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   z-index: 10;
+  min-width: 0;
 }
 
 .app-header .brand {
@@ -216,14 +231,21 @@ img, svg { display: block; max-width: 100%; }
 .app-header nav {
   margin-left: auto;
   display: flex;
-  gap: var(--space-4);
-  flex-wrap: wrap;
+  gap: var(--space-3);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-width: 100%;
+  min-width: 0;
 }
+.app-header nav::-webkit-scrollbar { display: none; }
 .app-header nav a {
   color: var(--text-soft);
   font-weight: 500;
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
+  white-space: nowrap;
   transition: color var(--dur-fast) var(--ease),
               background var(--dur-fast) var(--ease);
 }
@@ -254,8 +276,11 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .sidebar-list a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   padding: var(--space-2) var(--space-3);
+  min-height: 36px;
   border-radius: var(--radius-sm);
   color: var(--text-soft);
   font-size: 0.92rem;
@@ -278,28 +303,34 @@ img, svg { display: block; max-width: 100%; }
   width: 100%;
   overflow-y: auto;
   scroll-behavior: smooth;
-  padding: var(--space-8) var(--space-8) var(--space-12);
+  padding: clamp(var(--space-5), 3vw, var(--space-8))
+           clamp(var(--space-4), 4vw, var(--space-8))
+           var(--space-12);
 }
 
 /* Non-phase pages (home, coming-soon): cap reading width and centre. */
-.app-main:not(:has(.phase-layout)) > * {
+.app-main:not(:has(.phase-content)) > * {
   max-width: 1080px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Phase pages: full bleed so the right TOC sits at the viewport's right edge. */
-.app-main:has(.phase-layout) {
-  padding-left: var(--space-10);
-  padding-right: var(--space-6);
+/* Phase pages: tighter horizontal padding since the TOC lives in its own grid column. */
+.app-main:has(.phase-content) {
+  padding-left: clamp(var(--space-4), 4vw, var(--space-10));
+  padding-right: clamp(var(--space-4), 3vw, var(--space-6));
 }
 
 
 /* ===== 5. Typography =========================================== */
 h1, h2, h3, h4 { color: var(--text); line-height: 1.25; font-weight: 700; }
-h1 { font-size: 2rem;    margin: 0 0 var(--space-2); letter-spacing: -0.01em; }
+h1 {
+  font-size: clamp(1.6rem, 2.6vw, 2rem);
+  margin: 0 0 var(--space-2);
+  letter-spacing: -0.01em;
+}
 h2 {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
   margin: var(--space-8) 0 var(--space-3);
   padding-bottom: var(--space-2);
   border-bottom: 1px solid var(--border);
@@ -316,8 +347,9 @@ strong { color: var(--text); font-weight: 600; }
 
 /* ===== 6. Cards, pills, callouts, buttons ====================== */
 .lead {
-  font-size: 1.05rem;
+  font-size: clamp(0.98rem, 1.4vw, 1.05rem);
   color: var(--text-soft);
+  line-height: 1.65;
   margin-bottom: var(--space-6);
 }
 
@@ -429,8 +461,10 @@ pre::after {
   content: attr(data-label);
   position: absolute;
   top: 9px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* Centre between the traffic-light dots (~80px) and copy button (~90px) */
+  left: 80px;
+  right: 90px;
+  text-align: center;
   font-family: var(--font-mono);
   font-size: 0.76rem;
   color: rgba(192, 202, 245, 0.45);
@@ -438,7 +472,6 @@ pre::after {
   z-index: 2;
   pointer-events: none;
   white-space: nowrap;
-  max-width: calc(100% - 90px);
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -488,18 +521,57 @@ pre code {
 .hljs-addition              { color: #9ece6a; }
 .hljs-deletion              { color: #f7768e; }
 
+/* Copy button — sits in the top-right of the dark header bar */
+.code-block { position: relative; }
+
+.btn-copy {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(192, 202, 245, 0.7);
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease),
+              color      var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+.btn-copy:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+.btn-copy.copied {
+  background: rgba(74, 222, 128, 0.16);
+  border-color: rgba(74, 222, 128, 0.4);
+  color: #4ade80;
+}
+.btn-copy svg { display: block; flex-shrink: 0; }
+
 
 /* ===== 8. Topic article ========================================= */
 .topic-card {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: var(--space-6) var(--space-7, 1.75rem);
+  padding: clamp(var(--space-4), 2.5vw, var(--space-6))
+           clamp(var(--space-4), 3vw, 1.75rem);
   margin: var(--space-6) 0 var(--space-10);
   box-shadow: var(--shadow-sm);
   scroll-margin-top: var(--space-6);
   transition: box-shadow var(--dur) var(--ease),
-              border-color var(--dur) var(--ease);
+              border-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease);
 }
 .topic-card:hover {
   box-shadow: var(--shadow-md);
@@ -538,29 +610,36 @@ pre code {
 
 
 /* ===== 9. Phase page layout ===================================== */
-.phase-layout {
-  display: grid;
-  grid-template-columns: minmax(0, var(--content-max)) 1fr var(--toc-w);
-  gap: 0;
-  align-items: start;
-}
 .phase-content {
-  grid-column: 1;
+  max-width: var(--content-max);
   min-width: 0;
-  padding-right: var(--space-10);
 }
 
-.phase-toc {
-  grid-column: 3;
-  position: sticky;
-  top: var(--space-4);
+/*
+ * Right TOC — lives at the shell-grid level (column 3) so it doesn't scroll
+ * with the main content. Topics come from PhaseTocService.
+ */
+.app-toc {
   background: var(--bg-soft);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: var(--space-4);
-  max-height: calc(100vh - var(--header-h) - var(--space-8));
+  border-left: 1px solid var(--border);
+  padding: var(--space-5) var(--space-4);
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(75, 85, 99, 0.30) transparent;
 }
+.app-toc::-webkit-scrollbar       { width: 8px; }
+.app-toc::-webkit-scrollbar-track { background: transparent; }
+.app-toc::-webkit-scrollbar-thumb {
+  background: rgba(75, 85, 99, 0.22);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.app-toc::-webkit-scrollbar-thumb:hover {
+  background: rgba(75, 85, 99, 0.55);
+  background-clip: content-box;
+}
+
 .toc-title {
   font-size: 0.72rem;
   font-weight: 700;
@@ -594,10 +673,15 @@ pre code {
   margin: var(--space-4) 0 var(--space-8);
 }
 .topic-index ol {
+  /* Topic titles already start with "N." (e.g. "1. Variables & Data Types"),
+     so we hide the <ol> markers to avoid double numbering. */
+  list-style: none;
+  padding-left: 0;
   columns: 2;
   column-gap: var(--space-8);
   margin: var(--space-2) 0 0;
 }
+.topic-index li { margin: var(--space-1) 0; break-inside: avoid; }
 
 /* Back-to-top link inside topic card */
 .back-top {
@@ -623,8 +707,9 @@ pre code {
 }
 .brand-text { color: var(--primary); }
 .hero-sub {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
   color: var(--text-soft);
+  line-height: 1.6;
   max-width: 720px;
   margin-bottom: var(--space-6);
 }
@@ -632,7 +717,7 @@ pre code {
 
 .value-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
   gap: var(--space-4);
   margin: var(--space-2) 0 var(--space-8);
 }
@@ -650,7 +735,7 @@ pre code {
 
 .phase-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
   gap: var(--space-4);
   margin: var(--space-6) 0;
 }
@@ -684,7 +769,7 @@ pre code {
 
 .plan-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
   gap: var(--space-4);
   margin: var(--space-4) 0 var(--space-8);
 }
@@ -836,70 +921,181 @@ pre.code-output code { color: #bbf7d0; }
 .skip-link:focus { left: 0; text-decoration: none; }
 
 
-/* ===== 14. Responsive ========================================== */
+/* =================================================================
+   14. RESPONSIVE — edit per-device blocks below
+   -----------------------------------------------------------------
+   Default styles above target Desktop (≥1281px).
+   Each block below ONLY contains overrides for that device size.
 
-/* Wide laptop — drop the right TOC */
+   Breakpoints:
+     🖥  Desktop      ≥ 1281px  (no media query — base styles)
+     💻 Laptop       ≤ 1280px  (right TOC drops away)
+     📟 Small Laptop ≤ 1024px  (1-col topic index)
+     📱 Tablet       ≤ 768px   (sidebar becomes slide-over drawer)
+     📱 Mobile       ≤ 480px   (small phones, full-width CTAs)
+   ================================================================= */
+
+
+/* ============== 💻 LAPTOP  (≤ 1280px) ============== */
 @media (max-width: 1280px) {
-  .phase-layout { grid-template-columns: 1fr; }
-  .phase-content { padding-right: 0; }
-  .phase-toc { display: none; }
-  .app-main:has(.phase-layout) {
-    padding-left: var(--space-8);
-    padding-right: var(--space-8);
-  }
+  /* Drop the right TOC, shell back to 2 columns */
+  .app-shell.has-toc                      { grid-template-columns: var(--sidebar-w) 1fr; }
+  .app-shell.has-toc.sidebar-collapsed    { grid-template-columns: 0 1fr; }
+  app-phase-toc, .app-toc                 { display: none; }   /* hide host + aside */
 }
 
-/* Laptop / small desktop — gentler padding, single-column index */
+
+/* ============== 💻 SMALL LAPTOP  (≤ 1024px) ============== */
 @media (max-width: 1024px) {
-  .app-main { padding: var(--space-6) var(--space-6) var(--space-12); }
-  .topic-card { padding: var(--space-5) var(--space-6); }
+  /* Single-column topic index for narrower reading column */
   .topic-index ol { columns: 1; }
+  h2              { margin-top: var(--space-6); }
 }
 
-/* Tablet — collapse shell to single column, sidebar above */
+
+/* ============== 📟 TABLET  (≤ 768px) ============== */
 @media (max-width: 768px) {
-  .app-shell {
+
+  /* --- SHELL — single column, sidebar overlays content as a drawer --- */
+  .app-shell,
+  .app-shell.has-toc,
+  .app-shell.sidebar-collapsed,
+  .app-shell.sidebar-collapsed.has-toc {
     grid-template-columns: 1fr;
-    height: auto;
-    overflow: visible;
+    grid-template-rows: var(--header-h) 1fr;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
   }
-  .app-shell.sidebar-collapsed { grid-template-columns: 1fr; }
+
+  /* --- HEADER --- */
+  .app-header        { gap: var(--space-2); }
+  .app-header nav    { display: none; }    /* sidebar already lists every route */
+
+  /* --- SIDEBAR — off-canvas drawer (slides in from the left) --- */
   .app-sidebar {
-    height: auto;
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    width: min(280px, 82vw);
+    height: calc(100vh - var(--header-h));
+    height: calc(100dvh - var(--header-h));
+    z-index: 20;
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    border-bottom: 0;
+    box-shadow: var(--shadow-lg);
     padding: var(--space-4);
+    transform: translateX(0);
+    transition: transform var(--dur) var(--ease);
+    overflow-y: auto;
   }
+  .app-shell.sidebar-collapsed .app-sidebar {
+    transform: translateX(-100%);
+    visibility: visible;          /* override desktop-collapsed hide */
+    border-right: 1px solid var(--border);
+    padding: var(--space-4);
+    overflow: auto;
+  }
+
+  /* Backdrop — clickable, closes drawer when tapped */
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    background: rgba(15, 23, 42, 0.45);
+    z-index: 19;
+    opacity: 1;
+    transition: opacity var(--dur) var(--ease);
+    cursor: pointer;
+  }
+  .app-shell.sidebar-collapsed .sidebar-backdrop {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* --- MAIN — always full width, scrolls independently --- */
   .app-main {
-    height: auto;
-    overflow: visible;
-    padding: var(--space-4) var(--space-4) var(--space-10);
+    grid-column: 1;
+    grid-row: 2;
+    height: calc(100vh - var(--header-h));
+    height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: var(--space-5) var(--space-4) var(--space-10);
   }
-  .app-main:has(.phase-layout) { padding: var(--space-4) var(--space-4) var(--space-10); }
-  .app-header { padding: 0 var(--space-4); gap: var(--space-3); }
-  .app-header nav { display: none; }   /* sidebar already lists routes */
-  .topic-card { padding: var(--space-4); border-radius: var(--radius); }
-  .topic-card .topic-title { font-size: 1.2rem; }
-  .hero { padding-bottom: var(--space-6); margin-bottom: var(--space-6); }
-  .hero-sub { font-size: 1rem; }
-  pre code { padding: 46px var(--space-4) var(--space-4); font-size: 0.84rem; line-height: 1.6; }
-  pre::before { height: 32px; }
-  pre::after  { top: 7px; font-size: 0.7rem; }
-  .pill { font-size: 0.72rem; padding: 0.15rem 0.5rem; }
-  .topic-index { padding: var(--space-3) var(--space-4); }
+  .app-main:has(.phase-content) {
+    padding: var(--space-5) var(--space-4) var(--space-10);
+  }
+
+  /* --- TOPIC CARD --- */
+  .topic-card                 { border-radius: var(--radius); padding: var(--space-4); }
+  .topic-card .topic-title    { font-size: 1.2rem; }
+  .topic-index                { padding: var(--space-3) var(--space-4); }
+
+  /* --- HERO / HOME --- */
+  .hero                  { padding: var(--space-3) 0 var(--space-6); margin-bottom: var(--space-6); }
+  .hero-sub              { font-size: 1rem; }
+  .hero-cta              { gap: var(--space-2); }
+  .hero-cta .btn,
+  .cta-row .btn          { flex: 1 1 auto; min-width: 160px; }
+
+  /* --- CODE BLOCK --- */
+  pre code        { padding: 46px var(--space-4) var(--space-4); font-size: 0.84rem; line-height: 1.6; }
+  pre::before     { height: 32px; }
+  pre::after      { top: 7px; font-size: 0.7rem; left: 70px; right: 80px; }
+  .btn-copy       { top: 4px; right: 6px; padding: 3px 8px; font-size: 0.7rem; }
+  .btn-copy svg   { width: 12px; height: 12px; }
+
+  /* --- MISC --- */
+  .pill        { font-size: 0.72rem; padding: 0.15rem 0.5rem; }
+  .cta-band    { padding: var(--space-5) var(--space-4); }
 }
 
-/* Small phones */
+
+/* ============== 📱 MOBILE  (≤ 480px) ============== */
 @media (max-width: 480px) {
-  body { font-size: 15px; }
-  h1 { font-size: 1.55rem; }
-  h2 { font-size: 1.25rem; margin-top: var(--space-6); }
-  .topic-card { padding: var(--space-3) var(--space-4); }
-  .topic-card .topic-title { font-size: 1.1rem; }
-  pre code { font-size: 0.78rem; padding: 44px var(--space-3) var(--space-3); }
-  .btn { font-size: 0.88rem; padding: 0.55rem 0.9rem; }
-  .btn-output { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
-  .app-header .brand { font-size: 0.95rem; }
-  .cta-band { padding: var(--space-5); }
-  .lead { font-size: 1rem; }
+
+  /* --- BASE TYPE --- */
+  body              { font-size: 15px; }
+  h1                { font-size: 1.55rem; }
+  h2                { font-size: 1.25rem; margin-top: var(--space-6); padding-bottom: var(--space-1); }
+  h3                { font-size: 1.05rem; }
+  .lead             { font-size: 1rem; }
+
+  /* --- HEADER --- */
+  .app-header       { padding: 0 var(--space-3); gap: var(--space-2); }
+  .app-header .brand{ font-size: 0.95rem; }
+
+  /* --- MAIN --- */
+  .app-main,
+  .app-main:has(.phase-content) {
+    padding: var(--space-4) var(--space-3) var(--space-10);
+  }
+
+  /* --- TOPIC CARD --- */
+  .topic-card               { padding: var(--space-3) var(--space-4); }
+  .topic-card .topic-title  { font-size: 1.1rem; }
+  .topic-index              { padding: var(--space-3); }
+  .topic-index ol           { margin-top: var(--space-1); }
+
+  /* --- CODE BLOCK --- */
+  pre code      { font-size: 0.78rem; padding: 44px var(--space-3) var(--space-3); }
+  pre::after    { left: 64px; right: 72px; }
+
+  /* --- BUTTONS --- */
+  .btn          { font-size: 0.88rem; padding: 0.55rem 0.9rem; }
+  .btn-output   { font-size: 0.8rem;  padding: 0.4rem 0.8rem; }
+
+  /* --- HOME / CTA --- */
+  .cta-band     { padding: var(--space-4); border-radius: var(--radius); }
+  .cta-band h3  { font-size: 1.1rem; }
+  .hero-cta             { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn        { width: 100%; }
+
+  /* --- Q&A / CALLOUTS --- */
+  .qa .q, .qa .a  { font-size: 0.95rem; }
+  .rapid-fire     { padding: var(--space-2) var(--space-3); }
+  .callout        { padding: var(--space-2) var(--space-3); }
+  .pill           { margin-bottom: var(--space-1); }
 }

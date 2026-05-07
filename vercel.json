@@ -1,0 +1,7 @@
+{
+  "buildCommand": "ng build",
+  "outputDirectory": "dist/dotnet-roadmap/browser",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

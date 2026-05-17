@@ -2,27 +2,29 @@
 <div class="landing-grid" aria-hidden="true"></div>
 
 <div class="wrap">
-  <app-landing-nav [cta]="{ label: 'Start .NET', path: '/dotnet' }" />
+  <app-landing-nav />
 
   <!-- ─── HERO ─── -->
   <section class="hero">
-    <p class="eyebrow">Learn Hub · Free forever</p>
-    <h1 class="title">
-      one place.<br>
-      <span class="accent">all the roadmaps.</span>
+    <a routerLink="/dotnet" class="announce">
+      <span class="announce-dot" aria-hidden="true"></span>
+      Live · 7 .NET phases + 4 PDFs ready to use
+      <span class="announce-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <h1 class="hero-title">
+      I help devs crack
+      <span class="accent-mark">product-company interviews.</span>
     </h1>
-    <p class="sub">
-      Phase-by-phase, interview-focused roadmaps for backend and frontend — plus the
-      premium notes I built preparing for product-company interviews.
+
+    <p class="hero-sub">
+      Phase-by-phase roadmaps and battle-tested notes — the .NET stack, the way it
+      actually ships in production teams. Read at your own pace. Type every snippet.
     </p>
-    <div class="stats">
-      <span><strong>{{ subjects.length }}</strong> subjects</span>
-      <span class="dot">·</span>
-      <span><strong>9-phase</strong> .NET</span>
-      <span class="dot">·</span>
-      <span><strong>4</strong> PDFs</span>
-      <span class="dot">·</span>
-      <span class="free-pill">All free</span>
+
+    <div class="hero-cta">
+      <a routerLink="/dotnet" class="btn-light">Start .NET <span aria-hidden="true">→</span></a>
+      <a routerLink="/notes" class="btn-ghost">Browse notes</a>
     </div>
   </section>
 
@@ -100,14 +102,44 @@
     </div>
   </section>
 
-  <!-- ─── CTA BAND ─── -->
-  <section class="cta-band">
-    <h3>Ready when you are.</h3>
-    <p>.NET is live with 7 phases. Notes are downloadable right now. Angular &amp; React are next.</p>
-    <div class="cta-band-row">
-      <a routerLink="/dotnet" class="btn-light">Start .NET <span aria-hidden="true">→</span></a>
-      <a routerLink="/notes" class="btn-ghost">Browse notes</a>
+  <!-- ─── NEWSLETTER (anchor target for navbar Subscribe button) ─── -->
+  <section id="newsletter" class="newsletter">
+    <p class="nl-eyebrow">Newsletter</p>
+    <h2 class="nl-title">stay sharp.</h2>
+    <p class="nl-sub">
+      One email when something ships — a new phase, a new note, a teardown. No filler, no spam.
+      Unsubscribe anytime.
+    </p>
+
+    <div class="nl-topics">
+      @for (t of topics; track t) {
+        <span class="nl-topic">{{ t }}</span>
+      }
     </div>
+
+    @if (!subscribed()) {
+      <form class="nl-form" (ngSubmit)="onSubscribe()" #f="ngForm">
+        <input class="nl-input"
+               type="email"
+               name="email"
+               placeholder="you@example.com"
+               [(ngModel)]="email"
+               required
+               aria-label="Email address" />
+        <button class="nl-submit" type="submit">Subscribe →</button>
+      </form>
+      <p class="nl-foot">
+        <span class="nl-foot-dot" aria-hidden="true"></span>
+        Solo author · Updated as I ship
+      </p>
+    } @else {
+      <div class="nl-thanks">
+        Thanks — you're on the list. ✓
+      </div>
+      <p class="nl-foot">
+        Newsletter integration goes live soon. Until then, your email is held locally.
+      </p>
+    }
   </section>
 
   <p class="foot-note">

@@ -22,5 +22,10 @@ export const routes: Routes = [
     path: 'notes',
     loadChildren: () => import('./subjects/notes/notes.routes').then(m => m.NOTES_ROUTES)
   },
+  {
+    path: 'blog',
+    loadComponent: () => import('./pages/blog/blog.component').then(m => m.BlogComponent),
+    title: 'Blog — Learn Hub'
+  },
   { path: '**', redirectTo: '' }
 ];

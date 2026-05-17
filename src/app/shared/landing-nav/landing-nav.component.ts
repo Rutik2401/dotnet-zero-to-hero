@@ -487,7 +487,6 @@ export class LandingNavComponent {
     { label: 'Home',    path: '/',        exact: true },
     { label: 'Courses', path: '/courses' },
     { label: 'Notes',   path: '/notes' },
-    { label: 'React',   path: '/react',   soon: true },
     { label: 'Blog',    path: '/blog' }
   ];
 

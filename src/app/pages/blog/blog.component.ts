@@ -31,8 +31,8 @@ import { LandingFooterComponent } from '../../shared/landing-footer/landing-foot
       text-transform: uppercase; margin: 0 0 1.1rem; font-weight: 600;
     }
     .page-title {
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      font-weight: 800; letter-spacing: -0.04em; line-height: 0.98;
+      font-size: clamp(1.85rem, 4.4vw, 3.4rem);
+      font-weight: 800; letter-spacing: -0.035em; line-height: 1.04;
       margin: 0 0 1.5rem; max-width: 820px; text-wrap: balance;
       color: var(--text);
     }

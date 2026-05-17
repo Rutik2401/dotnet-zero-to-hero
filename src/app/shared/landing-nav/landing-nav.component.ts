@@ -487,7 +487,8 @@ export class LandingNavComponent {
     { label: 'Home',    path: '/',        exact: true },
     { label: 'Courses', path: '/courses' },
     { label: 'Notes',   path: '/notes' },
-    { label: 'Blog',    path: '/blog' }
+    { label: 'Blog',    path: '/blog' },
+    { label: 'Contact', path: '/contact' }
   ];
 
   readonly resources: ResourceItem[] = [

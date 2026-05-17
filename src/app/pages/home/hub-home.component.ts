@@ -90,11 +90,11 @@ interface MethodStep   { step: string; title: string; desc: string; }
     .announce-arrow { color: var(--primary); font-weight: 700; }
 
     .hero-title {
-      font-size: clamp(2.6rem, 8.5vw, 6.5rem);
+      font-size: clamp(2rem, 5vw, 4rem);
       font-weight: 800;
-      letter-spacing: -0.04em; line-height: 0.98;
-      margin: 0 auto 1.6rem;
-      max-width: 980px;
+      letter-spacing: -0.035em; line-height: 1.04;
+      margin: 0 auto 1.4rem;
+      max-width: 820px;
       text-wrap: balance;
       color: var(--text);
     }
@@ -315,9 +315,9 @@ interface MethodStep   { step: string; title: string; desc: string; }
       margin: 0 0 1.25rem; font-weight: 700;
     }
     .nl-title {
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      font-weight: 800; letter-spacing: -0.04em;
-      margin: 0 0 1.1rem; line-height: 0.98;
+      font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+      font-weight: 800; letter-spacing: -0.035em;
+      margin: 0 0 1rem; line-height: 1.05;
       color: var(--text);
       padding: 0; border: 0;
     }

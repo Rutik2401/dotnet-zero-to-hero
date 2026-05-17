@@ -25,11 +25,12 @@ interface ComingTopic {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, LandingNavComponent, LandingFooterComponent],
   template: `
-    <app-landing-nav />
     <div class="cream-bg" aria-hidden="true"></div>
     <div class="cream-grid" aria-hidden="true"></div>
 
     <div class="wrap">
+      <app-landing-nav />
+
       <!-- ─── HERO ─── -->
       <section class="hero">
         <p class="hero-eyebrow">COURSES</p>
@@ -176,12 +177,12 @@ interface ComingTopic {
       margin: 0 0 1.5rem; font-weight: 700;
     }
     .hero-title {
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-size: clamp(1.85rem, 4.4vw, 3.4rem);
       font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 0.98;
-      margin: 0 0 1.5rem;
-      max-width: 900px;
+      letter-spacing: -0.035em;
+      line-height: 1.02;
+      margin: 0 0 1.25rem;
+      max-width: 760px;
       color: var(--text);
       text-wrap: balance;
     }

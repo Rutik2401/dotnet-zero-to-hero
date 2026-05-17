@@ -526,11 +526,8 @@ export class LandingFooterComponent {
     {
       title: 'Product',
       links: [
-        { label: '.NET Roadmap', path: '/dotnet',  live: true },
-        { label: 'Notes & PDFs', path: '/notes',   live: true },
-        { label: 'Blog',         path: '/blog' },
-        { label: 'Angular',      path: '/angular', soon: true },
-        { label: 'React',        path: '/react',   soon: true }
+        { label: 'Courses', path: '/courses', live: true },
+        { label: 'Blog',    path: '/blog' }
       ]
     },
     {

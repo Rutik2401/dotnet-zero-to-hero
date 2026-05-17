@@ -211,14 +211,7 @@ interface DirectChannel {
       color: var(--text);
     }
 
-    .accent-mark { position: relative; display: inline-block; }
-    .accent-mark::after {
-      content: ''; position: absolute;
-      left: 0; right: 0; bottom: 0.04em;
-      height: 0.18em;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--accent-2) 100%);
-      border-radius: 4px; z-index: -1; opacity: 0.85;
-    }
+    .accent-mark { display: inline-block; }
 
     .page-sub {
       color: var(--text-soft);

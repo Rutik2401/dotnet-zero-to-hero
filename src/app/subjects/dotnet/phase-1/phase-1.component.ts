@@ -1,24 +1,22 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
 import hljs from 'highlight.js/lib/core';
-import typescript from 'highlight.js/lib/languages/typescript';
-import xml from 'highlight.js/lib/languages/xml';
-import { CodeBlockComponent } from '../../shared/code-block/code-block.component';
-import { PhaseTocService } from '../../shared/phase-toc/phase-toc.service';
-import { phase5Topics } from './phase-5.data';
+import csharp from 'highlight.js/lib/languages/csharp';
+import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
+import { PhaseTocService } from '../shared/phase-toc/phase-toc.service';
+import { phase1Topics } from './phase-1.data';
 
-// Register TypeScript + HTML once for the lifetime of the page (lazy-loaded with the component).
-hljs.registerLanguage('typescript', typescript);
-hljs.registerLanguage('html', xml);
+// Register C# once for the lifetime of the page (lazy-loaded with the component).
+hljs.registerLanguage('csharp', csharp);
 
 @Component({
-  selector: 'app-phase-5',
+  selector: 'app-phase-1',
   imports: [CodeBlockComponent],
-  templateUrl: './phase-5.component.html'
+  templateUrl: './phase-1.component.html'
 })
-export class Phase5Component implements AfterViewInit {
+export class Phase1Component implements AfterViewInit {
   private readonly host = inject(ElementRef);
 
-  topics = phase5Topics;
+  topics = phase1Topics;
 
   /** Per-topic toggle state for the "See Output" button. */
   private readonly _outputs = signal<Record<string, boolean>>({});
@@ -57,14 +55,14 @@ export class Phase5Component implements AfterViewInit {
     this.highlightCodeBlocks();
   }
 
-  /** Highlight all TypeScript code blocks; skip output panes (plain console output). */
+  /** Highlight all C# code blocks; skip output panes (plain console output). */
   private highlightCodeBlocks(): void {
     const blocks: NodeListOf<HTMLElement> =
       this.host.nativeElement.querySelectorAll('.topic-card pre:not(.code-output) code');
 
     blocks.forEach(block => {
       if (block.dataset['highlighted'] === 'yes') return; // already done
-      block.classList.add('language-typescript');
+      block.classList.add('language-csharp');
       hljs.highlightElement(block);
     });
   }

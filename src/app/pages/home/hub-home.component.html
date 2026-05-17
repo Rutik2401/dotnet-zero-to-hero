@@ -1,0 +1,38 @@
+<section class="hub">
+  <header class="hub-hero">
+    <span class="pill">Learn Hub</span>
+    <h1 class="hub-title">One place. <span class="brand-text">All the roadmaps.</span></h1>
+    <p class="hub-sub">
+      Phase-by-phase, interview-focused roadmaps for backend and frontend. Pick a track and go.
+    </p>
+  </header>
+
+  <div class="hub-grid">
+    @for (s of subjects; track s.slug) {
+      <a class="subject-card"
+         [class.subject-card-soon]="!s.ready"
+         [routerLink]="s.link">
+        <div class="subject-accent" [style.background]="s.accent"></div>
+        <div class="subject-body">
+          <div class="subject-meta">
+            <span class="subject-tag">{{ s.tagline }}</span>
+            @if (s.ready) {
+              <span class="pill pill-ready">ready</span>
+            } @else {
+              <span class="pill">soon</span>
+            }
+          </div>
+          <h2 class="subject-title">{{ s.title }}</h2>
+          <p class="subject-desc">{{ s.desc }}</p>
+          <span class="subject-cta">
+            @if (s.ready) { Open roadmap → } @else { Preview → }
+          </span>
+        </div>
+      </a>
+    }
+  </div>
+
+  <footer class="hub-foot">
+    <p>More subjects on the way. Each track lazy-loads independently — visiting one never downloads the others.</p>
+  </footer>
+</section>

@@ -1,22 +1,22 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
 import hljs from 'highlight.js/lib/core';
 import csharp from 'highlight.js/lib/languages/csharp';
-import { CodeBlockComponent } from '../../shared/code-block/code-block.component';
-import { PhaseTocService } from '../../shared/phase-toc/phase-toc.service';
-import { phase1Topics } from './phase-1.data';
+import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
+import { PhaseTocService } from '../shared/phase-toc/phase-toc.service';
+import { phase0Topics } from './phase-0.data';
 
 // Register C# once for the lifetime of the page (lazy-loaded with the component).
 hljs.registerLanguage('csharp', csharp);
 
 @Component({
-  selector: 'app-phase-1',
+  selector: 'app-phase-0',
   imports: [CodeBlockComponent],
-  templateUrl: './phase-1.component.html'
+  templateUrl: './phase-0.component.html'
 })
-export class Phase1Component implements AfterViewInit {
+export class Phase0Component implements AfterViewInit {
   private readonly host = inject(ElementRef);
 
-  topics = phase1Topics;
+  topics = phase0Topics;
 
   /** Per-topic toggle state for the "See Output" button. */
   private readonly _outputs = signal<Record<string, boolean>>({});
@@ -29,6 +29,7 @@ export class Phase1Component implements AfterViewInit {
       queueMicrotask(() => this.highlightCodeBlocks());
     });
 
+    // Publish topics to the shell-level right TOC; clear when the route is destroyed.
     const toc = inject(PhaseTocService);
     toc.setTopics(this.topics.map(t => ({ id: t.id, title: t.title })));
     inject(DestroyRef).onDestroy(() => toc.clear());

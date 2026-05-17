@@ -1,22 +1,22 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
 import hljs from 'highlight.js/lib/core';
 import csharp from 'highlight.js/lib/languages/csharp';
-import { CodeBlockComponent } from '../../shared/code-block/code-block.component';
-import { PhaseTocService } from '../../shared/phase-toc/phase-toc.service';
-import { phase3Topics } from './phase-3.data';
+import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
+import { PhaseTocService } from '../shared/phase-toc/phase-toc.service';
+import { phase4Topics } from './phase-4.data';
 
 // Register C# once for the lifetime of the page (lazy-loaded with the component).
 hljs.registerLanguage('csharp', csharp);
 
 @Component({
-  selector: 'app-phase-3',
+  selector: 'app-phase-4',
   imports: [CodeBlockComponent],
-  templateUrl: './phase-3.component.html'
+  templateUrl: './phase-4.component.html'
 })
-export class Phase3Component implements AfterViewInit {
+export class Phase4Component implements AfterViewInit {
   private readonly host = inject(ElementRef);
 
-  topics = phase3Topics;
+  topics = phase4Topics;
 
   /** Per-topic toggle state for the "See Output" button. */
   private readonly _outputs = signal<Record<string, boolean>>({});

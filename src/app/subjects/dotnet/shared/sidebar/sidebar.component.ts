@@ -5,6 +5,8 @@ export interface PhaseLink {
   path: string;
   label: string;
   ready: boolean;
+  /** When true, the link only highlights on an exact URL match (used for the subject "Home" entry). */
+  exact?: boolean;
 }
 
 @Component({
@@ -17,7 +19,7 @@ export interface PhaseLink {
         <li>
           <a [routerLink]="p.path"
              routerLinkActive="active"
-             [routerLinkActiveOptions]="{ exact: p.path === '/' }"
+             [routerLinkActiveOptions]="{ exact: !!p.exact }"
              [tabindex]="open() ? 0 : -1">
             {{ p.label }}
             @if (!p.ready) { <span class="pill pill-soon">soon</span> }

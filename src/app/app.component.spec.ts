@@ -16,8 +16,8 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should expose the brand title`, () => {
+  it(`should expose the hub brand title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    expect(fixture.componentInstance.title).toEqual('.NET Roadmap');
+    expect(fixture.componentInstance.title).toEqual('Learn Hub');
   });
 });

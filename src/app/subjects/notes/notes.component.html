@@ -1,0 +1,50 @@
+<div class="notes-wrap">
+  <a routerLink="/" class="notes-back">← Learn Hub</a>
+
+  <header class="notes-hero">
+    <span class="pill">Notes &amp; PDFs</span>
+    <h1 class="notes-title">Interview <span class="brand-text">Notes</span></h1>
+    <p class="notes-sub">
+      Premium PDFs for product-company interviews. Angular, .NET, React. Read online, download, or print.
+    </p>
+  </header>
+
+  <div class="notes-grid">
+    @for (n of notes; track n.slug) {
+      <article class="note-card">
+        <div class="note-cover"
+             [style.background]="'linear-gradient(135deg, ' + n.cover.gradientFrom + ' 0%, ' + n.cover.gradientTo + ' 100%)'">
+          {{ n.cover.initials }}
+        </div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-level">{{ n.level }}</span>
+            <span class="pill">{{ n.badge }}</span>
+          </div>
+          <h2 class="note-title">{{ n.title }}</h2>
+          <p class="note-desc">{{ n.description }}</p>
+          <div class="note-topics">
+            @for (t of n.topics; track t) {
+              <span class="note-topic">{{ t }}</span>
+            }
+          </div>
+          <div class="note-stats">
+            <span><strong>{{ n.pages }}</strong> pages</span>
+            <span><strong>{{ n.questions }}</strong> Qs</span>
+            <span><strong>{{ n.updated }}</strong> updated</span>
+          </div>
+          <div class="note-actions">
+            <a class="note-btn note-btn-primary"
+               [href]="n.pdfPath"
+               [download]="n.fileName"
+               target="_blank"
+               rel="noopener">
+              Download PDF →
+            </a>
+          </div>
+          <p class="note-size">{{ n.pdfSize }} · PDF</p>
+        </div>
+      </article>
+    }
+  </div>
+</div>

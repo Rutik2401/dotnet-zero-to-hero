@@ -38,8 +38,8 @@
       @for (n of notes; track n.slug) {
         <article class="card">
           <div class="cover" [style.background]="n.coverGradient">
-            <span class="cover-vol">VOL. {{ n.vol }} · {{ n.shortTag }}</span>
             <span class="cover-initials">{{ n.coverInitials }}</span>
+            <span class="cover-vol">VOL. {{ n.vol }} · {{ n.shortTag }}</span>
           </div>
           <div class="body">
             <p class="meta">

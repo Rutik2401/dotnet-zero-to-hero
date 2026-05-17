@@ -12,7 +12,20 @@ interface SubjectCard {
   ready: boolean;
   link: string;
   coverInitials: string;
+  coverTag: string;
   coverGradient: string;
+}
+
+interface FeatureItem {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+interface MethodStep {
+  step: string;
+  title: string;
+  desc: string;
 }
 
 @Component({
@@ -60,98 +73,57 @@ interface SubjectCard {
     .hero { padding: clamp(2.5rem, 8vh, 6rem) 0 clamp(2rem, 5vh, 4rem); }
     .eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.16em;
-      color: #818cf8;
-      text-transform: uppercase;
-      margin: 0 0 1.25rem;
-      font-weight: 600;
+      font-size: 0.75rem; letter-spacing: 0.16em; color: #818cf8;
+      text-transform: uppercase; margin: 0 0 1.25rem; font-weight: 600;
     }
     .title {
       font-size: clamp(2.5rem, 8vw, 5.75rem);
-      font-weight: 800;
-      letter-spacing: -0.035em;
-      line-height: 0.98;
-      margin: 0 0 1.75rem;
-      max-width: 900px;
-      text-wrap: balance;
+      font-weight: 800; letter-spacing: -0.035em; line-height: 0.98;
+      margin: 0 0 1.75rem; max-width: 900px; text-wrap: balance;
     }
     .accent {
       background: linear-gradient(135deg, #a5b4fc 0%, #c4b5fd 60%, #67e8f9 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
     .sub {
-      color: #94a3b8;
-      font-size: clamp(1.05rem, 1.6vw, 1.2rem);
-      line-height: 1.7;
-      max-width: 640px;
-      margin: 0 0 2rem;
+      color: #94a3b8; font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.7;
+      max-width: 640px; margin: 0 0 2rem;
     }
     .stats {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.55rem 0.9rem;
-      color: #cbd5e1;
-      font-size: 0.95rem;
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 0.55rem 0.9rem; color: #cbd5e1; font-size: 0.95rem;
     }
     .stats strong { color: #f8fafc; font-weight: 700; }
     .stats .dot { color: #475569; }
-    .stats .free-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+    .stats .free-pill { display: inline-flex; align-items: center; gap: 0.4rem; }
     .stats .free-pill::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
     }
 
-    /* Section */
+    /* Section header */
     .section { padding: clamp(2.5rem, 6vh, 4.5rem) 0; }
     .sec-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; margin-bottom: 0.5rem;
     }
     .sec-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.85rem;
+      display: inline-flex; align-items: center; gap: 0.85rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.14em;
-      color: #818cf8;
-      text-transform: uppercase;
-      margin: 0;
-      font-weight: 600;
+      font-size: 0.75rem; letter-spacing: 0.14em; color: #818cf8;
+      text-transform: uppercase; margin: 0; font-weight: 600;
     }
     .sec-label::before {
-      content: '';
-      display: inline-block;
-      width: 36px;
-      height: 1px;
-      background: rgba(129, 140, 248, 0.5);
+      content: ''; display: inline-block;
+      width: 36px; height: 1px; background: rgba(129, 140, 248, 0.5);
     }
     .sec-meta {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      color: #64748b;
+      font-size: 0.7rem; letter-spacing: 0.12em; color: #64748b;
     }
     .sec-title {
       font-size: clamp(2rem, 4.5vw, 3.25rem);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.05;
+      font-weight: 800; letter-spacing: -0.025em; line-height: 1.05;
       margin: 0 0 clamp(1.75rem, 3vw, 2.5rem);
     }
 
@@ -162,18 +134,13 @@ interface SubjectCard {
       gap: 1.5rem;
     }
     .card {
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
+      border-radius: 18px; overflow: hidden;
+      text-decoration: none; color: inherit;
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.3s ease,
-                  box-shadow 0.3s ease,
-                  background 0.3s ease;
+                  border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     }
     .card:hover {
       transform: translateY(-6px);
@@ -182,6 +149,7 @@ interface SubjectCard {
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
     }
     .card:hover .cta { gap: 0.55rem; color: #fff; }
+    .card:hover .cover-initials { transform: translateY(-2px); }
     .card-soon { opacity: 0.78; }
 
     .cover {
@@ -195,143 +163,248 @@ interface SubjectCard {
     }
     .cover::after {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: radial-gradient(ellipse at 80% 90%, rgba(0, 0, 0, 0.35) 0%, transparent 65%);
     }
-    .cover-vol {
-      position: relative;
-      z-index: 1;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.78);
+    .cover-initials {
+      position: relative; z-index: 1;
+      font-size: 4.25rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+      color: rgba(255, 255, 255, 0.96);
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       align-self: flex-start;
+    }
+    .cover-tag {
+      position: relative; z-index: 1;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.78);
+      align-self: flex-end;
       padding: 0.3rem 0.65rem;
       background: rgba(0, 0, 0, 0.32);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 999px;
     }
-    .cover-initials {
-      position: relative;
-      z-index: 1;
-      font-size: 3.5rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      color: rgba(255, 255, 255, 0.96);
-      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-      align-self: flex-end;
-    }
 
-    .body {
-      padding: 1.4rem 1.4rem 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+    .body { padding: 1.4rem 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
     .meta {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      color: #94a3b8;
-      text-transform: uppercase;
-      margin: 0 0 0.85rem;
+      font-size: 0.7rem; letter-spacing: 0.12em; color: #94a3b8;
+      text-transform: uppercase; margin: 0 0 0.85rem;
     }
+    .meta .meta-dot {
+      display: inline-block; width: 3px; height: 3px; border-radius: 50%;
+      background: #475569; margin: 0 0.45rem; vertical-align: middle;
+    }
+    .meta .live { color: #6ee7b7; }
+    .meta .soon { color: #fcd34d; }
     .name {
-      font-size: 1.45rem;
-      font-weight: 800;
-      letter-spacing: -0.015em;
+      font-size: 1.4rem; font-weight: 800; letter-spacing: -0.015em;
       margin: 0 0 0.5rem;
     }
     .desc {
-      color: #94a3b8;
-      font-size: 0.92rem;
-      line-height: 1.55;
+      color: #94a3b8; font-size: 0.92rem; line-height: 1.55;
       margin: 0 0 1.25rem;
     }
     .hr { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.07); margin: 0 0 1rem; }
     .foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       margin-top: auto;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.82rem;
-      letter-spacing: 0.04em;
-      color: #64748b;
+      font-size: 0.82rem; letter-spacing: 0.04em; color: #64748b;
     }
     .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: #a5b4fc;
-      font-weight: 600;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: #a5b4fc; font-weight: 600;
       transition: gap 0.25s ease, color 0.25s ease;
     }
 
-    .foot-note {
+    /* Features grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .feature {
+      padding: 1.5rem 1.4rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .feature:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.035);
+    }
+    .feature-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(139, 92, 246, 0.18));
+      border: 1px solid rgba(99, 102, 241, 0.32);
+      border-radius: 10px;
+      font-size: 1.1rem;
+      margin-bottom: 0.85rem;
+    }
+    .feature-title {
+      font-size: 1rem; font-weight: 700; letter-spacing: -0.01em;
+      margin: 0 0 0.35rem; color: #f8fafc;
+    }
+    .feature-desc {
+      color: #94a3b8; font-size: 0.9rem; line-height: 1.55; margin: 0;
+    }
+
+    /* Method steps */
+    .method-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .method {
+      padding: 1.5rem 1.4rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+    }
+    .method-step {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.75rem; letter-spacing: 0.14em; color: #818cf8;
+      margin: 0 0 0.6rem; font-weight: 700;
+    }
+    .method-title {
+      font-size: 1.05rem; font-weight: 700; margin: 0 0 0.4rem; color: #f8fafc;
+    }
+    .method-desc {
+      color: #94a3b8; font-size: 0.9rem; line-height: 1.55; margin: 0;
+    }
+
+    /* CTA band */
+    .cta-band {
       margin: clamp(3rem, 6vh, 5rem) 0 clamp(4rem, 8vh, 6rem);
+      padding: clamp(2.5rem, 6vw, 4rem) clamp(1.75rem, 4vw, 3rem);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 80% 100%, rgba(167, 139, 250, 0.22) 0%, transparent 55%),
+        radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.2) 0%, transparent 55%),
+        rgba(15, 21, 48, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+    }
+    .cta-band h3 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem;
+    }
+    .cta-band p {
+      color: #cbd5e1; max-width: 540px;
+      margin: 0 auto 1.75rem; line-height: 1.6;
+    }
+    .cta-band-row {
+      display: inline-flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center;
+    }
+    .btn-light {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.85rem 1.5rem;
+      background: #f8fafc; color: #07091a; font-weight: 700;
+      border-radius: 999px; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-light:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(255, 255, 255, 0.16);
+    }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.85rem 1.5rem;
+      background: rgba(255, 255, 255, 0.04); color: #cbd5e1;
+      font-weight: 600; border-radius: 999px; text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Foot */
+    .foot-note {
       text-align: center;
       color: #64748b;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.82rem;
-      letter-spacing: 0.04em;
+      font-size: 0.82rem; letter-spacing: 0.04em;
+      padding: 2rem 0 3rem;
     }
   `]
 })
 export class HubHomeComponent {
   subjects: SubjectCard[] = [
     {
-      vol: '00',
-      slug: 'dotnet',
+      vol: '00', slug: 'dotnet',
       title: '.NET Roadmap',
       tagline: 'Backend · Full-stack',
-      desc: '9-phase, 6–7 month roadmap. C#, ASP.NET Core, EF Core, system design, DevOps. Real examples in Indian English.',
+      desc: '9-phase, 6–7 month interview roadmap. C#, ASP.NET Core, EF Core, system design, DevOps. Real examples, not toy demos.',
       meta: '9 phases · 100+ topics',
       ready: true,
       link: '/dotnet',
       coverInitials: '.NET',
+      coverTag: '.NET ROADMAP',
       coverGradient: 'linear-gradient(135deg, #1e1b4b 0%, #4f46e5 70%, #8b5cf6 100%)'
     },
     {
-      vol: '01',
-      slug: 'angular',
-      title: 'Angular Roadmap',
-      tagline: 'Frontend · Modern',
-      desc: 'Standalone, signals, control flow, RxJS, OnPush, SSR. The Angular 19+ stack, phase by phase.',
-      meta: 'In progress',
-      ready: false,
-      link: '/angular',
-      coverInitials: 'NG',
-      coverGradient: 'linear-gradient(135deg, #7f1d1d 0%, #dd0031 70%, #ef4444 100%)'
-    },
-    {
-      vol: '02',
-      slug: 'react',
-      title: 'React Roadmap',
-      tagline: 'Frontend · Next.js',
-      desc: 'Hooks, Context, Redux Toolkit, React Query, Next.js App Router, Server Components and streaming.',
-      meta: 'In progress',
-      ready: false,
-      link: '/react',
-      coverInitials: 'RX',
-      coverGradient: 'linear-gradient(135deg, #0c4a6e 0%, #0891b2 70%, #06b6d4 100%)'
-    },
-    {
-      vol: '03',
-      slug: 'notes',
+      vol: '01', slug: 'notes',
       title: 'Notes & PDFs',
-      tagline: 'Premium · Interview Prep',
-      desc: '4 interview-ready PDFs — Angular, .NET Senior, .NET Fresher, React. Download, read on screen or print.',
+      tagline: 'Premium · Interview prep',
+      desc: '4 interview-ready PDFs — Angular, .NET Senior, .NET Fresher, React. 475+ pages, 275+ questions. Direct download.',
       meta: '4 PDFs · 475+ pages',
       ready: true,
       link: '/notes',
       coverInitials: 'PDF',
+      coverTag: 'NOTES · DOWNLOAD',
       coverGradient: 'linear-gradient(135deg, #7c2d12 0%, #ea580c 70%, #f59e0b 100%)'
+    },
+    {
+      vol: '02', slug: 'angular',
+      title: 'Angular Roadmap',
+      tagline: 'Frontend · Modern',
+      desc: 'Standalone, signals, control flow, RxJS, OnPush, SSR. The Angular 19+ stack as senior engineers actually write it.',
+      meta: 'In progress',
+      ready: false,
+      link: '/angular',
+      coverInitials: 'NG',
+      coverTag: 'ANGULAR · SOON',
+      coverGradient: 'linear-gradient(135deg, #7f1d1d 0%, #dd0031 70%, #ef4444 100%)'
+    },
+    {
+      vol: '03', slug: 'react',
+      title: 'React Roadmap',
+      tagline: 'Frontend · Next.js',
+      desc: 'Hooks, Context, Redux Toolkit, React Query, Next.js App Router, Server Components and streaming — the full modern stack.',
+      meta: 'In progress',
+      ready: false,
+      link: '/react',
+      coverInitials: 'RX',
+      coverTag: 'REACT · SOON',
+      coverGradient: 'linear-gradient(135deg, #0c4a6e 0%, #0891b2 70%, #06b6d4 100%)'
     }
+  ];
+
+  features: FeatureItem[] = [
+    { icon: '▤', title: 'Topics broken down', desc: 'Each phase is split into bite-sized topics. Read top-to-bottom, no jumping around.' },
+    { icon: '◇', title: 'Code + expected output', desc: 'Every snippet has a "see output" toggle. Predict first, verify after — like a real coding round.' },
+    { icon: '?', title: 'Interview Q&A',          desc: '3–5 main questions per topic plus rapid-fire follow-ups. The actual questions you\'ll face.' },
+    { icon: '◈', title: 'Real-life examples',    desc: 'Concepts explained with Swiggy, Amazon, ATM, banking — examples you actually relate to.' },
+    { icon: '⚠', title: 'Common mistakes',       desc: 'Each topic flags the answer that sounds smart but loses you the round. Skip the trap.' },
+    { icon: '★', title: 'Pro tips',               desc: 'One line per topic that makes you sound like a senior, not someone reciting Stack Overflow.' }
+  ];
+
+  method: MethodStep[] = [
+    { step: '01', title: 'Read the concept',  desc: 'Understand the why before the how. That\'s what separates a senior answer from a junior one.' },
+    { step: '02', title: 'Predict the output', desc: 'Before clicking "see output", guess what it prints. This is the closest thing to a real round at home.' },
+    { step: '03', title: 'Drill the Q&A',     desc: 'Re-read the interview questions the day before any interview. These are the actual questions.' },
+    { step: '04', title: 'Ship a project',    desc: 'Theory without project is forgotten in two weeks. Apply each phase inside a real feature.' }
   ];
 
   get readyCount(): number {

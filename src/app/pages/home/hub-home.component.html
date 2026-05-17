@@ -2,7 +2,7 @@
 <div class="landing-grid" aria-hidden="true"></div>
 
 <div class="wrap">
-  <app-landing-nav />
+  <app-landing-nav [cta]="{ label: 'Start .NET', path: '/dotnet' }" />
 
   <!-- ─── HERO ─── -->
   <section class="hero">
@@ -38,11 +38,15 @@
       @for (s of subjects; track s.slug) {
         <a class="card" [class.card-soon]="!s.ready" [routerLink]="s.link">
           <div class="cover" [style.background]="s.coverGradient">
-            <span class="cover-vol">VOL. {{ s.vol }}</span>
             <span class="cover-initials">{{ s.coverInitials }}</span>
+            <span class="cover-tag">{{ s.coverTag }}</span>
           </div>
           <div class="body">
-            <p class="meta">{{ s.tagline }}</p>
+            <p class="meta">
+              VOL. {{ s.vol }}<span class="meta-dot"></span>
+              @if (s.ready) { <span class="live">LIVE</span> } @else { <span class="soon">SOON</span> }
+              <span class="meta-dot"></span>{{ s.tagline }}
+            </p>
             <h3 class="name">{{ s.title }}</h3>
             <p class="desc">{{ s.desc }}</p>
             <hr class="hr">
@@ -59,7 +63,54 @@
     </div>
   </section>
 
+  <!-- ─── WHAT'S INSIDE ─── -->
+  <section class="section">
+    <div class="sec-head">
+      <p class="sec-label">02 — WHAT'S INSIDE</p>
+      <div class="sec-meta">EVERY ROADMAP</div>
+    </div>
+    <h2 class="sec-title">one shape, every topic.</h2>
+
+    <div class="feature-grid">
+      @for (f of features; track f.title) {
+        <div class="feature">
+          <span class="feature-icon" aria-hidden="true">{{ f.icon }}</span>
+          <h4 class="feature-title">{{ f.title }}</h4>
+          <p class="feature-desc">{{ f.desc }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ─── METHOD ─── -->
+  <section class="section">
+    <div class="sec-head">
+      <p class="sec-label">03 — THE METHOD</p>
+    </div>
+    <h2 class="sec-title">how to actually use it.</h2>
+
+    <div class="method-list">
+      @for (m of method; track m.step) {
+        <div class="method">
+          <p class="method-step">{{ m.step }}</p>
+          <h4 class="method-title">{{ m.title }}</h4>
+          <p class="method-desc">{{ m.desc }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ─── CTA BAND ─── -->
+  <section class="cta-band">
+    <h3>Ready when you are.</h3>
+    <p>.NET is live with 7 phases. Notes are downloadable right now. Angular &amp; React are next.</p>
+    <div class="cta-band-row">
+      <a routerLink="/dotnet" class="btn-light">Start .NET <span aria-hidden="true">→</span></a>
+      <a routerLink="/notes" class="btn-ghost">Browse notes</a>
+    </div>
+  </section>
+
   <p class="foot-note">
-    More tracks landing soon. Each one is a complete, standalone roadmap.
+    Built solo. Updated as I prep for the next round.
   </p>
 </div>

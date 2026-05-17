@@ -193,6 +193,17 @@ interface NoteCard {
       inset: 0;
       background: radial-gradient(ellipse at 80% 90%, rgba(0, 0, 0, 0.35) 0%, transparent 65%);
     }
+    .cover-initials {
+      position: relative;
+      z-index: 1;
+      font-size: 4.25rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+      color: rgba(255, 255, 255, 0.96);
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      align-self: flex-start;
+    }
     .cover-vol {
       position: relative;
       z-index: 1;
@@ -201,23 +212,12 @@ interface NoteCard {
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.78);
-      align-self: flex-start;
+      align-self: flex-end;
       padding: 0.3rem 0.65rem;
       background: rgba(0, 0, 0, 0.32);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 999px;
-    }
-    .cover-initials {
-      position: relative;
-      z-index: 1;
-      font-size: 3rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      color: rgba(255, 255, 255, 0.96);
-      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-      align-self: flex-end;
     }
 
     .body {

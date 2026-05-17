@@ -6,23 +6,52 @@
 
   <!-- ─── HERO ─── -->
   <section class="hero">
-    <p class="eyebrow">Premium Notes · Free forever</p>
-    <h1 class="title">
-      interview notes<br>
-      <span class="accent">that got me hired.</span>
-    </h1>
-    <p class="sub">
-      Battle-tested PDFs I built preparing for — and giving — product-company interviews.
-      Direct download. Read on screen or print.
-    </p>
-    <div class="stats">
-      <span><strong>{{ notes.length }}</strong> PDFs</span>
-      <span class="dot">·</span>
-      <span><strong>{{ totalPages }}</strong> pages</span>
-      <span class="dot">·</span>
-      <span><strong>{{ totalQuestions }}</strong> Qs</span>
-      <span class="dot">·</span>
-      <span class="free-pill">All free</span>
+    <div class="hero-text">
+      <p class="eyebrow">Premium Notes · Free forever</p>
+      <h1 class="title">
+        Interview Notes<br>
+        <span class="accent">That Got Me Hired.</span>
+      </h1>
+      <p class="sub">
+        Battle-tested PDFs I built preparing for — and giving — product-company interviews.
+        Direct download. Read on screen or print.
+      </p>
+      <div class="stats">
+        <span><strong>{{ notes.length }}</strong> PDFs</span>
+        <span class="dot">·</span>
+        <span><strong>{{ totalPages }}</strong> pages</span>
+        <span class="dot">·</span>
+        <span><strong>{{ totalQuestions }}</strong> Qs</span>
+        <span class="dot">·</span>
+        <span class="free-pill">All free</span>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hv-glow"></div>
+      <div class="hv-card">
+        <div class="hv-bar">
+          <span class="hv-icon">PDF</span>
+          <span class="hv-file">Angular Senior — Interview Pack.pdf</span>
+          <span class="hv-pages">96 pp</span>
+        </div>
+        <div class="hv-body">
+          <p class="hv-doc-eyebrow">TABLE OF CONTENTS</p>
+          <ul class="hv-toc">
+            <li class="hv-toc-item"><span class="hv-toc-num">01</span><span class="hv-toc-text">Standalone components &amp; bootstrap</span><span class="hv-toc-page">02</span></li>
+            <li class="hv-toc-item"><span class="hv-toc-num">02</span><span class="hv-toc-text">Signals, computed, effects</span><span class="hv-toc-page">11</span></li>
+            <li class="hv-toc-item"><span class="hv-toc-num">03</span><span class="hv-toc-text">Change detection &amp; OnPush</span><span class="hv-toc-page">24</span></li>
+            <li class="hv-toc-item"><span class="hv-toc-num">04</span><span class="hv-toc-text">RxJS — operators that matter</span><span class="hv-toc-page">38</span></li>
+            <li class="hv-toc-item"><span class="hv-toc-num">05</span><span class="hv-toc-text">SSR, hydration, performance</span><span class="hv-toc-page">61</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="hv-badge">
+        <span class="hv-badge-dot"></span>
+        <span>275+ QUESTIONS</span>
+        <span class="hv-badge-sep">·</span>
+        <span>FREE</span>
+      </div>
     </div>
   </section>
 
@@ -32,7 +61,7 @@
       <p class="sec-label">01 — DOWNLOAD</p>
       <div class="sec-meta">{{ notes.length }} READY</div>
     </div>
-    <h2 class="sec-title">every roadmap.</h2>
+    <h2 class="sec-title">Every Roadmap.</h2>
 
     <div class="grid">
       @for (n of notes; track n.slug) {

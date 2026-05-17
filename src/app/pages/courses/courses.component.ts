@@ -35,11 +35,11 @@ interface ComingTopic {
       <section class="hero">
         <div class="hero-text">
           <p class="hero-eyebrow">COURSES</p>
-          <h1 class="hero-title">learn .net,<br />the practical way.</h1>
+          <h1 class="hero-title">deep-dive courses,<br />the practical way.</h1>
           <p class="hero-sub">
-            Free, hands-on courses for .NET developers. Track progress across lessons,
-            read or watch at your own pace, and pull every example from a real GitHub repo.
-            Built around production patterns I actually ship.
+            Hands-on roadmaps and notes for product-company interviews — .NET, Angular,
+            React, and the system design behind them. Read at your own pace, every
+            example from a real GitHub repo, built around production patterns I ship.
           </p>
           <div class="hero-stats">
             <span class="stat">2 courses</span>

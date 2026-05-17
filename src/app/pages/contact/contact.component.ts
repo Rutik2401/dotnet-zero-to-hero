@@ -30,20 +30,59 @@ interface DirectChannel {
       <app-landing-nav />
 
       <section class="page-hero">
-        <p class="page-eyebrow">Contact</p>
-        <h1 class="page-title">
-          let's <span class="accent-mark">talk.</span>
-        </h1>
-        <p class="page-sub">
-          Sponsorships, collaborations, topic suggestions, or just a hello.
-          I read every message and reply within a day on weekdays.
-        </p>
+        <div class="hero-text">
+          <p class="page-eyebrow">Contact</p>
+          <h1 class="page-title">
+            Let's <span class="accent-mark">Talk.</span>
+          </h1>
+          <p class="page-sub">
+            Sponsorships, collaborations, topic suggestions, or just a hello.
+            I read every message and reply within a day on weekdays.
+          </p>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hv-glow"></div>
+          <div class="hv-card">
+            <header class="hv-thread-head">
+              <span class="hv-avatar">R</span>
+              <div class="hv-thread-meta">
+                <span class="hv-thread-name">Rutik Pimpale</span>
+                <span class="hv-thread-sub">Replies within a day · IST</span>
+              </div>
+              <span class="hv-thread-tag">DM</span>
+            </header>
+
+            <div class="hv-thread-body">
+              <div class="hv-msg hv-msg-in">
+                <span class="hv-msg-time">10:42</span>
+                <p>Hey — saw your .NET roadmap. Mind if I sponsor a phase on auth?</p>
+              </div>
+              <div class="hv-msg hv-msg-out">
+                <span class="hv-msg-time">10:43</span>
+                <p>Sure — happy to chat. Free Thursday at 4pm IST?</p>
+              </div>
+              <div class="hv-typing" aria-hidden="true">
+                <span class="hv-typing-dot"></span>
+                <span class="hv-typing-dot"></span>
+                <span class="hv-typing-dot"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hv-badge">
+            <span class="hv-badge-dot"></span>
+            <span>ONLINE</span>
+            <span class="hv-badge-sep">·</span>
+            <span>1-day reply SLA</span>
+          </div>
+        </div>
       </section>
 
       <section class="page-section">
         <div class="sec-head">
           <p class="page-seclabel"><span class="sec-num">01</span> Pick a starting point</p>
-          <h2 class="page-sectitle">what's this about?</h2>
+          <h2 class="page-sectitle">What's This About?</h2>
           <p class="sec-meta">3 OPTIONS</p>
         </div>
 
@@ -68,7 +107,7 @@ interface DirectChannel {
         <div class="col col-form">
           <div class="sec-head">
             <p class="page-seclabel"><span class="sec-num">02</span> Write to me</p>
-            <h2 class="page-sectitle">send a message</h2>
+            <h2 class="page-sectitle">Send a Message</h2>
             <p class="sec-meta">30 SEC TO FILL</p>
           </div>
 
@@ -154,7 +193,7 @@ interface DirectChannel {
         <aside class="col col-channels">
           <div class="sec-head">
             <p class="page-seclabel"><span class="sec-num">03</span> Other channels</p>
-            <h2 class="page-sectitle small">reach out direct</h2>
+            <h2 class="page-sectitle small">Reach Out Direct</h2>
           </div>
 
           <div class="channels">
@@ -196,7 +235,232 @@ interface DirectChannel {
       padding: 0 clamp(1rem, 4vw, 2rem);
     }
 
-    .page-hero { padding: clamp(2.5rem, 8vh, 5rem) 0 clamp(2rem, 5vh, 4rem); }
+    .page-hero {
+      padding: clamp(2.5rem, 8vh, 5rem) 0 clamp(2rem, 5vh, 4rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(2.5rem, 4vw, 3.5rem);
+      align-items: center;
+    }
+    @media (min-width: 960px) {
+      .page-hero { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+    }
+    .hero-text { min-width: 0; }
+
+    /* ─── HERO VISUAL — animated message thread card ─── */
+    .hero-visual {
+      position: relative;
+      display: none;
+      min-height: 320px;
+      perspective: 1200px;
+    }
+    @media (min-width: 960px) { .hero-visual { display: block; } }
+
+    .hv-glow {
+      position: absolute;
+      inset: 8% -10% 4% -4%;
+      background:
+        radial-gradient(45% 55% at 60% 50%, rgba(139, 92, 246, 0.38), transparent 70%),
+        radial-gradient(40% 50% at 30% 80%, rgba(6, 182, 212, 0.22), transparent 70%);
+      filter: blur(36px);
+      z-index: 0;
+      animation: hv-glow-pulse 7s ease-in-out infinite;
+    }
+
+    .hv-card {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.9) inset,
+        0 26px 52px -18px rgba(15, 15, 15, 0.35),
+        0 14px 32px -12px rgba(109, 40, 217, 0.20);
+      transform-origin: 60% 50%;
+      opacity: 0;
+      animation:
+        hv-enter 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards,
+        hv-float 7s ease-in-out 1.05s infinite alternate;
+    }
+    .hv-card:hover { animation-play-state: paused; }
+
+    .hv-thread-head {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.95rem 1.1rem;
+      border-bottom: 1px solid var(--border-chrome);
+      background: rgba(109, 40, 217, 0.035);
+    }
+    .hv-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .hv-thread-meta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      flex: 1;
+    }
+    .hv-thread-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.005em;
+    }
+    .hv-thread-sub {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.66rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+    }
+    .hv-thread-tag {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      padding: 0.18rem 0.55rem;
+      color: var(--primary);
+      background: rgba(109, 40, 217, 0.10);
+      border: 1px solid rgba(109, 40, 217, 0.28);
+      border-radius: 999px;
+    }
+
+    .hv-thread-body {
+      padding: 1rem 1.1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .hv-msg {
+      max-width: 82%;
+      padding: 0.65rem 0.85rem;
+      border-radius: 14px;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--text);
+      opacity: 0;
+      transform: translateY(6px);
+      animation: hv-type 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .hv-msg p { margin: 0; }
+    .hv-msg-time {
+      display: block;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+    .hv-msg-in {
+      align-self: flex-start;
+      background: #f5f1e8;
+      border: 1px solid var(--border);
+      animation-delay: 0.55s;
+    }
+    .hv-msg-out {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--primary), var(--accent-2));
+      color: #f5f1e8;
+      animation-delay: 0.90s;
+    }
+    .hv-msg-out .hv-msg-time { color: rgba(245, 241, 232, 0.7); }
+
+    .hv-typing {
+      align-self: flex-start;
+      display: inline-flex;
+      gap: 0.3rem;
+      padding: 0.75rem 0.95rem;
+      background: #f5f1e8;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      opacity: 0;
+      transform: translateY(6px);
+      animation: hv-type 0.5s cubic-bezier(0.22, 1, 0.36, 1) 1.3s forwards;
+    }
+    .hv-typing-dot {
+      width: 6px; height: 6px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      animation: hv-typing-bob 1.2s ease-in-out infinite;
+    }
+    .hv-typing-dot:nth-child(2) { animation-delay: 0.15s; }
+    .hv-typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+    .hv-badge {
+      position: absolute;
+      bottom: -1.1rem;
+      right: clamp(0.5rem, 3vw, 2rem);
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.95rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      color: var(--text);
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      transform: translateY(8px);
+      animation: hv-badge-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+    .hv-badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.16);
+      animation: hv-pulse 2.2s ease-in-out infinite;
+    }
+    .hv-badge-sep { color: var(--text-muted); }
+
+    @keyframes hv-enter {
+      from { opacity: 0; transform: translateY(22px) rotate(-3deg); }
+      to   { opacity: 1; transform: translateY(0)    rotate(-1.5deg); }
+    }
+    @keyframes hv-float {
+      from { transform: translateY(0)     rotate(-1.5deg); }
+      to   { transform: translateY(-12px) rotate(-0.6deg); }
+    }
+    @keyframes hv-glow-pulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50%      { opacity: 1;   transform: scale(1.06); }
+    }
+    @keyframes hv-pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.16); }
+      50%      { box-shadow: 0 0 0 7px rgba(109, 40, 217, 0.06); }
+    }
+    @keyframes hv-type {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hv-badge-enter {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hv-typing-bob {
+      0%, 100% { transform: translateY(0);    opacity: 0.4; }
+      50%      { transform: translateY(-4px); opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hv-card, .hv-badge, .hv-glow, .hv-msg, .hv-typing, .hv-typing-dot, .hv-badge-dot {
+        animation: none !important;
+      }
+      .hv-card, .hv-badge, .hv-msg, .hv-typing { opacity: 1; transform: none; }
+      .hv-card { transform: rotate(-1deg); }
+    }
 
     .page-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -528,21 +792,21 @@ export class ContactComponent {
   readonly startingPoints: StartingPoint[] = [
     {
       label: 'SPONSORSHIP',
-      title: 'reach developers.',
+      title: 'Reach Developers.',
       desc: 'Newsletter primaries, blog placements, and bespoke deals. Reach a focused audience of working engineers across stacks.',
       subject: 'Sponsorship inquiry',
       accent: '#6d28d9',
     },
     {
       label: 'COLLABORATION',
-      title: 'build something together.',
+      title: 'Build Something Together.',
       desc: 'Talks, conference workshops, content collaborations, podcast appearances. Open to projects where the audience overlaps.',
       subject: 'Collaboration idea',
       accent: '#8b5cf6',
     },
     {
       label: 'SUGGEST A TOPIC',
-      title: 'tell me what to write next.',
+      title: 'Tell Me What to Write Next.',
       desc: "Stuck on something? Send the problem — it might be the next deep-dive.",
       subject: 'Topic suggestion',
       accent: '#ec4899',

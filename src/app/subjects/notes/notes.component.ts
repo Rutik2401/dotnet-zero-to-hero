@@ -47,7 +47,210 @@ interface NoteCard {
       padding: 0 clamp(1rem, 4vw, 2rem);
     }
 
-    .hero { padding: clamp(2.5rem, 8vh, 5rem) 0 clamp(2rem, 5vh, 4rem); }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(2.5rem, 4vw, 3.5rem);
+      align-items: center;
+      padding: clamp(2.5rem, 8vh, 5rem) 0 clamp(2rem, 5vh, 4rem);
+    }
+    @media (min-width: 960px) {
+      .hero { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+    }
+    .hero-text { min-width: 0; }
+
+    /* ─── HERO VISUAL — animated PDF document mockup ─── */
+    .hero-visual {
+      position: relative;
+      display: none;
+      min-height: 320px;
+      perspective: 1200px;
+    }
+    @media (min-width: 960px) { .hero-visual { display: block; } }
+
+    .hv-glow {
+      position: absolute;
+      inset: 8% -10% 4% -4%;
+      background:
+        radial-gradient(45% 55% at 60% 50%, rgba(245, 158, 11, 0.35), transparent 70%),
+        radial-gradient(40% 50% at 30% 80%, rgba(180, 83, 9, 0.18), transparent 70%);
+      filter: blur(36px);
+      z-index: 0;
+      animation: hv-glow-pulse 7s ease-in-out infinite;
+    }
+
+    .hv-card {
+      position: relative;
+      z-index: 1;
+      background: #fffdf8;
+      border: 1px solid rgba(180, 83, 9, 0.18);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.9) inset,
+        0 30px 60px -20px rgba(15, 15, 15, 0.18),
+        0 14px 32px -12px rgba(180, 83, 9, 0.28);
+      transform-origin: 60% 50%;
+      opacity: 0;
+      animation:
+        hv-enter 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards,
+        hv-float 7s ease-in-out 1.05s infinite alternate;
+    }
+    .hv-card:hover { animation-play-state: paused; }
+
+    .hv-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.7rem 0.95rem;
+      background: rgba(180, 83, 9, 0.06);
+      border-bottom: 1px solid rgba(180, 83, 9, 0.18);
+    }
+    .hv-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.18rem 0.45rem;
+      border-radius: 6px;
+      background: var(--warn);
+      color: #fff;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em;
+    }
+    .hv-file {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hv-pages {
+      margin-left: auto;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(180, 83, 9, 0.10);
+      border: 1px solid rgba(180, 83, 9, 0.22);
+      color: var(--warn);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.10em;
+      white-space: nowrap;
+    }
+
+    .hv-body {
+      padding: 1.25rem 1.4rem 1.6rem;
+      background: #fffdf8;
+    }
+    .hv-doc-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.66rem; letter-spacing: 0.18em;
+      color: var(--warn); text-transform: uppercase;
+      font-weight: 700;
+      margin: 0 0 0.85rem;
+    }
+    .hv-toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .hv-toc-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      border-top: 1px solid rgba(180, 83, 9, 0.10);
+      opacity: 0;
+      transform: translateX(-4px);
+      animation: hv-type 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .hv-toc-item:first-child { border-top: 0; }
+    .hv-toc-item:nth-child(1) { animation-delay: 0.55s; }
+    .hv-toc-item:nth-child(2) { animation-delay: 0.80s; }
+    .hv-toc-item:nth-child(3) { animation-delay: 1.05s; }
+    .hv-toc-item:nth-child(4) { animation-delay: 1.30s; }
+    .hv-toc-item:nth-child(5) { animation-delay: 1.55s; }
+    .hv-toc-num {
+      flex-shrink: 0;
+      width: 22px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--warn);
+    }
+    .hv-toc-text {
+      flex: 1; min-width: 0;
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .hv-toc-page {
+      flex-shrink: 0;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .hv-badge {
+      position: absolute;
+      bottom: -1.1rem;
+      right: clamp(0.5rem, 3vw, 2rem);
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.95rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      color: var(--text);
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      transform: translateY(8px);
+      animation: hv-badge-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+    .hv-badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--warn);
+      box-shadow: 0 0 0 4px rgba(180, 83, 9, 0.16);
+      animation: hv-pulse 2.2s ease-in-out infinite;
+    }
+    .hv-badge-sep { color: var(--text-muted); }
+
+    @keyframes hv-enter {
+      from { opacity: 0; transform: translateY(22px) rotate(3deg); }
+      to   { opacity: 1; transform: translateY(0)    rotate(1.5deg); }
+    }
+    @keyframes hv-float {
+      from { transform: translateY(0)     rotate(1.5deg); }
+      to   { transform: translateY(-12px) rotate(0.6deg); }
+    }
+    @keyframes hv-glow-pulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50%      { opacity: 1;   transform: scale(1.06); }
+    }
+    @keyframes hv-pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(180, 83, 9, 0.16); }
+      50%      { box-shadow: 0 0 0 7px rgba(180, 83, 9, 0.06); }
+    }
+    @keyframes hv-type {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes hv-badge-enter {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hv-card, .hv-badge, .hv-glow, .hv-toc-item, .hv-badge-dot {
+        animation: none !important;
+      }
+      .hv-card, .hv-badge { opacity: 1; }
+      .hv-card { transform: rotate(1deg); }
+      .hv-toc-item { opacity: 1; transform: none; }
+    }
     .eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 0.74rem; letter-spacing: 0.18em; color: var(--warn);

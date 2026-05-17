@@ -255,42 +255,11 @@ img, svg { display: block; max-width: 100%; }
   min-width: 0;
 }
 
-.app-header .brand {
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* Shared landing-nav stretches to fill the header row */
+.app-header-nav {
+  flex: 1 1 auto;
   min-width: 0;
-}
-.app-header .brand:hover { text-decoration: none; opacity: 0.92; }
-
-/* "← Hub" pill that lives in the dotnet-shell header, before .brand */
-.app-header .hub-back {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.32rem 0.7rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--text-soft);
-  background: rgba(99, 102, 241, 0.10);
-  border: 1px solid rgba(99, 102, 241, 0.25);
-  border-radius: var(--radius-pill);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
-}
-.app-header .hub-back:hover {
-  color: var(--text);
-  background: rgba(99, 102, 241, 0.20);
-  border-color: rgba(99, 102, 241, 0.45);
-  text-decoration: none;
+  display: block;
 }
 
 .btn-burger {
@@ -319,41 +288,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .btn-burger:active { transform: scale(0.96); }
 
-.app-header nav {
-  margin-left: auto;
-  display: flex;
-  gap: var(--space-2);
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  max-width: 100%;
-  min-width: 0;
-}
-.app-header nav::-webkit-scrollbar { display: none; }
-.app-header nav a {
-  position: relative;
-  color: var(--text-muted);
-  font-weight: 500;
-  font-size: 0.92rem;
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  transition: color var(--dur-fast) var(--ease),
-              background var(--dur-fast) var(--ease);
-}
-.app-header nav a:hover {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.05);
-  text-decoration: none;
-}
-.app-header nav a.active {
-  color: #E0E7FF;
-  background: rgba(99, 102, 241, 0.18);
-  border: 1px solid rgba(99, 102, 241, 0.32);
-  /* Tiny outer ring = elevated, not just colored */
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
-}
+/* Old .app-header nav rules removed — landing-nav owns its own styling now. */
 
 /* Sidebar — L2 chrome, distinctly above body */
 .app-sidebar {
@@ -1284,7 +1219,6 @@ pre.code-output code { color: #BBF7D0; }
 
   /* --- HEADER --- */
   .app-header        { gap: var(--space-2); }
-  .app-header nav    { display: none; }    /* sidebar already lists every route */
 
   /* --- SIDEBAR — off-canvas drawer --- */
   .app-sidebar {
@@ -1381,7 +1315,6 @@ pre.code-output code { color: #BBF7D0; }
 
   /* --- HEADER --- */
   .app-header       { padding: 0 var(--space-3); gap: var(--space-2); }
-  .app-header .brand{ font-size: 0.95rem; }
 
   /* --- MAIN --- */
   .app-main,

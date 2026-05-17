@@ -5,21 +5,12 @@
     <button class="btn-burger"
             type="button"
             (click)="toggleSidebar()"
-            [attr.aria-label]="sidebarOpen() ? 'Collapse roadmap' : 'Open roadmap'"
-            [title]="sidebarOpen() ? 'Collapse roadmap' : 'Open roadmap'">
+            [attr.aria-label]="sidebarOpen() ? 'Collapse phase list' : 'Open phase list'"
+            [title]="sidebarOpen() ? 'Collapse phase list' : 'Open phase list'">
       @if (sidebarOpen()) { <span aria-hidden="true">✕</span> }
       @else                { <span aria-hidden="true">☰</span> }
     </button>
-    <a routerLink="/" class="hub-back" title="Back to Learn Hub">← Hub</a>
-    <a routerLink="/dotnet" class="brand">{{ title }}</a>
-    <nav>
-      <a routerLink="/dotnet" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      <a routerLink="/dotnet/phase-0" routerLinkActive="active">Phase 0</a>
-      <a routerLink="/dotnet/phase-1" routerLinkActive="active">Phase 1</a>
-      <a routerLink="/dotnet/phase-2" routerLinkActive="active">Phase 2</a>
-      <a routerLink="/dotnet/phase-3" routerLinkActive="active">Phase 3</a>
-      <a routerLink="/dotnet/phase-4" routerLinkActive="active">Phase 4</a>
-    </nav>
+    <app-landing-nav class="app-header-nav" />
   </header>
 
   <app-sidebar [phases]="phases" [open]="sidebarOpen()" />

@@ -1,20 +1,19 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { SidebarComponent, PhaseLink } from './shared/sidebar/sidebar.component';
 import { PhaseTocComponent } from './shared/phase-toc/phase-toc.component';
 import { PhaseTocService } from './shared/phase-toc/phase-toc.service';
+import { LandingNavComponent } from '../../shared/landing-nav/landing-nav.component';
 
 const SIDEBAR_KEY = 'roadmap-sidebar-open';
 
 @Component({
   selector: 'app-dotnet-shell',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, SidebarComponent, PhaseTocComponent],
+  imports: [RouterOutlet, SidebarComponent, PhaseTocComponent, LandingNavComponent],
   templateUrl: './dotnet-shell.component.html'
 })
 export class DotnetShellComponent {
   private readonly toc = inject(PhaseTocService);
-
-  title = '.NET Roadmap';
 
   sidebarOpen = signal(this.readSidebarState());
 

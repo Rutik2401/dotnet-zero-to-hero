@@ -1,12 +1,8 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
-import hljs from 'highlight.js/lib/core';
-import csharp from 'highlight.js/lib/languages/csharp';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { PhaseTocService } from '../shared/phase-toc/phase-toc.service';
+import { loadCSharpHighlighter } from '../../../shared/highlight/code-highlighter';
 import { phase4Topics } from './phase-4.data';
-
-// Register C# once for the lifetime of the page (lazy-loaded with the component).
-hljs.registerLanguage('csharp', csharp);
 
 @Component({
   selector: 'app-phase-4',
@@ -55,13 +51,13 @@ export class Phase4Component implements AfterViewInit {
     this.highlightCodeBlocks();
   }
 
-  /** Highlight all C# code blocks; skip output panes (plain console output). */
-  private highlightCodeBlocks(): void {
+  private async highlightCodeBlocks(): Promise<void> {
+    const hljs = await loadCSharpHighlighter();
     const blocks: NodeListOf<HTMLElement> =
       this.host.nativeElement.querySelectorAll('.topic-card pre:not(.code-output) code');
 
     blocks.forEach(block => {
-      if (block.dataset['highlighted'] === 'yes') return; // already done
+      if (block.dataset['highlighted'] === 'yes') return;
       block.classList.add('language-csharp');
       hljs.highlightElement(block);
     });

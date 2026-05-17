@@ -1232,8 +1232,66 @@ pre.code-output code {
 }
 
 
+/* ===== 14. Site-wide animated card border on hover ============= */
+.card,
+.phase-card,
+.topic-card,
+.sm-card,
+.topic-index,
+.post-list > li {
+  position: relative;
+}
+
+.card::before,
+.phase-card::before,
+.topic-card::before,
+.sm-card::before,
+.topic-index::before,
+.post-list > li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg,
+      var(--primary) 0%,
+      var(--accent-2) 45%,
+      var(--accent-3) 100%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transform: scale(0.985);
+  transition:
+    opacity 360ms var(--ease-out),
+    transform 480ms var(--ease-out);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.card:hover::before,
+.phase-card:hover::before,
+.topic-card:hover::before,
+.sm-card:hover::before,
+.topic-index:hover::before,
+.post-list > li:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.phase-card-soon:hover::before,
+.card-soon:hover::before {
+  opacity: 0;
+}
+
+
 /* =================================================================
-   14. RESPONSIVE
+   15. RESPONSIVE
    ================================================================= */
 
 @media (max-width: 1280px) {

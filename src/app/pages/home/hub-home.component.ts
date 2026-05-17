@@ -8,8 +8,6 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { LandingNavComponent } from '../../shared/landing-nav/landing-nav.component';
 import { LandingFooterComponent } from '../../shared/landing-footer/landing-footer.component';
 
@@ -436,10 +434,14 @@ export class HubHomeComponent {
    * via gsap.context() so leaving the route reverts every animation and
    * disposes the ScrollTriggers.
    */
-  private setupAnimations(): void {
+  private async setupAnimations(): Promise<void> {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion) return;
 
+    const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+      import('gsap'),
+      import('gsap/ScrollTrigger')
+    ]);
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {

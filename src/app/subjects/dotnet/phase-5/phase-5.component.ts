@@ -1,14 +1,8 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
-import hljs from 'highlight.js/lib/core';
-import typescript from 'highlight.js/lib/languages/typescript';
-import xml from 'highlight.js/lib/languages/xml';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { PhaseTocService } from '../shared/phase-toc/phase-toc.service';
+import { loadTypeScriptHighlighter } from '../../../shared/highlight/code-highlighter';
 import { phase5Topics } from './phase-5.data';
-
-// Register TypeScript + HTML once for the lifetime of the page (lazy-loaded with the component).
-hljs.registerLanguage('typescript', typescript);
-hljs.registerLanguage('html', xml);
 
 @Component({
   selector: 'app-phase-5',
@@ -57,13 +51,13 @@ export class Phase5Component implements AfterViewInit {
     this.highlightCodeBlocks();
   }
 
-  /** Highlight all TypeScript code blocks; skip output panes (plain console output). */
-  private highlightCodeBlocks(): void {
+  private async highlightCodeBlocks(): Promise<void> {
+    const hljs = await loadTypeScriptHighlighter();
     const blocks: NodeListOf<HTMLElement> =
       this.host.nativeElement.querySelectorAll('.topic-card pre:not(.code-output) code');
 
     blocks.forEach(block => {
-      if (block.dataset['highlighted'] === 'yes') return; // already done
+      if (block.dataset['highlighted'] === 'yes') return;
       block.classList.add('language-typescript');
       hljs.highlightElement(block);
     });

@@ -6,43 +6,7 @@ import { LandingFooterComponent } from '../../shared/landing-footer/landing-foot
 @Component({
   selector: 'app-blog',
   imports: [RouterLink, LandingNavComponent, LandingFooterComponent],
-  template: `
-    <div class="page-grid" aria-hidden="true"></div>
-
-    <div class="page-wrap">
-      <app-landing-nav />
-
-      <section class="page-hero">
-        <p class="page-eyebrow">Blog · Coming soon</p>
-        <h1 class="page-title">
-          short notes,<br>
-          <span class="accent-mark">deep takes.</span>
-        </h1>
-        <p class="page-sub">
-          Tutorials, post-mortems, and field notes on what I'm building, breaking and shipping.
-          First posts drop after the .NET roadmap finishes.
-        </p>
-        <div class="page-cta">
-          <a routerLink="/dotnet" class="btn btn-primary">Open .NET Roadmap <span aria-hidden="true">→</span></a>
-          <a routerLink="/" fragment="newsletter" class="btn btn-ghost">Get notified</a>
-        </div>
-      </section>
-
-      <section class="page-section">
-        <p class="page-seclabel">PLANNED</p>
-        <h2 class="page-sectitle">what's coming.</h2>
-        <ul class="post-list">
-          <li><span class="post-dot"></span> EF Core change tracking — when it bites and how to spot it</li>
-          <li><span class="post-dot"></span> ASP.NET Core middleware order — the one most tutorials get wrong</li>
-          <li><span class="post-dot"></span> JWT vs cookie auth — what I actually use in production</li>
-          <li><span class="post-dot"></span> Postgres + EF Core — the indexes nobody explains</li>
-          <li><span class="post-dot"></span> Angular signals — three patterns I lift from .NET</li>
-        </ul>
-      </section>
-    </div>
-
-    <app-landing-footer />
-  `,
+  templateUrl: './blog.component.html',
   styles: [`
     :host { display: block; min-height: 100vh; background: var(--bg); color: var(--text); }
 

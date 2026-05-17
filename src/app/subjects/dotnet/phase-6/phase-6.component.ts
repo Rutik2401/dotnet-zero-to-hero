@@ -1,23 +1,8 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
-import hljs from 'highlight.js/lib/core';
-import bash from 'highlight.js/lib/languages/bash';
-import yaml from 'highlight.js/lib/languages/yaml';
-import dockerfile from 'highlight.js/lib/languages/dockerfile';
-import json from 'highlight.js/lib/languages/json';
-import csharp from 'highlight.js/lib/languages/csharp';
-import xml from 'highlight.js/lib/languages/xml';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { PhaseTocService } from '../shared/phase-toc/phase-toc.service';
+import { loadMultiHighlighter } from '../../../shared/highlight/code-highlighter';
 import { phase6Topics } from './phase-6.data';
-
-// Phase 6 (DevOps) mixes several languages — register them all and let hljs auto-detect.
-hljs.registerLanguage('bash', bash);
-hljs.registerLanguage('shell', bash);
-hljs.registerLanguage('yaml', yaml);
-hljs.registerLanguage('dockerfile', dockerfile);
-hljs.registerLanguage('json', json);
-hljs.registerLanguage('csharp', csharp);
-hljs.registerLanguage('xml', xml);
 
 @Component({
   selector: 'app-phase-6',
@@ -64,8 +49,8 @@ export class Phase6Component implements AfterViewInit {
     this.highlightCodeBlocks();
   }
 
-  /** Auto-detect language for each block since this phase mixes bash/yaml/Dockerfile/json/cs. */
-  private highlightCodeBlocks(): void {
+  private async highlightCodeBlocks(): Promise<void> {
+    const hljs = await loadMultiHighlighter();
     const blocks: NodeListOf<HTMLElement> =
       this.host.nativeElement.querySelectorAll('.topic-card pre:not(.code-output) code');
 

@@ -1,38 +1,76 @@
-<section class="hub">
-  <header class="hub-hero">
-    <span class="pill">Learn Hub</span>
-    <h1 class="hub-title">One place. <span class="brand-text">All the roadmaps.</span></h1>
-    <p class="hub-sub">
-      Phase-by-phase, interview-focused roadmaps for backend and frontend. Pick a track and go.
+<div class="landing-bg" aria-hidden="true"></div>
+<div class="landing-grid" aria-hidden="true"></div>
+
+<div class="wrap">
+
+  <!-- ─── TOP NAV ─── -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <span class="nav-brand-dot">LH</span>
+      <span class="nav-brand-text">Learn Hub</span>
+    </div>
+    <div class="nav-links">
+      <a routerLink="/dotnet" class="nav-link">.NET</a>
+      <a routerLink="/notes" class="nav-link">Notes</a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <p class="eyebrow">Learn Hub · Free forever</p>
+    <h1 class="title">
+      one place.<br>
+      <span class="accent">all the roadmaps.</span>
+    </h1>
+    <p class="sub">
+      Phase-by-phase, interview-focused roadmaps for backend and frontend, plus the
+      premium notes I built while preparing for product-company interviews. Pick a track.
     </p>
-  </header>
+    <div class="stats">
+      <span><strong>{{ subjects.length }}</strong> subjects</span>
+      <span class="dot">·</span>
+      <span><strong>9-phase</strong> .NET</span>
+      <span class="dot">·</span>
+      <span class="free-pill">All free</span>
+      <span class="dot">·</span>
+      <span>Lazy-loaded</span>
+    </div>
+  </section>
 
-  <div class="hub-grid">
-    @for (s of subjects; track s.slug) {
-      <a class="subject-card"
-         [class.subject-card-soon]="!s.ready"
-         [routerLink]="s.link">
-        <div class="subject-accent" [style.background]="s.accent"></div>
-        <div class="subject-body">
-          <div class="subject-meta">
-            <span class="subject-tag">{{ s.tagline }}</span>
-            @if (s.ready) {
-              <span class="pill pill-ready">ready</span>
-            } @else {
-              <span class="pill">soon</span>
-            }
+  <!-- ─── SUBJECTS ─── -->
+  <section class="section">
+    <div class="sec-head">
+      <p class="sec-label">01 — TRACKS</p>
+      <div class="sec-meta">{{ readyCount }} READY · {{ subjects.length - readyCount }} SOON</div>
+    </div>
+    <h2 class="sec-title">pick a subject.</h2>
+
+    <div class="grid">
+      @for (s of subjects; track s.slug) {
+        <a class="card" [class.card-soon]="!s.ready" [routerLink]="s.link">
+          <div class="cover" [style.background]="s.coverGradient">
+            <span class="cover-vol">VOL. {{ s.vol }}</span>
+            <span class="cover-initials">{{ s.coverInitials }}</span>
           </div>
-          <h2 class="subject-title">{{ s.title }}</h2>
-          <p class="subject-desc">{{ s.desc }}</p>
-          <span class="subject-cta">
-            @if (s.ready) { Open roadmap → } @else { Preview → }
-          </span>
-        </div>
-      </a>
-    }
-  </div>
+          <div class="body">
+            <p class="meta">{{ s.tagline }}</p>
+            <h3 class="name">{{ s.title }}</h3>
+            <p class="desc">{{ s.desc }}</p>
+            <hr class="hr">
+            <div class="foot">
+              <span>{{ s.meta }}</span>
+              <span class="cta">
+                @if (s.ready) { Open <span aria-hidden="true">↗</span> }
+                @else        { Preview <span aria-hidden="true">↗</span> }
+              </span>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+  </section>
 
-  <footer class="hub-foot">
-    <p>More subjects on the way. Each track lazy-loads independently — visiting one never downloads the others.</p>
-  </footer>
-</section>
+  <p class="foot-note">
+    Each subject lazy-loads independently — visiting one never downloads the others.
+  </p>
+</div>

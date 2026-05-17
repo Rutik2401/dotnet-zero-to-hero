@@ -1,50 +1,85 @@
-<div class="notes-wrap">
-  <a routerLink="/" class="notes-back">← Learn Hub</a>
+<div class="landing-bg" aria-hidden="true"></div>
+<div class="landing-grid" aria-hidden="true"></div>
 
-  <header class="notes-hero">
-    <span class="pill">Notes &amp; PDFs</span>
-    <h1 class="notes-title">Interview <span class="brand-text">Notes</span></h1>
-    <p class="notes-sub">
-      Premium PDFs for product-company interviews. Angular, .NET, React. Read online, download, or print.
+<div class="wrap">
+
+  <!-- ─── TOP NAV ─── -->
+  <nav class="nav">
+    <a routerLink="/" class="hub-back">← Learn Hub</a>
+    <span class="nav-brand">Notes &amp; PDFs</span>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <p class="eyebrow">Premium Notes · Free forever</p>
+    <h1 class="title">
+      interview notes,<br>
+      <span class="accent">that got me hired.</span>
+    </h1>
+    <p class="sub">
+      Battle-tested PDFs I built while preparing for and giving interviews at product companies.
+      Direct download. Read on screen or print.
     </p>
-  </header>
+    <div class="stats">
+      <span><strong>{{ notes.length }}</strong> PDFs</span>
+      <span class="dot">·</span>
+      <span><strong>{{ totalPages }}</strong> pages</span>
+      <span class="dot">·</span>
+      <span><strong>{{ totalQuestions }}</strong> Qs</span>
+      <span class="dot">·</span>
+      <span class="free-pill">All free</span>
+    </div>
+  </section>
 
-  <div class="notes-grid">
-    @for (n of notes; track n.slug) {
-      <article class="note-card">
-        <div class="note-cover"
-             [style.background]="'linear-gradient(135deg, ' + n.cover.gradientFrom + ' 0%, ' + n.cover.gradientTo + ' 100%)'">
-          {{ n.cover.initials }}
-        </div>
-        <div class="note-body">
-          <div class="note-meta">
-            <span class="note-level">{{ n.level }}</span>
-            <span class="pill">{{ n.badge }}</span>
+  <!-- ─── DOWNLOAD GRID ─── -->
+  <section class="section">
+    <div class="sec-head">
+      <p class="sec-label">01 — DOWNLOAD</p>
+      <div class="sec-meta">{{ notes.length }} READY</div>
+    </div>
+    <h2 class="sec-title">all four notes.</h2>
+
+    <div class="grid">
+      @for (n of notes; track n.slug) {
+        <article class="card">
+          <div class="cover" [style.background]="n.coverGradient">
+            <span class="cover-vol">VOL. {{ n.vol }} · {{ n.shortTag }}</span>
+            <span class="cover-initials">{{ n.coverInitials }}</span>
           </div>
-          <h2 class="note-title">{{ n.title }}</h2>
-          <p class="note-desc">{{ n.description }}</p>
-          <div class="note-topics">
-            @for (t of n.topics; track t) {
-              <span class="note-topic">{{ t }}</span>
-            }
+          <div class="body">
+            <p class="meta">
+              {{ n.level }}<span class="meta-dot"></span><span class="free">FREE</span>
+            </p>
+            <h3 class="name">{{ n.title }}</h3>
+            <p class="desc">{{ n.description }}</p>
+
+            <div class="topics">
+              @for (t of n.topics; track t) {
+                <span class="topic">{{ t }}</span>
+              }
+            </div>
+
+            <hr class="hr">
+
+            <div class="stats-row">
+              <span><strong>{{ n.pages }}</strong>pages</span>
+              <span><strong>{{ n.questions }}</strong>Qs</span>
+              <span><strong>{{ n.updated }}</strong>updated</span>
+            </div>
+
+            <div class="actions">
+              <a class="btn-download"
+                 [href]="n.pdfPath"
+                 [download]="n.fileName"
+                 target="_blank"
+                 rel="noopener">
+                Download PDF <span aria-hidden="true">↓</span>
+              </a>
+              <span class="size">{{ n.pdfSize }}</span>
+            </div>
           </div>
-          <div class="note-stats">
-            <span><strong>{{ n.pages }}</strong> pages</span>
-            <span><strong>{{ n.questions }}</strong> Qs</span>
-            <span><strong>{{ n.updated }}</strong> updated</span>
-          </div>
-          <div class="note-actions">
-            <a class="note-btn note-btn-primary"
-               [href]="n.pdfPath"
-               [download]="n.fileName"
-               target="_blank"
-               rel="noopener">
-              Download PDF →
-            </a>
-          </div>
-          <p class="note-size">{{ n.pdfSize }} · PDF</p>
-        </div>
-      </article>
-    }
-  </div>
+        </article>
+      }
+    </div>
+  </section>
 </div>

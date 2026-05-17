@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LandingNavComponent } from '../../../shared/landing-nav/landing-nav.component';
 
 interface PhaseCard {
   vol: string;
@@ -17,7 +18,7 @@ interface PhaseCard {
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, LandingNavComponent],
   templateUrl: './home.component.html',
   styles: [`
     :host {
@@ -57,65 +58,6 @@ interface PhaseCard {
       max-width: 1180px;
       margin: 0 auto;
       padding: 0 clamp(1rem, 4vw, 2rem);
-    }
-
-    /* ─── Top nav ─── */
-    .landing-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.5rem 0;
-      gap: 1rem;
-    }
-    .landing-nav-left,
-    .landing-nav-right {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .hub-back {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.45rem 0.85rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: #cbd5e1;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 999px;
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .hub-back:hover {
-      color: #fff;
-      background: rgba(99, 102, 241, 0.18);
-      border-color: rgba(99, 102, 241, 0.4);
-    }
-    .landing-brand {
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      background: linear-gradient(135deg, #a5b4fc 0%, #c4b5fd 60%, #67e8f9 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.55rem 1.1rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #07091a;
-      background: #f8fafc;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-    }
-    .nav-cta:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(255, 255, 255, 0.18);
     }
 
     /* ─── Hero ─── */
@@ -444,8 +386,6 @@ interface PhaseCard {
     }
 
     @media (max-width: 640px) {
-      .landing-nav { flex-wrap: wrap; }
-      .landing-nav-right .nav-cta { padding: 0.45rem 0.85rem; font-size: 0.78rem; }
       .phase-cover { height: 160px; padding: 1.2rem; }
       .phase-cover-num { font-size: 3.5rem; }
       .section-head { flex-direction: column; align-items: flex-start; gap: 0.6rem; }

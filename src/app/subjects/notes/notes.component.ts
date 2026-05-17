@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { LandingNavComponent } from '../../shared/landing-nav/landing-nav.component';
 
 interface NoteCard {
   vol: string;
@@ -21,7 +21,7 @@ interface NoteCard {
 
 @Component({
   selector: 'app-notes',
-  imports: [RouterLink],
+  imports: [LandingNavComponent],
   templateUrl: './notes.component.html',
   styles: [`
     :host {
@@ -58,36 +58,6 @@ interface NoteCard {
       max-width: 1180px;
       margin: 0 auto;
       padding: 0 clamp(1rem, 4vw, 2rem);
-    }
-
-    /* Top nav */
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 0; }
-    .hub-back {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.45rem 0.85rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: #cbd5e1;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 999px;
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .hub-back:hover {
-      color: #fff;
-      background: rgba(245, 158, 11, 0.16);
-      border-color: rgba(245, 158, 11, 0.4);
-    }
-    .nav-brand {
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 60%, #dc2626 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
     }
 
     /* Hero */

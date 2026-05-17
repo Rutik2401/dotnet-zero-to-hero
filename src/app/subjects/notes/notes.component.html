@@ -2,22 +2,17 @@
 <div class="landing-grid" aria-hidden="true"></div>
 
 <div class="wrap">
-
-  <!-- ─── TOP NAV ─── -->
-  <nav class="nav">
-    <a routerLink="/" class="hub-back">← Learn Hub</a>
-    <span class="nav-brand">Notes &amp; PDFs</span>
-  </nav>
+  <app-landing-nav />
 
   <!-- ─── HERO ─── -->
   <section class="hero">
     <p class="eyebrow">Premium Notes · Free forever</p>
     <h1 class="title">
-      interview notes,<br>
+      interview notes<br>
       <span class="accent">that got me hired.</span>
     </h1>
     <p class="sub">
-      Battle-tested PDFs I built while preparing for and giving interviews at product companies.
+      Battle-tested PDFs I built preparing for — and giving — product-company interviews.
       Direct download. Read on screen or print.
     </p>
     <div class="stats">
@@ -37,7 +32,7 @@
       <p class="sec-label">01 — DOWNLOAD</p>
       <div class="sec-meta">{{ notes.length }} READY</div>
     </div>
-    <h2 class="sec-title">all four notes.</h2>
+    <h2 class="sec-title">all four guides.</h2>
 
     <div class="grid">
       @for (n of notes; track n.slug) {

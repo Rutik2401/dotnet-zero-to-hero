@@ -2,18 +2,7 @@
 <div class="landing-grid" aria-hidden="true"></div>
 
 <div class="wrap">
-
-  <!-- ─── TOP NAV ─── -->
-  <nav class="nav">
-    <div class="nav-brand">
-      <span class="nav-brand-dot">LH</span>
-      <span class="nav-brand-text">Learn Hub</span>
-    </div>
-    <div class="nav-links">
-      <a routerLink="/dotnet" class="nav-link">.NET</a>
-      <a routerLink="/notes" class="nav-link">Notes</a>
-    </div>
-  </nav>
+  <app-landing-nav />
 
   <!-- ─── HERO ─── -->
   <section class="hero">
@@ -23,17 +12,17 @@
       <span class="accent">all the roadmaps.</span>
     </h1>
     <p class="sub">
-      Phase-by-phase, interview-focused roadmaps for backend and frontend, plus the
-      premium notes I built while preparing for product-company interviews. Pick a track.
+      Phase-by-phase, interview-focused roadmaps for backend and frontend — plus the
+      premium notes I built preparing for product-company interviews.
     </p>
     <div class="stats">
       <span><strong>{{ subjects.length }}</strong> subjects</span>
       <span class="dot">·</span>
       <span><strong>9-phase</strong> .NET</span>
       <span class="dot">·</span>
-      <span class="free-pill">All free</span>
+      <span><strong>4</strong> PDFs</span>
       <span class="dot">·</span>
-      <span>Lazy-loaded</span>
+      <span class="free-pill">All free</span>
     </div>
   </section>
 
@@ -71,6 +60,6 @@
   </section>
 
   <p class="foot-note">
-    Each subject lazy-loads independently — visiting one never downloads the others.
+    More tracks landing soon. Each one is a complete, standalone roadmap.
   </p>
 </div>

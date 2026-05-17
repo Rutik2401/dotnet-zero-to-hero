@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LandingNavComponent } from '../../../shared/landing-nav/landing-nav.component';
 
 @Component({
   selector: 'app-angular-home',
-  imports: [RouterLink],
+  imports: [RouterLink, LandingNavComponent],
   template: `
     <div class="landing-bg" aria-hidden="true"></div>
     <div class="landing-grid" aria-hidden="true"></div>
 
     <div class="wrap">
-      <nav class="nav">
-        <a routerLink="/" class="hub-back">← Learn Hub</a>
-        <span class="nav-brand">Angular Roadmap</span>
-      </nav>
+      <app-landing-nav />
 
       <section class="hero">
         <p class="eyebrow">In progress · Coming soon</p>
@@ -72,21 +70,6 @@ import { RouterLink } from '@angular/router';
     }
 
     .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
-
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 0; }
-    .hub-back {
-      display: inline-flex; align-items: center; padding: 0.45rem 0.85rem;
-      font-size: 0.8rem; font-weight: 600; color: #cbd5e1;
-      background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 999px; text-decoration: none;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .hub-back:hover { color: #fff; background: rgba(220, 38, 38, 0.18); border-color: rgba(220, 38, 38, 0.45); }
-    .nav-brand {
-      font-weight: 700;
-      background: linear-gradient(135deg, #fca5a5 0%, #ef4444 60%, #dc2626 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
 
     .hero { padding: clamp(2.5rem, 8vh, 6rem) 0 clamp(2rem, 5vh, 4rem); }
     .eyebrow {

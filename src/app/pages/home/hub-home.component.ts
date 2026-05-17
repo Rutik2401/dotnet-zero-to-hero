@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LandingNavComponent } from '../../shared/landing-nav/landing-nav.component';
 
 interface SubjectCard {
   vol: string;
@@ -16,7 +17,7 @@ interface SubjectCard {
 
 @Component({
   selector: 'app-hub-home',
-  imports: [RouterLink],
+  imports: [RouterLink, LandingNavComponent],
   templateUrl: './hub-home.component.html',
   styles: [`
     :host {
@@ -54,47 +55,6 @@ interface SubjectCard {
       margin: 0 auto;
       padding: 0 clamp(1rem, 4vw, 2rem);
     }
-
-    /* Top nav */
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.5rem 0;
-    }
-    .nav-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-    .nav-brand-dot {
-      width: 26px;
-      height: 26px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 60%, #06b6d4 100%);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: 900;
-      color: #07091a;
-    }
-    .nav-brand-text {
-      background: linear-gradient(135deg, #a5b4fc 0%, #c4b5fd 60%, #67e8f9 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-link {
-      font-size: 0.88rem;
-      color: #94a3b8;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-link:hover { color: #f8fafc; }
 
     /* Hero */
     .hero { padding: clamp(2.5rem, 8vh, 6rem) 0 clamp(2rem, 5vh, 4rem); }

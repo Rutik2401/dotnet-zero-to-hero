@@ -4,12 +4,13 @@ import { SidebarComponent, PhaseLink } from './shared/sidebar/sidebar.component'
 import { PhaseTocComponent } from './shared/phase-toc/phase-toc.component';
 import { PhaseTocService } from './shared/phase-toc/phase-toc.service';
 import { LandingNavComponent } from '../../shared/landing-nav/landing-nav.component';
+import { LandingFooterComponent } from '../../shared/landing-footer/landing-footer.component';
 
 const SIDEBAR_KEY = 'roadmap-sidebar-open';
 
 @Component({
   selector: 'app-dotnet-shell',
-  imports: [RouterOutlet, SidebarComponent, PhaseTocComponent, LandingNavComponent],
+  imports: [RouterOutlet, SidebarComponent, PhaseTocComponent, LandingNavComponent, LandingFooterComponent],
   templateUrl: './dotnet-shell.component.html'
 })
 export class DotnetShellComponent {

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LandingNavComponent } from '../../../shared/landing-nav/landing-nav.component';
+import { LandingFooterComponent } from '../../../shared/landing-footer/landing-footer.component';
 
 @Component({
   selector: 'app-angular-home',
-  imports: [RouterLink, LandingNavComponent],
+  imports: [RouterLink, LandingNavComponent, LandingFooterComponent],
   template: `
     <div class="landing-bg" aria-hidden="true"></div>
     <div class="landing-grid" aria-hidden="true"></div>
@@ -31,8 +32,8 @@ import { LandingNavComponent } from '../../../shared/landing-nav/landing-nav.com
           <span class="free-pill">Free forever</span>
         </div>
         <div class="cta-row">
-          <a routerLink="/dotnet" class="btn-primary">Open .NET Roadmap <span aria-hidden="true">→</span></a>
-          <a routerLink="/notes" class="btn-ghost">Browse notes</a>
+          <a routerLink="/dotnet" class="btn btn-primary">Open .NET Roadmap <span aria-hidden="true">→</span></a>
+          <a routerLink="/notes" class="btn btn-ghost">Browse notes</a>
         </div>
       </section>
 
@@ -51,106 +52,105 @@ import { LandingNavComponent } from '../../../shared/landing-nav/landing-nav.com
         </ul>
       </section>
     </div>
+
+    <app-landing-footer />
   `,
   styles: [`
-    :host { display: block; min-height: 100vh; background: #07091a; color: #f8fafc; }
+    :host { display: block; min-height: 100vh; background: var(--bg); color: var(--text); }
 
     .landing-bg, .landing-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .landing-bg {
-      background-image:
-        radial-gradient(circle at 18% 12%, rgba(220, 38, 38, 0.16) 0%, transparent 38%),
-        radial-gradient(circle at 82% 88%, rgba(239, 68, 68, 0.14) 0%, transparent 42%);
+      background:
+        radial-gradient(45rem 30rem at 14% -8%, rgba(220, 38, 38, 0.06), transparent 60%),
+        radial-gradient(50rem 32rem at 100% 100%, rgba(139, 92, 246, 0.05), transparent 60%);
     }
     .landing-grid {
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 30%, transparent 100%);
+      background-image: radial-gradient(rgba(10, 10, 10, 0.045) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 35%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 35%, transparent 100%);
+      opacity: 0.6;
     }
 
     .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
 
-    .hero { padding: clamp(2.5rem, 8vh, 6rem) 0 clamp(2rem, 5vh, 4rem); }
+    .hero { padding: clamp(2.5rem, 8vh, 5rem) 0 clamp(2rem, 5vh, 4rem); }
     .eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.75rem; letter-spacing: 0.16em; color: #fca5a5;
-      text-transform: uppercase; margin: 0 0 1.25rem; font-weight: 600;
+      font-size: 0.74rem; letter-spacing: 0.18em; color: var(--danger);
+      text-transform: uppercase; margin: 0 0 1.2rem; font-weight: 700;
     }
     .title {
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      font-weight: 800; letter-spacing: -0.035em; line-height: 0.98;
-      margin: 0 0 1.75rem; max-width: 820px; text-wrap: balance;
+      font-size: clamp(2.6rem, 7.5vw, 5.25rem);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 0.98;
+      margin: 0 0 1.5rem; max-width: 820px; text-wrap: balance;
+      color: var(--text);
     }
-    .accent {
-      background: linear-gradient(135deg, #fca5a5 0%, #ef4444 60%, #dc2626 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+    .accent { color: var(--danger); }
+    .sub {
+      color: var(--text-soft);
+      font-size: clamp(1.05rem, 1.5vw, 1.18rem);
+      line-height: 1.65; max-width: 640px; margin: 0 0 1.75rem;
     }
-    .sub { color: #94a3b8; font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.7; max-width: 620px; margin: 0 0 2rem; }
-    .stats { display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem 0.9rem; color: #cbd5e1; font-size: 0.95rem; margin-bottom: 2rem; }
-    .stats strong { color: #f8fafc; font-weight: 700; }
-    .stats .dot { color: #475569; }
+    .stats {
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 0.5rem 0.85rem; color: var(--text-soft); font-size: 0.94rem;
+      margin-bottom: 1.85rem;
+    }
+    .stats strong { color: var(--text); font-weight: 700; }
+    .stats .dot { color: var(--text-muted); }
     .stats .free-pill { display: inline-flex; align-items: center; gap: 0.4rem; }
     .stats .free-pill::before {
       content: ''; width: 8px; height: 8px; border-radius: 50%;
-      background: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.16);
     }
 
-    .cta-row { display: flex; flex-wrap: wrap; gap: 0.85rem; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      padding: 0.85rem 1.5rem; background: #f8fafc; color: #07091a;
-      font-weight: 700; border-radius: 999px; text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(255, 255, 255, 0.16); }
-    .btn-ghost {
-      display: inline-flex; align-items: center;
-      padding: 0.85rem 1.5rem; background: rgba(255, 255, 255, 0.04);
-      color: #cbd5e1; font-weight: 600; border-radius: 999px;
-      text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-    }
-    .btn-ghost:hover { color: #fff; background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+    .cta-row .btn { padding: 0.9rem 1.5rem; font-size: 0.95rem; }
 
     .section { padding: clamp(2rem, 6vh, 4rem) 0 clamp(4rem, 8vh, 6rem); }
     .sec-label {
       display: inline-flex; align-items: center; gap: 0.85rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.75rem; letter-spacing: 0.14em; color: #fca5a5;
+      font-size: 0.74rem; letter-spacing: 0.14em; color: var(--danger);
       text-transform: uppercase; margin: 0 0 0.5rem; font-weight: 600;
     }
     .sec-label::before {
       content: ''; display: inline-block;
-      width: 36px; height: 1px; background: rgba(252, 165, 165, 0.5);
+      width: 36px; height: 1px; background: rgba(185, 28, 28, 0.45);
     }
     .sec-title {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 800; letter-spacing: -0.025em; line-height: 1.1;
-      margin: 0 0 2rem;
+      font-size: clamp(1.85rem, 4vw, 2.6rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+      margin: 0 0 1.85rem; color: var(--text);
+      padding: 0; border: 0;
     }
+
     .phase-list {
       list-style: none; padding: 0; margin: 0;
       display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-      gap: 0.65rem;
+      gap: 0.7rem;
     }
     .phase-list li {
       display: flex; align-items: center; gap: 1rem;
       padding: 1rem 1.2rem;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      color: #cbd5e1;
-      transition: border-color 0.2s, background 0.2s;
+      color: var(--text-soft);
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
     .phase-list li:hover {
-      border-color: rgba(220, 38, 38, 0.3);
-      background: rgba(220, 38, 38, 0.04);
+      border-color: rgba(185, 28, 28, 0.32);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
     }
     .phase-num {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 0.85rem; font-weight: 800; letter-spacing: 0.04em;
-      color: #ef4444; min-width: 28px;
+      color: var(--danger); min-width: 28px;
     }
   `]
 })

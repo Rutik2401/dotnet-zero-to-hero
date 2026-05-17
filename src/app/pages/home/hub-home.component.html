@@ -1,5 +1,5 @@
-<div class="landing-bg" aria-hidden="true"></div>
-<div class="landing-grid" aria-hidden="true"></div>
+<div class="cream-bg" aria-hidden="true"></div>
+<div class="cream-grid" aria-hidden="true"></div>
 
 <div class="wrap">
   <app-landing-nav />
@@ -8,23 +8,23 @@
   <section class="hero">
     <a routerLink="/dotnet" class="announce">
       <span class="announce-dot" aria-hidden="true"></span>
-      Live · 7 .NET phases + 4 PDFs ready to use
+      New <span class="announce-sep">·</span> 7 .NET phases + 4 PDFs ready to use
       <span class="announce-arrow" aria-hidden="true">→</span>
     </a>
 
     <h1 class="hero-title">
-      I help devs crack
+      I help devs crack<br />
       <span class="accent-mark">product-company interviews.</span>
     </h1>
 
     <p class="hero-sub">
-      Phase-by-phase roadmaps and battle-tested notes — the .NET stack, the way it
-      actually ships in production teams. Read at your own pace. Type every snippet.
+      Phase-by-phase roadmaps and battle-tested notes on .NET, Angular, React, system design,
+      and the way real teams ship code. Read at your own pace. Type every snippet. No fluff.
     </p>
 
     <div class="hero-cta">
-      <a routerLink="/dotnet" class="btn-light">Start .NET <span aria-hidden="true">→</span></a>
-      <a routerLink="/notes" class="btn-ghost">Browse notes</a>
+      <a routerLink="/dotnet" class="btn btn-primary">Start .NET <span aria-hidden="true">→</span></a>
+      <a routerLink="/notes" class="btn btn-ghost">Browse notes</a>
     </div>
   </section>
 
@@ -102,13 +102,32 @@
     </div>
   </section>
 
-  <!-- ─── NEWSLETTER (anchor target for navbar Subscribe button) ─── -->
+  <!-- ─── STUCK-ON CTA CARD ─── -->
+  <section class="stuck">
+    <div class="stuck-text">
+      <p class="stuck-eyebrow">GOT A .NET PROBLEM YOU CAN'T FIND GOOD WRITING ON?</p>
+      <h2 class="stuck-title">tell me what you're stuck on.</h2>
+      <p class="stuck-sub">
+        I take topic requests from readers and reply to every email. If there's a .NET problem
+        you can't find good writing on, send it over — it might be the next deep-dive.
+      </p>
+    </div>
+    <div class="stuck-cta">
+      <a routerLink="/" fragment="newsletter" class="btn btn-primary">
+        Subscribe to newsletter <span aria-hidden="true">↗</span>
+      </a>
+      <a routerLink="/dotnet" class="btn btn-ghost">
+        Get in touch <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── NEWSLETTER ─── -->
   <section id="newsletter" class="newsletter">
-    <p class="nl-eyebrow">Newsletter</p>
-    <h2 class="nl-title">stay sharp.</h2>
+    <p class="nl-eyebrow">— NEWSLETTER —</p>
+    <h2 class="nl-title">stay ahead in <span class="nl-net">.net</span></h2>
     <p class="nl-sub">
-      One email when something ships — a new phase, a new note, a teardown. No filler, no spam.
-      Unsubscribe anytime.
+      One email every Tuesday at <strong>7 PM IST</strong>. One topic, deep. The week's articles. No filler.
     </p>
 
     <div class="nl-topics">
@@ -126,11 +145,11 @@
                [(ngModel)]="email"
                required
                aria-label="Email address" />
-        <button class="nl-submit" type="submit">Subscribe →</button>
+        <button class="nl-submit" type="submit">Subscribe <span aria-hidden="true">→</span></button>
       </form>
       <p class="nl-foot">
         <span class="nl-foot-dot" aria-hidden="true"></span>
-        Solo author · Updated as I ship
+        Join <strong>8,429</strong> developers · Delivered every Tuesday
       </p>
     } @else {
       <div class="nl-thanks">
@@ -146,3 +165,5 @@
     Built solo. Updated as I prep for the next round.
   </p>
 </div>
+
+<app-landing-footer />

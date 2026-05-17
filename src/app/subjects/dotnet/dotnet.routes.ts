@@ -5,15 +5,19 @@ const comingSoon = () =>
   import('./coming-soon/coming-soon.component').then(m => m.ComingSoonComponent);
 
 export const DOTNET_ROUTES: Routes = [
+  /* Full-width SaaS landing — no sidebar / app-shell. */
+  {
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
+    title: '.NET Roadmap — Learn .NET, the practical way'
+  },
+
+  /* All phase pages share the dotnet-shell (sidebar + header + TOC). */
   {
     path: '',
     component: DotnetShellComponent,
     children: [
-      {
-        path: '',
-        loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
-        title: '.NET Roadmap — Home'
-      },
       {
         path: 'phase-0',
         loadComponent: () => import('./phase-0/phase-0.component').then(m => m.Phase0Component),

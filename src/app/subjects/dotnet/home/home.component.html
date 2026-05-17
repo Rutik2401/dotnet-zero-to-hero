@@ -1,91 +1,151 @@
-<section class="hero">
-  <span class="pill">Beginner → Advanced</span>
-  <span class="pill">Interview Focused</span>
-  <span class="pill">Indian English</span>
-  <h1 class="hero-title">Become a job-ready <span class="brand-text">.NET Developer</span></h1>
-  <p class="hero-sub">
-    A 6–7 month roadmap broken into <strong>9 clear phases</strong>. Each topic comes with
-    real-life examples, runnable code, expected output, interview questions, common mistakes
-    and a pro tip — written in simple Indian English, not formal textbook style.
-  </p>
-  <div class="hero-cta">
-    <a class="btn btn-primary" routerLink="/dotnet/phase-0">Start with Phase 0 →</a>
-    <a class="btn btn-ghost" href="#roadmap">See full roadmap</a>
-  </div>
-</section>
+<div class="landing-bg" aria-hidden="true"></div>
+<div class="landing-grid" aria-hidden="true"></div>
 
-<section class="value-grid">
-  <div class="value-card">
-    <h4>Real-life Examples</h4>
-    <p>Every concept explained with Swiggy, Amazon, Bank, ATM — examples you actually relate to.</p>
-  </div>
-  <div class="value-card">
-    <h4>Runnable Code + Output</h4>
-    <p>Click <em>See Output</em> to verify what the code prints. Predict first, verify after.</p>
-  </div>
-  <div class="value-card">
-    <h4>Interview Q &amp; A</h4>
-    <p>3–5 main interview questions plus rapid-fire follow-ups for important topics.</p>
-  </div>
-  <div class="value-card">
-    <h4>Pro Tips</h4>
-    <p>One line per topic that makes you sound like a senior engineer in the interview.</p>
-  </div>
-</section>
+<div class="landing-wrap">
 
-<section id="roadmap">
-  <h2>The 9-Phase Roadmap</h2>
-  <p class="lead">Follow phases in order. Don't skip Phase 0 even if you "know" basics — interviewers test depth, not whether you've heard the word.</p>
+  <!-- ─── TOP NAV ─── -->
+  <nav class="landing-nav">
+    <div class="landing-nav-left">
+      <a routerLink="/" class="hub-back" title="Back to Learn Hub">← Learn Hub</a>
+      <span class="landing-brand">.NET Roadmap</span>
+    </div>
+    <div class="landing-nav-right">
+      <a routerLink="phase-0" class="nav-cta">Start Phase 0 →</a>
+    </div>
+  </nav>
 
-  <div class="phase-grid">
-    @for (p of phases; track p.tag) {
-      @if (p.ready && p.link) {
+  <!-- ─── HERO ─── -->
+  <section class="landing-hero">
+    <p class="landing-eyebrow">Course · Free Forever</p>
+    <h1 class="landing-title">
+      learn .net,<br>
+      <span class="accent">the practical way.</span>
+    </h1>
+    <p class="landing-sub">
+      Free, hands-on .NET interview roadmap. Read at your own pace, type every snippet,
+      predict every output. Built around the exact patterns product companies test in real interviews.
+    </p>
+    <div class="landing-stats">
+      <span><strong>{{ totalPhases }}</strong> phases</span>
+      <span class="dot">·</span>
+      <span><strong>100+</strong> topics</span>
+      <span class="dot">·</span>
+      <span class="free-pill">All free</span>
+      <span class="dot">·</span>
+      <span>Code + output</span>
+      <span class="dot">·</span>
+      <span>Indian English</span>
+    </div>
+  </section>
+
+  <!-- ─── SECTION 01 · ACTIVE ─── -->
+  <section class="landing-section">
+    <div class="section-head">
+      <p class="section-label">01 — LIVE NOW</p>
+      <div class="section-meta">{{ readyCount }} PHASES</div>
+    </div>
+    <h2 class="section-title">active phases</h2>
+
+    <div class="phase-grid">
+      @for (p of activePhases; track p.vol) {
         <a class="phase-card" [routerLink]="p.link">
-          <span class="phase-tag">{{ p.tag }} <span class="pill pill-ready">ready</span></span>
-          <h3>{{ p.title }}</h3>
-          <p>{{ p.desc }}</p>
-        </a>
-      } @else if (p.link) {
-        <a class="phase-card phase-card-soon" [routerLink]="p.link">
-          <span class="phase-tag">{{ p.tag }} <span class="pill">soon</span></span>
-          <h3>{{ p.title }}</h3>
-          <p>{{ p.desc }}</p>
+          <div class="phase-cover" [style.background]="p.coverGradient">
+            <span class="phase-cover-num">{{ p.vol }}</span>
+            <span class="phase-cover-tag">{{ p.tag }}</span>
+          </div>
+          <div class="phase-body">
+            <p class="phase-meta">
+              <span>VOL. {{ p.vol }}</span>
+              <span class="meta-dot"></span>
+              <span class="free">FREE</span>
+              <span class="meta-dot"></span>
+              <span>{{ p.level }}</span>
+            </p>
+            <h3 class="phase-title">{{ p.title }}</h3>
+            <p class="phase-desc">{{ p.desc }}</p>
+            <hr class="phase-hr">
+            <div class="phase-foot">
+              <span>{{ p.topics }} topics · {{ p.hours }}+ hrs</span>
+              <span class="phase-cta">Start <span aria-hidden="true">↗</span></span>
+            </div>
+          </div>
         </a>
       }
-    }
-  </div>
-</section>
-
-<section>
-  <h2>How to Use This Site</h2>
-  <ol>
-    <li><strong>Read the topic top-to-bottom</strong> — don't jump to code first. Understand <em>why</em> before <em>how</em>.</li>
-    <li><strong>Predict the output</strong> before clicking <em>See Output</em>. This is the closest thing to a real coding round.</li>
-    <li><strong>Re-read the interview questions</strong> the day before any interview. They are the actual questions you'll face.</li>
-    <li><strong>Build a project alongside</strong> — see Phase 7. Theory without project is forgotten in 2 weeks.</li>
-  </ol>
-</section>
-
-<section>
-  <h2>Suggested Daily Plan</h2>
-  <div class="plan-grid">
-    <div class="plan-block">
-      <span class="plan-time">2 hrs</span>
-      <p>Read concepts. Take notes. Don't watch videos passively.</p>
     </div>
-    <div class="plan-block">
-      <span class="plan-time">2 hrs</span>
-      <p>Type the code yourself. No copy-paste. Break it on purpose, see the error.</p>
-    </div>
-    <div class="plan-block">
-      <span class="plan-time">2 hrs</span>
-      <p>Project work. Apply what you learnt today inside a real feature.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="cta-band">
-  <h3>Ready to start?</h3>
-  <p>Phase 0 covers Programming + OOP — the foundation of every other phase.</p>
-  <a class="btn btn-primary" routerLink="/dotnet/phase-0">Open Phase 0 →</a>
-</section>
+  <!-- ─── SECTION 02 · UPCOMING ─── -->
+  @if (upcomingPhases.length > 0) {
+    <section class="landing-section">
+      <div class="section-head">
+        <p class="section-label">02 — IN PROGRESS</p>
+        <div class="section-meta" style="--dot-color: #f59e0b;">{{ upcomingPhases.length }} UPCOMING</div>
+      </div>
+      <h2 class="section-title">coming next</h2>
+
+      <div class="phase-grid">
+        @for (p of upcomingPhases; track p.vol) {
+          <div class="phase-card phase-card-soon">
+            <div class="phase-cover" [style.background]="p.coverGradient">
+              <span class="phase-cover-num">{{ p.vol }}</span>
+              <span class="phase-cover-tag">SOON</span>
+            </div>
+            <div class="phase-body">
+              <p class="phase-meta">
+                <span>VOL. {{ p.vol }}</span>
+                <span class="meta-dot"></span>
+                <span>{{ p.level }}</span>
+              </p>
+              <h3 class="phase-title">{{ p.title }}</h3>
+              <p class="phase-desc">{{ p.desc }}</p>
+              <hr class="phase-hr">
+              <div class="phase-foot">
+                <span>Coming soon</span>
+                <span class="phase-cta" style="color: #64748b;">In progress</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  }
+
+  <!-- ─── SECTION 03 · HOW IT WORKS ─── -->
+  <section class="landing-section">
+    <div class="section-head">
+      <p class="section-label">03 — HOW IT WORKS</p>
+    </div>
+    <h2 class="section-title">how to actually use this.</h2>
+
+    <div class="how-grid">
+      <div class="how-step">
+        <p class="how-step-num">01</p>
+        <h4 class="how-step-title">Read top-to-bottom</h4>
+        <p class="how-step-desc">Don't jump to the code first. Understand <em>why</em> before <em>how</em> — that's what separates a senior answer from a junior one.</p>
+      </div>
+      <div class="how-step">
+        <p class="how-step-num">02</p>
+        <h4 class="how-step-title">Predict the output</h4>
+        <p class="how-step-desc">Before clicking <em>See Output</em>, guess what it prints. This is the closest thing to a real coding round at home.</p>
+      </div>
+      <div class="how-step">
+        <p class="how-step-num">03</p>
+        <h4 class="how-step-title">Re-read the Q&amp;A</h4>
+        <p class="how-step-desc">The day before any interview, re-read the interview questions section. These are the actual questions you'll be asked.</p>
+      </div>
+      <div class="how-step">
+        <p class="how-step-num">04</p>
+        <h4 class="how-step-title">Ship a project</h4>
+        <p class="how-step-desc">Theory without project is forgotten in two weeks. See Phase 7 — apply what you learnt that day inside a real feature.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA BAND ─── -->
+  <section class="cta-band">
+    <h3>Ready when you are.</h3>
+    <p>Phase 0 covers Programming + OOP — the foundation every other phase quietly assumes.</p>
+    <a routerLink="phase-0">Start Phase 0 <span aria-hidden="true">→</span></a>
+  </section>
+
+</div>

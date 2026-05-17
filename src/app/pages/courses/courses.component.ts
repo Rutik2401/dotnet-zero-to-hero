@@ -33,24 +33,48 @@ interface ComingTopic {
 
       <!-- ─── HERO ─── -->
       <section class="hero">
-        <p class="hero-eyebrow">COURSES</p>
-        <h1 class="hero-title">learn .net,<br />the practical way.</h1>
-        <p class="hero-sub">
-          Free, hands-on courses for .NET developers. Track progress across lessons,
-          read or watch at your own pace, and pull every example from a real GitHub repo.
-          Built around production patterns I actually ship.
-        </p>
-        <div class="hero-stats">
-          <span class="stat">2 courses</span>
-          <span class="stat-dot" aria-hidden="true">·</span>
-          <span class="stat">100+ lessons</span>
-          <span class="stat-dot" aria-hidden="true">·</span>
-          <span class="stat stat-free">
-            <span class="dot dot-green" aria-hidden="true"></span>
-            All free
-          </span>
-          <span class="stat-dot" aria-hidden="true">·</span>
-          <span class="stat">Source code included</span>
+        <div class="hero-text">
+          <p class="hero-eyebrow">COURSES</p>
+          <h1 class="hero-title">learn .net,<br />the practical way.</h1>
+          <p class="hero-sub">
+            Free, hands-on courses for .NET developers. Track progress across lessons,
+            read or watch at your own pace, and pull every example from a real GitHub repo.
+            Built around production patterns I actually ship.
+          </p>
+          <div class="hero-stats">
+            <span class="stat">2 courses</span>
+            <span class="stat-dot" aria-hidden="true">·</span>
+            <span class="stat">100+ lessons</span>
+            <span class="stat-dot" aria-hidden="true">·</span>
+            <span class="stat stat-free">
+              <span class="dot dot-green" aria-hidden="true"></span>
+              All free
+            </span>
+            <span class="stat-dot" aria-hidden="true">·</span>
+            <span class="stat">Source code included</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hv-glow"></div>
+          <div class="hv-card">
+            <div class="hv-bar">
+              <span class="hv-tl hv-tl-r"></span>
+              <span class="hv-tl hv-tl-y"></span>
+              <span class="hv-tl hv-tl-g"></span>
+              <span class="hv-file">Program.cs</span>
+              <span class="hv-tag">.NET 9</span>
+            </div>
+            <div class="hv-code">
+              <span class="hv-c-line"><span class="hv-c-kw">var</span> builder = WebApplication</span><span class="hv-c-line">    .<span class="hv-c-fn">CreateBuilder</span>(args);</span><span class="hv-c-line"><span class="hv-c-kw">var</span> app = builder.<span class="hv-c-fn">Build</span>();</span><span class="hv-c-line">app.<span class="hv-c-fn">MapGet</span>(<span class="hv-c-str">"/"</span>, () =&gt; <span class="hv-c-str">"Hello!"</span>);</span><span class="hv-c-line">app.<span class="hv-c-fn">Run</span>();<span class="hv-c-caret"></span></span>
+            </div>
+          </div>
+          <div class="hv-badge">
+            <span class="hv-badge-dot"></span>
+            <span>LIVE</span>
+            <span class="hv-badge-sep">·</span>
+            <span>3 students online</span>
+          </div>
         </div>
       </section>
 
@@ -165,16 +189,185 @@ interface ComingTopic {
       padding: 0 clamp(1rem, 4vw, 2rem);
     }
 
-    /* ─── HERO (left-aligned) ─── */
+    /* ─── HERO (two-column at >=960px, single column below) ─── */
     .hero {
-      padding: clamp(3rem, 9vh, 6rem) 0 clamp(2.5rem, 6vh, 4rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(2.5rem, 4vw, 3.5rem);
+      align-items: center;
+      padding: clamp(3rem, 9vh, 6rem) 0 clamp(3rem, 7vh, 5rem);
       text-align: left;
     }
+    @media (min-width: 960px) {
+      .hero { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+    }
+    .hero-text { min-width: 0; }
     .hero-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 0.78rem; letter-spacing: 0.22em;
       color: var(--primary); text-transform: uppercase;
       margin: 0 0 1.5rem; font-weight: 700;
+    }
+
+    /* ─── HERO VISUAL — animated code editor card ─── */
+    .hero-visual {
+      position: relative;
+      display: none;
+      min-height: 320px;
+      perspective: 1200px;
+    }
+    @media (min-width: 960px) { .hero-visual { display: block; } }
+
+    .hv-glow {
+      position: absolute;
+      inset: 8% -10% 4% -4%;
+      background:
+        radial-gradient(45% 55% at 60% 50%, rgba(139, 92, 246, 0.38), transparent 70%),
+        radial-gradient(40% 50% at 30% 80%, rgba(6, 182, 212, 0.22), transparent 70%);
+      filter: blur(36px);
+      z-index: 0;
+      animation: hv-glow-pulse 7s ease-in-out infinite;
+    }
+
+    .hv-card {
+      position: relative;
+      z-index: 1;
+      background: #0a0e1a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.06) inset,
+        0 30px 60px -20px rgba(15, 15, 15, 0.45),
+        0 14px 32px -12px rgba(109, 40, 217, 0.32);
+      transform-origin: 60% 50%;
+      opacity: 0;
+      animation:
+        hv-enter 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards,
+        hv-float 7s ease-in-out 1.05s infinite alternate;
+    }
+    .hv-card:hover { animation-play-state: paused; }
+
+    .hv-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.72rem 0.95rem;
+      background: rgba(255, 255, 255, 0.035);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .hv-tl {
+      width: 11px; height: 11px; border-radius: 50%; display: inline-block;
+    }
+    .hv-tl-r { background: #ff5f57; }
+    .hv-tl-y { background: #febc2e; }
+    .hv-tl-g { background: #28c840; }
+    .hv-file {
+      margin-left: 0.55rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.76rem;
+      color: rgba(245, 241, 232, 0.55);
+    }
+    .hv-tag {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.12em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      color: #c4b5fd;
+      background: rgba(139, 92, 246, 0.16);
+      border: 1px solid rgba(139, 92, 246, 0.32);
+    }
+
+    .hv-code {
+      padding: 1.15rem 1.25rem 1.45rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #d1d5db;
+    }
+    .hv-c-line {
+      display: block;
+      white-space: pre;
+      opacity: 0;
+      transform: translateX(-4px);
+      animation: hv-type 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .hv-c-line:nth-child(1) { animation-delay: 0.55s; }
+    .hv-c-line:nth-child(2) { animation-delay: 0.80s; }
+    .hv-c-line:nth-child(3) { animation-delay: 1.05s; }
+    .hv-c-line:nth-child(4) { animation-delay: 1.30s; }
+    .hv-c-line:nth-child(5) { animation-delay: 1.55s; }
+    .hv-c-kw  { color: #c084fc; }
+    .hv-c-fn  { color: #67e8f9; }
+    .hv-c-str { color: #fde047; }
+    .hv-c-caret {
+      display: inline-block;
+      width: 7px; height: 1em;
+      background: #a78bfa;
+      margin-left: 4px;
+      vertical-align: -2px;
+      animation: hv-caret 1s steps(2) 2s infinite;
+    }
+
+    .hv-badge {
+      position: absolute;
+      bottom: -1.1rem;
+      right: clamp(0.5rem, 3vw, 2rem);
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.95rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      color: var(--text);
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      transform: translateY(8px);
+      animation: hv-badge-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+    .hv-badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.16);
+      animation: hv-pulse 2.2s ease-in-out infinite;
+    }
+    .hv-badge-sep { color: var(--text-muted); }
+
+    @keyframes hv-enter {
+      from { opacity: 0; transform: translateY(22px) rotate(-3deg); }
+      to   { opacity: 1; transform: translateY(0)    rotate(-1.5deg); }
+    }
+    @keyframes hv-float {
+      from { transform: translateY(0)     rotate(-1.5deg); }
+      to   { transform: translateY(-12px) rotate(-0.6deg); }
+    }
+    @keyframes hv-glow-pulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50%      { opacity: 1;   transform: scale(1.06); }
+    }
+    @keyframes hv-pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.16); }
+      50%      { box-shadow: 0 0 0 7px rgba(4, 120, 87, 0.06); }
+    }
+    @keyframes hv-caret { 50% { opacity: 0; } }
+    @keyframes hv-type {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes hv-badge-enter {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hv-card, .hv-badge, .hv-glow, .hv-c-line, .hv-c-caret, .hv-badge-dot {
+        animation: none !important;
+      }
+      .hv-card, .hv-badge { opacity: 1; }
+      .hv-card { transform: rotate(-1deg); }
+      .hv-c-line { opacity: 1; transform: none; }
     }
     .hero-title {
       font-size: clamp(1.85rem, 4.4vw, 3.4rem);

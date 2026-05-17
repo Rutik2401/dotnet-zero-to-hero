@@ -485,9 +485,8 @@ export class LandingNavComponent {
 
   readonly links: NavLink[] = [
     { label: 'Home',    path: '/',        exact: true },
-    { label: '.NET',    path: '/dotnet' },
+    { label: 'Courses', path: '/courses' },
     { label: 'Notes',   path: '/notes' },
-    { label: 'Angular', path: '/angular', soon: true },
     { label: 'React',   path: '/react',   soon: true },
     { label: 'Blog',    path: '/blog' }
   ];

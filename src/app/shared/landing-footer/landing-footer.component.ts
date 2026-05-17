@@ -125,7 +125,7 @@ interface ContextStrip {
             <span class="lfoot-meta-dot" aria-hidden="true">·</span>
             <a href="https://github.com/rutikpimpale2401" target="_blank" rel="noopener" class="lfoot-meta-link">Source on GitHub</a>
             <span class="lfoot-meta-dot" aria-hidden="true">·</span>
-            <a href="mailto:codervibe61&#64;gmail.com" class="lfoot-meta-link">Contact</a>
+            <a routerLink="/contact" class="lfoot-meta-link">Contact</a>
           </div>
         </div>
       </div>

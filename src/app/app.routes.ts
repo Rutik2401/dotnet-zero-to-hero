@@ -7,6 +7,11 @@ export const routes: Routes = [
     title: 'Learn Hub — Roadmaps for .NET, Angular, React'
   },
   {
+    path: 'courses',
+    loadComponent: () => import('./pages/courses/courses.component').then(m => m.CoursesComponent),
+    title: 'Courses — Learn Hub'
+  },
+  {
     path: 'dotnet',
     loadChildren: () => import('./subjects/dotnet/dotnet.routes').then(m => m.DOTNET_ROUTES)
   },
@@ -26,6 +31,11 @@ export const routes: Routes = [
     path: 'blog',
     loadComponent: () => import('./pages/blog/blog.component').then(m => m.BlogComponent),
     title: 'Blog — Learn Hub'
+  },
+  {
+    path: 'contact',
+    loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent),
+    title: 'Contact — Learn Hub'
   },
   { path: '**', redirectTo: '' }
 ];

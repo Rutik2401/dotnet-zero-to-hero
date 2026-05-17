@@ -1,6 +1,17 @@
-import { Component, HostListener, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  signal,
+  viewChild
+} from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs/operators';
 import { SearchService } from './search.service';
+import { IconComponent, IconName } from '../icon/icon.component';
 
 interface NavLink {
   label: string;
@@ -9,18 +20,24 @@ interface NavLink {
   soon?: boolean;
 }
 
+interface ResourceItem {
+  title: string;
+  desc: string;
+  path: string;
+  fragment?: string;
+  external?: boolean;
+  icon: IconName;
+  tag?: 'live' | 'soon' | 'free';
+}
+
 @Component({
   selector: 'app-landing-nav',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, NgTemplateOutlet, IconComponent],
   template: `
     <nav class="lnav" aria-label="Primary">
       <a routerLink="/" class="lnav-brand" aria-label="Learn Hub — Home">
         <span class="lnav-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 2.5 L28.5 9.75 V22.25 L16 29.5 L3.5 22.25 V9.75 Z"
-                  fill="#6d28d9" stroke="#5b21b6" stroke-width="1" stroke-linejoin="round"/>
-            <path d="M11 11 V21 M11 16 H17 M17 11 V21" stroke="#f5f1e8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <app-icon name="brand" [size]="28" />
         </span>
         <span class="lnav-name">
           <span class="lnav-name-soft">learn</span><span class="lnav-name-bold">hub</span>
@@ -38,23 +55,83 @@ interface NavLink {
             @if (l.soon) { <span class="lnav-link-tag">soon</span> }
           </a>
         }
+
+        <!-- ─── Resources mega-dropdown ─── -->
+        <div class="lnav-drop" #dropRoot>
+          <button type="button"
+                  class="lnav-link lnav-drop-trigger"
+                  [class.is-open]="resourcesOpen()"
+                  (click)="toggleResources($event)"
+                  (mouseenter)="hoverOpen()"
+                  aria-haspopup="true"
+                  [attr.aria-expanded]="resourcesOpen()"
+                  aria-controls="lnav-resources-panel">
+            <span class="lnav-link-label">Resources</span>
+            <span class="lnav-drop-chevron"><app-icon name="chevron-down" [size]="11" /></span>
+          </button>
+
+          @if (resourcesOpen()) {
+            <div class="lnav-drop-panel"
+                 id="lnav-resources-panel"
+                 role="menu"
+                 (mouseleave)="hoverClose()">
+              @for (r of resources; track r.title) {
+                @if (r.external) {
+                  <a class="lnav-drop-item"
+                     [href]="r.path"
+                     target="_blank"
+                     rel="noopener"
+                     role="menuitem"
+                     (click)="closeResources()">
+                    <ng-container *ngTemplateOutlet="dropContent; context: { $implicit: r }"></ng-container>
+                  </a>
+                } @else if (r.fragment) {
+                  <a class="lnav-drop-item"
+                     [routerLink]="r.path"
+                     [fragment]="r.fragment"
+                     role="menuitem"
+                     (click)="closeResources()">
+                    <ng-container *ngTemplateOutlet="dropContent; context: { $implicit: r }"></ng-container>
+                  </a>
+                } @else {
+                  <a class="lnav-drop-item"
+                     [routerLink]="r.path"
+                     role="menuitem"
+                     (click)="closeResources()">
+                    <ng-container *ngTemplateOutlet="dropContent; context: { $implicit: r }"></ng-container>
+                  </a>
+                }
+              }
+            </div>
+          }
+
+          <ng-template #dropContent let-r>
+            <span class="lnav-drop-icon" aria-hidden="true">
+              <app-icon [name]="r.icon" [size]="18" />
+            </span>
+            <span class="lnav-drop-text">
+              <span class="lnav-drop-title">
+                {{ r.title }}
+                @if (r.tag === 'live') { <span class="lnav-drop-tag lnav-drop-tag-live">live</span> }
+                @if (r.tag === 'soon') { <span class="lnav-drop-tag lnav-drop-tag-soon">soon</span> }
+                @if (r.tag === 'free') { <span class="lnav-drop-tag lnav-drop-tag-free">free</span> }
+              </span>
+              <span class="lnav-drop-desc">{{ r.desc }}</span>
+            </span>
+            <span class="lnav-drop-arrow" aria-hidden="true">→</span>
+          </ng-template>
+        </div>
       </div>
 
       <div class="lnav-actions">
         <button class="lnav-search" type="button" (click)="openSearch()" aria-label="Search">
-          <svg class="lnav-search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="7"/>
-            <path d="m20 20-3.5-3.5"/>
-          </svg>
+          <span class="lnav-search-icon"><app-icon name="search" [size]="16" /></span>
           <span class="lnav-search-label">Search</span>
           <kbd class="lnav-kbd">Ctrl<span class="lnav-kbd-plus">·</span>K</kbd>
         </button>
 
         <button class="lnav-theme" type="button" (click)="toggleTheme()" aria-label="Toggle theme">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="4"/>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-          </svg>
+          <app-icon name="sun" [size]="18" />
         </button>
 
         <a routerLink="/" fragment="newsletter" class="lnav-subscribe">
@@ -64,7 +141,7 @@ interface NavLink {
     </nav>
   `,
   styles: [`
-    :host { display: block; }
+    :host { display: block; position: relative; z-index: 30; }
 
     .lnav {
       display: flex;
@@ -112,11 +189,8 @@ interface NavLink {
                   0 6px 20px rgba(15, 15, 15, 0.05);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      overflow-x: auto;
-      scrollbar-width: none;
       max-width: 100%;
     }
-    .lnav-pill::-webkit-scrollbar { display: none; }
 
     .lnav-link {
       position: relative;
@@ -131,6 +205,10 @@ interface NavLink {
       border-radius: 999px;
       white-space: nowrap;
       transition: color 0.2s ease, background 0.2s ease;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
     }
     .lnav-link:hover { color: #0a0a0a; text-decoration: none; }
     .lnav-link.active { color: #f5f1e8; background: #0a0a0a; }
@@ -151,6 +229,143 @@ interface NavLink {
     }
     .lnav-link.is-soon { color: #a8a29e; }
     .lnav-link.is-soon:hover { color: #44403c; }
+
+    /* ─── Resources dropdown ─── */
+    .lnav-drop {
+      position: relative;
+      display: inline-flex;
+    }
+    .lnav-drop-trigger { gap: 0.32rem; }
+    .lnav-drop-trigger.is-open {
+      background: rgba(10, 10, 10, 0.06);
+      color: #0a0a0a;
+    }
+    .lnav-drop-chevron {
+      display: inline-flex;
+      transition: transform 0.2s ease, color 0.2s ease;
+      color: #78716c;
+    }
+    .lnav-drop-trigger.is-open .lnav-drop-chevron {
+      transform: rotate(180deg);
+      color: #6d28d9;
+    }
+
+    /* Solid white panel — no transparency, no backdrop-filter, lifted above
+       every page hero. Fixes the bleed-through issue on subject hero pages. */
+    .lnav-drop-panel {
+      position: absolute;
+      top: calc(100% + 0.6rem);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(360px, calc(100vw - 2rem));
+      padding: 0.45rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      background: #ffffff;
+      border: 1px solid rgba(10, 10, 10, 0.10);
+      border-radius: 18px;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.95) inset,
+        0 24px 56px rgba(15, 15, 15, 0.22),
+        0 8px 20px rgba(15, 15, 15, 0.10);
+      z-index: 1000;
+      animation: dropFade 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    @keyframes dropFade {
+      from { opacity: 0; transform: translate(-50%, -6px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    .lnav-drop-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.75rem 0.85rem;
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .lnav-drop-item:hover {
+      background: rgba(109, 40, 217, 0.06);
+      text-decoration: none;
+    }
+    .lnav-drop-item:hover .lnav-drop-arrow {
+      color: #6d28d9;
+      transform: translateX(3px);
+    }
+    .lnav-drop-item:hover .lnav-drop-icon {
+      border-color: rgba(109, 40, 217, 0.35);
+      color: #6d28d9;
+      background: rgba(139, 92, 246, 0.12);
+    }
+
+    .lnav-drop-icon {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: #faf7f0;
+      border: 1px solid rgba(10, 10, 10, 0.08);
+      color: #44403c;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    }
+
+    .lnav-drop-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      flex: 1;
+    }
+    .lnav-drop-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #0a0a0a;
+      letter-spacing: -0.005em;
+    }
+    .lnav-drop-desc {
+      font-size: 0.78rem;
+      color: #78716c;
+      font-weight: 500;
+      letter-spacing: 0;
+      margin-top: 2px;
+    }
+    .lnav-drop-arrow {
+      color: #a8a29e;
+      font-weight: 700;
+      transition: color 0.18s ease, transform 0.18s ease;
+      flex-shrink: 0;
+    }
+    .lnav-drop-tag {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+    }
+    .lnav-drop-tag-live {
+      background: rgba(4, 120, 87, 0.10);
+      color: #047857;
+      border: 1px solid rgba(4, 120, 87, 0.28);
+    }
+    .lnav-drop-tag-soon {
+      background: rgba(180, 83, 9, 0.10);
+      color: #b45309;
+      border: 1px solid rgba(180, 83, 9, 0.28);
+    }
+    .lnav-drop-tag-free {
+      background: rgba(109, 40, 217, 0.10);
+      color: #6d28d9;
+      border: 1px solid rgba(109, 40, 217, 0.28);
+    }
 
     /* ─── Right-side actions ─── */
     .lnav-actions {
@@ -174,6 +389,7 @@ interface NavLink {
       cursor: pointer;
       transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
       box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+      font-family: inherit;
     }
     .lnav-search:hover {
       color: #0a0a0a;
@@ -182,7 +398,7 @@ interface NavLink {
       box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset,
                   0 6px 18px rgba(15, 15, 15, 0.08);
     }
-    .lnav-search-icon { color: #78716c; }
+    .lnav-search-icon { display: inline-flex; color: #78716c; }
     .lnav-search:hover .lnav-search-icon { color: #6d28d9; }
     .lnav-search-label { letter-spacing: -0.005em; }
     .lnav-kbd {
@@ -254,6 +470,7 @@ interface NavLink {
       .lnav-link { padding: 0.4rem 0.7rem; font-size: 0.82rem; }
       .lnav-link-tag { display: none; }
       .lnav-kbd { display: none; }
+      .lnav-drop-panel { width: 320px; }
     }
     @media (max-width: 640px) {
       .lnav-pill { display: none; }
@@ -263,6 +480,8 @@ interface NavLink {
 })
 export class LandingNavComponent {
   private readonly search = inject(SearchService);
+  private readonly router = inject(Router);
+  private readonly dropRoot = viewChild<ElementRef<HTMLElement>>('dropRoot');
 
   readonly links: NavLink[] = [
     { label: 'Home',    path: '/',        exact: true },
@@ -272,6 +491,69 @@ export class LandingNavComponent {
     { label: 'React',   path: '/react',   soon: true },
     { label: 'Blog',    path: '/blog' }
   ];
+
+  readonly resources: ResourceItem[] = [
+    {
+      title: '.NET Roadmap',
+      desc:  '9-phase interview prep · start here',
+      path:  '/dotnet',
+      icon:  'rocket',
+      tag:   'live'
+    },
+    {
+      title: 'Interview PDFs',
+      desc:  '475+ pages · 275+ questions · free',
+      path:  '/notes',
+      icon:  'pdf',
+      tag:   'free'
+    },
+    {
+      title: 'Blog & field notes',
+      desc:  'Post-mortems, write-ups, ship logs',
+      path:  '/blog',
+      icon:  'box'
+    },
+    {
+      title: 'Newsletter',
+      desc:  'Weekly drops · no spam, just signal',
+      path:  '/',
+      fragment: 'newsletter',
+      icon: 'mail'
+    }
+  ];
+
+  readonly resourcesOpen = signal(false);
+  private hoverCloseTimer: ReturnType<typeof setTimeout> | null = null;
+
+  constructor() {
+    this.router.events
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntilDestroyed()
+      )
+      .subscribe(() => this.closeResources());
+  }
+
+  toggleResources(e: Event): void {
+    e.stopPropagation();
+    this.resourcesOpen.update(v => !v);
+  }
+
+  hoverOpen(): void {
+    if (this.hoverCloseTimer) {
+      clearTimeout(this.hoverCloseTimer);
+      this.hoverCloseTimer = null;
+    }
+    this.resourcesOpen.set(true);
+  }
+
+  hoverClose(): void {
+    this.hoverCloseTimer = setTimeout(() => this.resourcesOpen.set(false), 160);
+  }
+
+  closeResources(): void {
+    this.resourcesOpen.set(false);
+  }
 
   openSearch(): void {
     this.search.open();
@@ -288,6 +570,18 @@ export class LandingNavComponent {
     if (isMod && (e.key === 'k' || e.key === 'K')) {
       e.preventDefault();
       this.search.open();
+    }
+    if (e.key === 'Escape' && this.resourcesOpen()) {
+      this.closeResources();
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocClick(e: MouseEvent): void {
+    if (!this.resourcesOpen()) return;
+    const root = this.dropRoot()?.nativeElement;
+    if (root && !root.contains(e.target as Node)) {
+      this.closeResources();
     }
   }
 }

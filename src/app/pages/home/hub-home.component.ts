@@ -23,6 +23,7 @@ interface SubjectCard {
   coverInitials: string;
   coverTag: string;
   coverGradient: string;
+  status?: string;
 }
 
 interface FeatureItem  { icon: string; title: string; desc: string; }
@@ -391,14 +392,6 @@ interface MethodStep   { step: string; title: string; desc: string; }
       font-weight: 700;
     }
 
-    .foot-note {
-      text-align: center;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.82rem; letter-spacing: 0.04em;
-      padding: 3rem 0;
-    }
-
     /* ─── RESPONSIVE ───────────────────────────────────── */
     @media (max-width: 860px) {
       .hero { padding: 2.5rem 0 3rem; }
@@ -534,10 +527,11 @@ export class HubHomeComponent {
       title: 'Angular Roadmap',
       tagline: 'Frontend · Modern',
       desc: 'Standalone, signals, control flow, RxJS, OnPush, SSR. The Angular 19+ stack as senior engineers actually write it.',
-      meta: 'In progress',
+      meta: 'Drafting · Q3 2026',
       ready: false, link: '/angular',
+      status: 'DRAFTING · Q3',
       coverInitials: 'NG',
-      coverTag: 'ANGULAR · SOON',
+      coverTag: 'ANGULAR · DRAFTING',
       coverGradient: 'linear-gradient(135deg, #7f1d1d 0%, #dd0031 70%, #ef4444 100%)'
     },
     {
@@ -545,10 +539,11 @@ export class HubHomeComponent {
       title: 'React Roadmap',
       tagline: 'Frontend · Next.js',
       desc: 'Hooks, Context, Redux Toolkit, React Query, Next.js App Router, Server Components and streaming — the full modern stack.',
-      meta: 'In progress',
+      meta: 'Drafting · Q4 2026',
       ready: false, link: '/react',
+      status: 'DRAFTING · Q4',
       coverInitials: 'RX',
-      coverTag: 'REACT · SOON',
+      coverTag: 'REACT · DRAFTING',
       coverGradient: 'linear-gradient(135deg, #0c4a6e 0%, #0891b2 70%, #06b6d4 100%)'
     }
   ];

@@ -6,9 +6,9 @@
 
   <!-- ─── HERO ─── -->
   <section class="hero">
-    <a routerLink="/dotnet" class="announce">
+    <a routerLink="/" fragment="newsletter" class="announce">
       <span class="announce-dot" aria-hidden="true"></span>
-      New <span class="announce-sep">·</span> 7 .NET phases + 4 PDFs ready to use
+      Shipping in public <span class="announce-sep">·</span> new roadmap drops every week
       <span class="announce-arrow" aria-hidden="true">→</span>
     </a>
 
@@ -46,7 +46,7 @@
           <div class="body">
             <p class="meta">
               VOL. {{ s.vol }}<span class="meta-dot"></span>
-              @if (s.ready) { <span class="live">LIVE</span> } @else { <span class="soon">SOON</span> }
+              @if (s.ready) { <span class="live">LIVE</span> } @else { <span class="soon">{{ s.status || 'SOON' }}</span> }
               <span class="meta-dot"></span>{{ s.tagline }}
             </p>
             <h3 class="name">{{ s.title }}</h3>
@@ -161,9 +161,6 @@
     }
   </section>
 
-  <p class="foot-note">
-    Built solo. Updated as I prep for the next round.
-  </p>
 </div>
 
 <app-landing-footer />

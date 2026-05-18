@@ -1,5 +1,4 @@
 import { Component, ElementRef, ViewChild, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { LandingNavComponent } from '../../shared/landing-nav/landing-nav.component';
 import { LandingFooterComponent } from '../../shared/landing-footer/landing-footer.component';
@@ -22,7 +21,7 @@ interface DirectChannel {
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, LandingNavComponent, LandingFooterComponent],
+  imports: [ReactiveFormsModule, LandingNavComponent, LandingFooterComponent],
   template: `
     <div class="page-grid" aria-hidden="true"></div>
 
@@ -816,9 +815,9 @@ export class ContactComponent {
   readonly directChannels: DirectChannel[] = [
     {
       label: 'EMAIL · PRIMARY',
-      value: 'codervibe61@gmail.com',
+      value: 'rutikpimpale2401@gmail.com',
       note: 'Best for sponsorships, collaborations, and longer messages.',
-      href: 'mailto:codervibe61@gmail.com',
+      href: 'mailto:rutikpimpale2401@gmail.com',
     },
     {
       label: 'X / TWITTER',

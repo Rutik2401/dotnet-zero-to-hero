@@ -16,8 +16,8 @@ import { LandingFooterComponent } from '../../../shared/landing-footer/landing-f
       <section class="hero">
         <p class="eyebrow">In progress · Coming soon</p>
         <h1 class="title">
-          modern react,<br>
-          <span class="accent">the way it actually ships.</span>
+          Modern React,<br>
+          <span class="accent">The Way It Actually Ships.</span>
         </h1>
         <p class="sub">
           Hooks deep-dive, Context, Redux Toolkit, React Query, Next.js App Router,
@@ -39,7 +39,7 @@ import { LandingFooterComponent } from '../../../shared/landing-footer/landing-f
 
       <section class="section">
         <p class="sec-label">01 — WHAT'S COMING</p>
-        <h2 class="sec-title">the roadmap.</h2>
+        <h2 class="sec-title">The Roadmap.</h2>
         <ul class="phase-list">
           <li><span class="phase-num">00</span> JS / TS fundamentals for React</li>
           <li><span class="phase-num">01</span> React core · JSX, hooks, reconciliation</li>

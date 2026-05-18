@@ -494,27 +494,27 @@ export class LandingNavComponent {
   readonly resources: ResourceItem[] = [
     {
       title: '.NET Roadmap',
-      desc:  '9-phase interview prep · start here',
+      desc:  '9-Phase Interview Prep · Start Here',
       path:  '/dotnet',
       icon:  'rocket',
       tag:   'live'
     },
     {
       title: 'Interview PDFs',
-      desc:  '475+ pages · 275+ questions · free',
+      desc:  '475+ Pages · 275+ Questions · Free',
       path:  '/notes',
       icon:  'pdf',
       tag:   'free'
     },
     {
-      title: 'Blog & field notes',
-      desc:  'Post-mortems, write-ups, ship logs',
+      title: 'Blog & Field Notes',
+      desc:  'Post-Mortems, Write-Ups, Ship Logs',
       path:  '/blog',
       icon:  'box'
     },
     {
       title: 'Newsletter',
-      desc:  'Weekly drops · no spam, just signal',
+      desc:  'Weekly Drops · No Spam, Just Signal',
       path:  '/',
       fragment: 'newsletter',
       icon: 'mail'

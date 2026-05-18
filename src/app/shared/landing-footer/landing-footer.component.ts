@@ -479,32 +479,32 @@ export class LandingFooterComponent {
     switch (this.context()) {
       case 'phase':
         return {
-          eyebrow: 'Reading the roadmap',
-          title:  'Pair this phase with the matching interview notes — same topics, printable, free.',
-          ctaLabel: 'Open the notes',
+          eyebrow: 'Reading the Roadmap',
+          title:  'Pair This Phase With the Matching Interview Notes — Same Topics, Printable, Free.',
+          ctaLabel: 'Open the Notes',
           ctaPath: '/notes'
         };
       case 'dotnet':
       case 'angular':
       case 'react':
         return {
-          eyebrow: 'Roadmaps · phase by phase',
-          title:  'Bookmark the path. New phases drop with the newsletter — no spam, just signal.',
+          eyebrow: 'Roadmaps · Phase by Phase',
+          title:  'Bookmark the Path. New Phases Drop With the Newsletter — No Spam, Just Signal.',
           ctaLabel: 'Subscribe',
           ctaPath: '/',
           ctaFragment: 'newsletter'
         };
       case 'notes':
         return {
-          eyebrow: 'Free interview PDFs',
-          title:  'Notes cover the questions. Roadmaps give you the depth — pick one and go phase by phase.',
-          ctaLabel: 'Browse roadmaps',
+          eyebrow: 'Free Interview PDFs',
+          title:  'Notes Cover the Questions. Roadmaps Give You the Depth — Pick One and Go Phase by Phase.',
+          ctaLabel: 'Browse Roadmaps',
           ctaPath: '/'
         };
       case 'blog':
         return {
-          eyebrow: 'Field notes',
-          title:  'Every post starts as a draft in the newsletter. Want the early version? Subscribe.',
+          eyebrow: 'Field Notes',
+          title:  'Every Post Starts as a Draft in the Newsletter. Want the Early Version? Subscribe.',
           ctaLabel: 'Subscribe',
           ctaPath: '/',
           ctaFragment: 'newsletter'
@@ -512,8 +512,8 @@ export class LandingFooterComponent {
       case 'home':
       default:
         return {
-          eyebrow: 'Built for the next round',
-          title:  'Pick a roadmap. Drill the questions. Ship the projects. Updated as I ship.',
+          eyebrow: 'Built for the Next Round',
+          title:  'Pick a Roadmap. Drill the Questions. Ship the Projects. Updated as I Ship.',
           ctaLabel: 'Subscribe',
           ctaPath: '/',
           ctaFragment: 'newsletter'
@@ -535,8 +535,8 @@ export class LandingFooterComponent {
       links: [
         { label: 'Newsletter',          path: '/', fragment: 'newsletter' },
         { label: 'Free Interview PDFs', path: '/notes' },
-        { label: 'Roadmap overview',    path: '/dotnet' },
-        { label: 'Search the site',     path: '/' }
+        { label: 'Roadmap Overview',    path: '/dotnet' },
+        { label: 'Search the Site',     path: '/' }
       ]
     },
     {
@@ -545,7 +545,7 @@ export class LandingFooterComponent {
         { label: 'GitHub',   path: 'https://github.com/rutikpimpale2401', external: true },
         { label: 'Twitter',  path: 'https://twitter.com/',                 external: true },
         { label: 'LinkedIn', path: 'https://www.linkedin.com/',            external: true },
-        { label: 'Email',    path: 'mailto:codervibe61@gmail.com',         external: true }
+        { label: 'Email',    path: 'mailto:rutikpimpale2401@gmail.com',         external: true }
       ]
     }
   ];
@@ -555,6 +555,6 @@ export class LandingFooterComponent {
     { label: 'Twitter / X', href: 'https://twitter.com/',                 icon: 'twitter'  },
     { label: 'LinkedIn',    href: 'https://www.linkedin.com/',            icon: 'linkedin' },
     { label: 'YouTube',     href: 'https://www.youtube.com/',             icon: 'youtube'  },
-    { label: 'Email',       href: 'mailto:codervibe61@gmail.com',         icon: 'mail'     }
+    { label: 'Email',       href: 'mailto:rutikpimpale2401@gmail.com',         icon: 'mail'     }
   ];
 }

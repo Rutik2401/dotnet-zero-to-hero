@@ -549,19 +549,19 @@ export class HubHomeComponent {
   ];
 
   features: FeatureItem[] = [
-    { icon: '▤', title: 'Topics broken down', desc: 'Each phase is split into bite-sized topics. Read top-to-bottom, no jumping around.' },
-    { icon: '◇', title: 'Code + expected output', desc: 'Every snippet has a "see output" toggle. Predict first, verify after — like a real coding round.' },
+    { icon: '▤', title: 'Topics Broken Down',     desc: 'Each phase is split into bite-sized topics. Read top-to-bottom, no jumping around.' },
+    { icon: '◇', title: 'Code + Expected Output', desc: 'Every snippet has a "see output" toggle. Predict first, verify after — like a real coding round.' },
     { icon: '?', title: 'Interview Q&A',          desc: '3–5 main questions per topic plus rapid-fire follow-ups. The actual questions you\'ll face.' },
-    { icon: '◈', title: 'Real-life examples',    desc: 'Concepts explained with Swiggy, Amazon, ATM, banking — examples you actually relate to.' },
-    { icon: '⚠', title: 'Common mistakes',       desc: 'Each topic flags the answer that sounds smart but loses you the round. Skip the trap.' },
-    { icon: '★', title: 'Pro tips',               desc: 'One line per topic that makes you sound like a senior, not someone reciting Stack Overflow.' }
+    { icon: '◈', title: 'Real-Life Examples',     desc: 'Concepts explained with Swiggy, Amazon, ATM, banking — examples you actually relate to.' },
+    { icon: '⚠', title: 'Common Mistakes',        desc: 'Each topic flags the answer that sounds smart but loses you the round. Skip the trap.' },
+    { icon: '★', title: 'Pro Tips',               desc: 'One line per topic that makes you sound like a senior, not someone reciting Stack Overflow.' }
   ];
 
   method: MethodStep[] = [
-    { step: '01', title: 'Read the concept',   desc: 'Understand the why before the how. That\'s what separates a senior answer from a junior one.' },
-    { step: '02', title: 'Predict the output', desc: 'Before clicking "see output", guess what it prints. The closest thing to a real round at home.' },
+    { step: '01', title: 'Read the Concept',   desc: 'Understand the why before the how. That\'s what separates a senior answer from a junior one.' },
+    { step: '02', title: 'Predict the Output', desc: 'Before clicking "see output", guess what it prints. The closest thing to a real round at home.' },
     { step: '03', title: 'Drill the Q&A',      desc: 'Re-read the interview questions the day before any interview. These are the actual questions.' },
-    { step: '04', title: 'Ship a project',     desc: 'Theory without project is forgotten in two weeks. Apply each phase inside a real feature.' }
+    { step: '04', title: 'Ship a Project',     desc: 'Theory without project is forgotten in two weeks. Apply each phase inside a real feature.' }
   ];
 
   topics: string[] = ['ROADMAPS', 'INTERVIEW PREP', 'CODE EXAMPLES', 'BEHIND-THE-SCENES'];

@@ -16,8 +16,8 @@ import { LandingFooterComponent } from '../../../shared/landing-footer/landing-f
       <section class="hero">
         <p class="eyebrow">In progress · Coming soon</p>
         <h1 class="title">
-          modern angular,<br>
-          <span class="accent">phase by phase.</span>
+          Modern Angular,<br>
+          <span class="accent">Phase by Phase.</span>
         </h1>
         <p class="sub">
           Standalone components, signals, control flow, RxJS deep-dive, OnPush strategy,
@@ -39,7 +39,7 @@ import { LandingFooterComponent } from '../../../shared/landing-footer/landing-f
 
       <section class="section">
         <p class="sec-label">01 — WHAT'S COMING</p>
-        <h2 class="sec-title">the roadmap.</h2>
+        <h2 class="sec-title">The Roadmap.</h2>
         <ul class="phase-list">
           <li><span class="phase-num">00</span> Angular fundamentals · components, templates, directives</li>
           <li><span class="phase-num">01</span> Modern Angular · standalone, signals, control flow</li>

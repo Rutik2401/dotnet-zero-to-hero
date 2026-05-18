@@ -65,7 +65,8 @@ interface MethodStep   { step: string; title: string; desc: string; }
     .announce {
       display: inline-flex; align-items: center; gap: 0.55rem;
       padding: 0.42rem 1rem;
-      font-size: 0.82rem; font-weight: 500;
+      font-size: 0.875rem; font-weight: 500;
+      line-height: 1.5;
       color: var(--text-soft);
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -90,9 +91,9 @@ interface MethodStep   { step: string; title: string; desc: string; }
     .announce-arrow { color: var(--primary); font-weight: 700; }
 
     .hero-title {
-      font-size: clamp(2rem, 5vw, 4rem);
+      font-size: clamp(2rem, 5vw, 3.75rem);
       font-weight: 800;
-      letter-spacing: -0.035em; line-height: 1.04;
+      letter-spacing: -0.03em; line-height: 1.1;
       margin: 0 auto 1.4rem;
       max-width: 820px;
       text-wrap: balance;
@@ -101,12 +102,12 @@ interface MethodStep   { step: string; title: string; desc: string; }
     .accent-mark { display: inline-block; }
     .hero-sub {
       color: var(--text-soft);
-      font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+      font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
       line-height: 1.6; max-width: 680px;
       margin: 0 auto 2rem;
     }
     .hero-cta { display: inline-flex; flex-wrap: wrap; gap: 0.65rem; justify-content: center; }
-    .hero-cta .btn { padding: 0.95rem 1.6rem; font-size: 0.95rem; }
+    .hero-cta .btn { padding: 0.95rem 1.6rem; font-size: 0.9375rem; }
 
     /* ─── SECTION HEAD ──────────────────────────────────── */
     .section { padding: clamp(3rem, 7vh, 5.5rem) 0; }
@@ -117,8 +118,9 @@ interface MethodStep   { step: string; title: string; desc: string; }
     .sec-label {
       display: inline-flex; align-items: center; gap: 0.85rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.16em; color: var(--primary);
+      font-size: 0.8125rem; letter-spacing: 0.10em; color: var(--primary);
       text-transform: uppercase; margin: 0; font-weight: 600;
+      line-height: 1.5;
     }
     .sec-label::before {
       content: ''; display: inline-block;
@@ -126,11 +128,12 @@ interface MethodStep   { step: string; title: string; desc: string; }
     }
     .sec-meta {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.14em; color: var(--text-muted);
+      font-size: 0.75rem; letter-spacing: 0.10em; color: var(--text-muted);
+      line-height: 1.5;
     }
     .sec-title {
-      font-size: clamp(2.2rem, 5.5vw, 4rem);
-      font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+      font-size: clamp(1.85rem, 4vw, 2.6rem);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
       margin: 0 0 clamp(2rem, 3.5vw, 2.75rem);
       color: var(--text);
       padding: 0; border: 0;
@@ -172,8 +175,8 @@ interface MethodStep   { step: string; title: string; desc: string; }
     }
     .cover-initials {
       position: relative; z-index: 1;
-      font-size: 4.25rem; font-weight: 900;
-      letter-spacing: -0.04em; line-height: 0.85;
+      font-size: 3.5rem; font-weight: 800;
+      letter-spacing: -0.03em; line-height: 0.95;
       color: rgba(255, 255, 255, 0.96);
       text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
       align-self: flex-start;
@@ -181,8 +184,8 @@ interface MethodStep   { step: string; title: string; desc: string; }
     .cover-tag {
       position: relative; z-index: 1;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.75rem; letter-spacing: 0.10em; text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
       align-self: flex-end;
       padding: 0.3rem 0.65rem;
       background: rgba(0, 0, 0, 0.32);
@@ -194,8 +197,9 @@ interface MethodStep   { step: string; title: string; desc: string; }
     .body { padding: 1.4rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
     .meta {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.12em; color: var(--text-muted);
+      font-size: 0.75rem; letter-spacing: 0.10em; color: var(--text-muted);
       text-transform: uppercase; margin: 0 0 0.85rem;
+      line-height: 1.5;
     }
     .meta .meta-dot {
       display: inline-block; width: 3px; height: 3px; border-radius: 50%;
@@ -204,16 +208,17 @@ interface MethodStep   { step: string; title: string; desc: string; }
     .meta .live { color: var(--accent); font-weight: 700; }
     .meta .soon { color: var(--warn); font-weight: 700; }
     .name {
-      font-size: 1.45rem; font-weight: 800; letter-spacing: -0.02em;
+      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em;
       margin: 0 0 0.55rem; color: var(--text);
+      line-height: 1.25;
     }
-    .desc { color: var(--text-soft); font-size: 0.94rem; line-height: 1.55; margin: 0 0 1.25rem; }
+    .desc { color: var(--text-soft); font-size: 0.9375rem; line-height: 1.6; margin: 0 0 1.25rem; }
     .hr { border: 0; border-top: 1px solid var(--border-chrome); margin: 0 0 1rem; }
     .foot {
       display: flex; align-items: center; justify-content: space-between;
       margin-top: auto;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.82rem; letter-spacing: 0.04em; color: var(--text-muted);
+      font-size: 0.8125rem; letter-spacing: 0.04em; color: var(--text-muted);
     }
     .cta {
       display: inline-flex; align-items: center; gap: 0.4rem;
@@ -252,16 +257,18 @@ interface MethodStep   { step: string; title: string; desc: string; }
       margin-bottom: 1rem;
     }
     .feature-title, .method-title {
-      font-size: 1.08rem; font-weight: 800; letter-spacing: -0.01em;
+      font-size: 1.125rem; font-weight: 700; letter-spacing: -0.01em;
       margin: 0 0 0.4rem; color: var(--text);
+      line-height: 1.35;
     }
     .feature-desc, .method-desc {
-      color: var(--text-soft); font-size: 0.93rem; line-height: 1.6; margin: 0;
+      color: var(--text-soft); font-size: 0.9375rem; line-height: 1.6; margin: 0;
     }
     .method-step {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.78rem; letter-spacing: 0.18em; color: var(--primary);
+      font-size: 0.8125rem; letter-spacing: 0.10em; color: var(--primary);
       margin: 0 0 0.7rem; font-weight: 700;
+      line-height: 1.5;
     }
 
     /* ─── STUCK-ON CTA CARD ────────────────────────────── */
@@ -278,23 +285,24 @@ interface MethodStep   { step: string; title: string; desc: string; }
     .stuck-text { flex: 1 1 380px; min-width: 0; }
     .stuck-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.16em;
+      font-size: 0.8125rem; letter-spacing: 0.10em;
       color: var(--text-muted); text-transform: uppercase;
       margin: 0 0 0.65rem; font-weight: 600;
+      line-height: 1.5;
     }
     .stuck-title {
-      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
-      font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+      font-size: clamp(1.65rem, 3.2vw, 2.25rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.15;
       margin: 0 0 0.85rem; color: var(--text);
       padding: 0; border: 0;
     }
     .stuck-sub {
       color: var(--text-soft);
-      font-size: 1rem; line-height: 1.65;
+      font-size: 1.0625rem; line-height: 1.65;
       margin: 0; max-width: 580px;
     }
     .stuck-cta { display: inline-flex; flex-wrap: wrap; gap: 0.6rem; }
-    .stuck-cta .btn { padding: 0.85rem 1.4rem; font-size: 0.9rem; }
+    .stuck-cta .btn { padding: 0.85rem 1.4rem; font-size: 0.9375rem; }
 
     /* ─── NEWSLETTER ───────────────────────────────────── */
     .newsletter {
@@ -310,21 +318,22 @@ interface MethodStep   { step: string; title: string; desc: string; }
     }
     .nl-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.78rem; letter-spacing: 0.22em;
+      font-size: 0.8125rem; letter-spacing: 0.12em;
       color: var(--primary); text-transform: uppercase;
       margin: 0 0 1.25rem; font-weight: 700;
+      line-height: 1.5;
     }
     .nl-title {
-      font-size: clamp(1.9rem, 4.6vw, 3.4rem);
-      font-weight: 800; letter-spacing: -0.035em;
-      margin: 0 0 1rem; line-height: 1.05;
+      font-size: clamp(1.85rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      margin: 0 0 1rem; line-height: 1.1;
       color: var(--text);
       padding: 0; border: 0;
     }
     .nl-net { color: var(--primary); display: inline-block; }
     .nl-sub {
       color: var(--text-soft); max-width: 580px;
-      font-size: clamp(1rem, 1.3vw, 1.1rem);
+      font-size: clamp(1.0625rem, 1.3vw, 1.125rem);
       margin: 0 auto 1.75rem; line-height: 1.6;
     }
     .nl-sub strong { color: var(--text); font-weight: 700; }
@@ -335,12 +344,13 @@ interface MethodStep   { step: string; title: string; desc: string; }
     }
     .nl-topic {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      font-size: 0.75rem; letter-spacing: 0.10em; text-transform: uppercase;
       padding: 0.5rem 1rem; border-radius: 999px;
       background: var(--bg-card);
       color: var(--text-soft);
       border: 1px solid var(--border);
       font-weight: 600;
+      line-height: 1.5;
     }
 
     .nl-form {
@@ -356,7 +366,8 @@ interface MethodStep   { step: string; title: string; desc: string; }
       flex: 1 1 200px; min-width: 0;
       padding: 0.85rem 1.1rem;
       background: transparent; border: 0;
-      color: var(--text); font-size: 0.98rem;
+      color: var(--text); font-size: 1rem;
+      line-height: 1.5;
       outline: none;
       font-family: inherit;
     }
@@ -365,7 +376,8 @@ interface MethodStep   { step: string; title: string; desc: string; }
       display: inline-flex; align-items: center; gap: 0.4rem;
       padding: 0.85rem 1.5rem;
       background: var(--text); color: var(--text-on-dark);
-      font-weight: 700; font-size: 0.92rem;
+      font-weight: 700; font-size: 0.9375rem;
+      line-height: 1.5;
       border: 0; border-radius: 999px;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -375,7 +387,7 @@ interface MethodStep   { step: string; title: string; desc: string; }
       background: #1c1917;
       box-shadow: 0 8px 22px rgba(10, 10, 10, 0.22);
     }
-    .nl-foot { margin: 1.4rem 0 0; font-size: 0.86rem; color: var(--text-muted); }
+    .nl-foot { margin: 1.4rem 0 0; font-size: 0.9375rem; color: var(--text-muted); line-height: 1.5; }
     .nl-foot strong { color: var(--text); font-weight: 700; }
     .nl-foot-dot {
       display: inline-block;
@@ -406,7 +418,7 @@ interface MethodStep   { step: string; title: string; desc: string; }
     @media (max-width: 520px) {
       .hero-cta { flex-direction: column; width: 100%; align-items: stretch; }
       .hero-cta .btn { width: 100%; justify-content: center; }
-      .announce { font-size: 0.76rem; padding: 0.38rem 0.85rem; }
+      .announce { font-size: 0.8125rem; padding: 0.38rem 0.85rem; }
     }
   `]
 })

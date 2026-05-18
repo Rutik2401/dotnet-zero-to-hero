@@ -49,12 +49,13 @@ interface PhaseCard {
     .landing-hero { padding: clamp(2.5rem, 8vh, 5rem) 0 clamp(2rem, 5vh, 4rem); }
     .landing-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.18em; color: var(--primary);
+      font-size: 0.8125rem; letter-spacing: 0.12em; color: var(--primary);
       text-transform: uppercase; margin: 0 0 1.25rem; font-weight: 700;
+      line-height: 1.5;
     }
     .landing-title {
-      font-size: clamp(2.6rem, 8.5vw, 6rem);
-      font-weight: 800; letter-spacing: -0.04em; line-height: 0.98;
+      font-size: clamp(2.2rem, 5.5vw, 3.75rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
       margin: 0 0 1.6rem; max-width: 900px; text-wrap: balance;
       color: var(--text);
     }
@@ -63,7 +64,7 @@ interface PhaseCard {
     }
     .landing-sub {
       color: var(--text-soft);
-      font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+      font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
       line-height: 1.65; max-width: 640px; margin: 0 0 1.75rem;
     }
     .landing-stats {
@@ -71,7 +72,8 @@ interface PhaseCard {
       align-items: center;
       gap: 0.5rem 0.85rem;
       color: var(--text-soft);
-      font-size: 0.94rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
     }
     .landing-stats strong { color: var(--text); font-weight: 700; }
     .landing-stats .dot { color: var(--text-muted); }
@@ -91,8 +93,9 @@ interface PhaseCard {
     .section-label {
       display: inline-flex; align-items: center; gap: 0.85rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.14em; color: var(--primary);
+      font-size: 0.8125rem; letter-spacing: 0.10em; color: var(--primary);
       text-transform: uppercase; margin: 0; font-weight: 600;
+      line-height: 1.5;
     }
     .section-label::before {
       content: ''; display: inline-block;
@@ -100,8 +103,9 @@ interface PhaseCard {
     }
     .section-meta {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.12em; color: var(--text-muted);
+      font-size: 0.75rem; letter-spacing: 0.10em; color: var(--text-muted);
       display: inline-flex; align-items: center; gap: 0.45rem;
+      line-height: 1.5;
     }
     .section-meta::before {
       content: ''; width: 6px; height: 6px; border-radius: 50%;
@@ -109,8 +113,8 @@ interface PhaseCard {
       box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.16);
     }
     .section-title {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800; letter-spacing: -0.035em; line-height: 1;
+      font-size: clamp(1.85rem, 4vw, 2.6rem);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
       margin: 0 0 clamp(1.75rem, 3vw, 2.5rem);
       color: var(--text);
       padding: 0; border: 0;
@@ -157,8 +161,8 @@ interface PhaseCard {
     }
     .phase-cover-num {
       position: relative; z-index: 1;
-      font-size: 5rem; font-weight: 900;
-      letter-spacing: -0.04em; line-height: 0.85;
+      font-size: 3.5rem; font-weight: 800;
+      letter-spacing: -0.03em; line-height: 0.95;
       color: rgba(255, 255, 255, 0.96);
       text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -167,14 +171,15 @@ interface PhaseCard {
     .phase-cover-tag {
       position: relative; z-index: 1;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.75rem; letter-spacing: 0.10em; text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
       align-self: flex-end;
       padding: 0.3rem 0.65rem;
       background: rgba(0, 0, 0, 0.32);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 999px;
+      line-height: 1.5;
     }
 
     .phase-body {
@@ -186,21 +191,22 @@ interface PhaseCard {
       display: flex; align-items: center; flex-wrap: wrap;
       gap: 0.5rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.12em;
+      font-size: 0.75rem; letter-spacing: 0.10em;
       color: var(--text-muted);
       text-transform: uppercase; margin: 0 0 0.85rem;
+      line-height: 1.5;
     }
     .phase-meta .meta-dot {
       width: 3px; height: 3px; border-radius: 50%; background: var(--text-muted);
     }
     .phase-meta .free { color: var(--accent); font-weight: 700; }
     .phase-title {
-      font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em;
+      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em;
       line-height: 1.25; margin: 0 0 0.5rem; color: var(--text);
     }
     .phase-desc {
       color: var(--text-soft);
-      font-size: 0.93rem; line-height: 1.55;
+      font-size: 0.9375rem; line-height: 1.6;
       margin: 0 0 1.25rem;
     }
     .phase-hr {
@@ -211,9 +217,10 @@ interface PhaseCard {
     .phase-foot {
       display: flex; align-items: center; justify-content: space-between;
       margin-top: auto;
-      font-size: 0.84rem; color: var(--text-muted);
+      font-size: 0.8125rem; color: var(--text-muted);
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       letter-spacing: 0.04em;
+      line-height: 1.5;
     }
     .phase-cta {
       display: inline-flex; align-items: center; gap: 0.4rem;
@@ -242,16 +249,18 @@ interface PhaseCard {
     }
     .how-step-num {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.78rem; letter-spacing: 0.16em;
+      font-size: 0.8125rem; letter-spacing: 0.10em;
       color: var(--primary); margin: 0 0 0.7rem; font-weight: 700;
+      line-height: 1.5;
     }
     .how-step-title {
-      font-size: 1.1rem; font-weight: 800; letter-spacing: -0.01em;
+      font-size: 1.125rem; font-weight: 700; letter-spacing: -0.01em;
       margin: 0 0 0.45rem; color: var(--text);
+      line-height: 1.35;
     }
     .how-step-desc {
       color: var(--text-soft);
-      font-size: 0.92rem; line-height: 1.6;
+      font-size: 0.9375rem; line-height: 1.6;
       margin: 0;
     }
 
@@ -268,21 +277,24 @@ interface PhaseCard {
     }
     .cta-band h3 {
       color: var(--text-on-dark);
-      font-size: clamp(1.65rem, 3.6vw, 2.5rem);
-      font-weight: 800; letter-spacing: -0.025em;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 700; letter-spacing: -0.02em;
       margin: 0 0 0.75rem;
+      line-height: 1.15;
       padding: 0; border: 0;
     }
     .cta-band p {
       color: rgba(245, 241, 232, 0.78);
-      max-width: 540px; margin: 0 auto 1.75rem; line-height: 1.6;
+      max-width: 540px; margin: 0 auto 1.75rem; line-height: 1.65;
+      font-size: 1.0625rem;
     }
     .cta-band a {
       display: inline-flex; align-items: center; gap: 0.5rem;
       padding: 0.9rem 1.6rem;
       background: var(--bg);
       color: var(--text);
-      font-weight: 700; border-radius: 999px;
+      font-weight: 700; font-size: 0.9375rem; line-height: 1.5;
+      border-radius: 999px;
       text-decoration: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -294,15 +306,15 @@ interface PhaseCard {
 
     @media (max-width: 640px) {
       .phase-cover { height: 160px; padding: 1.2rem; }
-      .phase-cover-num { font-size: 3.5rem; }
+      .phase-cover-num { font-size: 3rem; }
       .section-head { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
     }
 
     @media (max-width: 480px) {
-      .landing-title { font-size: clamp(2.1rem, 9.5vw, 3rem); letter-spacing: -0.035em; line-height: 1.02; }
-      .landing-sub { font-size: 1rem; line-height: 1.6; }
-      .landing-eyebrow { font-size: 0.68rem; letter-spacing: 0.16em; margin-bottom: 1rem; }
-      .landing-stats { font-size: 0.86rem; gap: 0.4rem 0.65rem; }
+      .landing-title { font-size: clamp(2rem, 8vw, 2.6rem); letter-spacing: -0.03em; line-height: 1.1; }
+      .landing-sub { font-size: 1.0625rem; line-height: 1.6; }
+      .landing-eyebrow { font-size: 0.8125rem; letter-spacing: 0.10em; margin-bottom: 1rem; }
+      .landing-stats { font-size: 0.9375rem; gap: 0.4rem 0.65rem; }
     }
   `]
 })

@@ -313,28 +313,31 @@ interface DirectChannel {
       flex: 1;
     }
     .hv-thread-name {
-      font-size: 0.92rem;
-      font-weight: 700;
+      font-size: 0.9375rem;
+      font-weight: 600;
       color: var(--text);
-      letter-spacing: -0.005em;
+      letter-spacing: 0;
+      line-height: 1.4;
     }
     .hv-thread-sub {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.66rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       margin-top: 2px;
+      line-height: 1.4;
     }
     .hv-thread-tag {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.10em;
       padding: 0.18rem 0.55rem;
       color: var(--primary);
       background: rgba(109, 40, 217, 0.10);
       border: 1px solid rgba(109, 40, 217, 0.28);
       border-radius: 999px;
+      line-height: 1.5;
     }
 
     .hv-thread-body {
@@ -348,7 +351,7 @@ interface DirectChannel {
       max-width: 82%;
       padding: 0.65rem 0.85rem;
       border-radius: 14px;
-      font-size: 0.84rem;
+      font-size: 0.9375rem;
       line-height: 1.5;
       color: var(--text);
       opacity: 0;
@@ -359,10 +362,11 @@ interface DirectChannel {
     .hv-msg-time {
       display: block;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.08em;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
       color: var(--text-muted);
       margin-bottom: 0.25rem;
+      line-height: 1.4;
     }
     .hv-msg-in {
       align-self: flex-start;
@@ -412,9 +416,10 @@ interface DirectChannel {
       border: 1px solid var(--border);
       border-radius: 999px;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
       color: var(--text);
       box-shadow: var(--shadow-md);
+      line-height: 1.5;
       opacity: 0;
       transform: translateY(8px);
       animation: hv-badge-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
@@ -463,13 +468,14 @@ interface DirectChannel {
 
     .page-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.16em; color: var(--primary);
+      font-size: 0.8125rem; letter-spacing: 0.10em; color: var(--primary);
       text-transform: uppercase; margin: 0 0 1.1rem; font-weight: 600;
+      line-height: 1.5;
     }
 
     .page-title {
-      font-size: clamp(1.85rem, 4.4vw, 3.4rem);
-      font-weight: 800; letter-spacing: -0.035em; line-height: 1.04;
+      font-size: clamp(1.85rem, 4.4vw, 3rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
       margin: 0 0 1.5rem; max-width: 820px; text-wrap: balance;
       color: var(--text);
     }
@@ -478,7 +484,7 @@ interface DirectChannel {
 
     .page-sub {
       color: var(--text-soft);
-      font-size: clamp(1.05rem, 1.5vw, 1.18rem);
+      font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
       line-height: 1.65; max-width: 640px; margin: 0 0 1.85rem;
     }
 
@@ -489,8 +495,9 @@ interface DirectChannel {
     .page-seclabel {
       display: inline-flex; align-items: center; gap: 0.85rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.14em; color: var(--primary);
+      font-size: 0.8125rem; letter-spacing: 0.10em; color: var(--primary);
       text-transform: uppercase; margin: 0 0 0.5rem; font-weight: 600;
+      line-height: 1.5;
     }
     .sec-num {
       display: inline-flex; align-items: center; justify-content: center;
@@ -499,23 +506,25 @@ interface DirectChannel {
       border: 1px solid rgba(109, 40, 217, 0.25);
       border-radius: 6px;
       color: var(--primary);
-      font-size: 0.7rem; font-weight: 700;
+      font-size: 0.75rem; font-weight: 700;
+      line-height: 1.5;
     }
 
     .page-sectitle {
-      font-size: clamp(1.85rem, 4vw, 2.6rem);
-      font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+      font-size: clamp(1.65rem, 3.4vw, 2.25rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.15;
       margin: 0 0 0.5rem; color: var(--text);
       padding: 0; border: 0;
     }
     .page-sectitle.small {
-      font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+      font-size: clamp(1.35rem, 2.4vw, 1.65rem);
     }
 
     .sec-meta {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.16em;
+      font-size: 0.75rem; letter-spacing: 0.10em;
       color: var(--text-muted); margin: 0.35rem 0 0; text-transform: uppercase;
+      line-height: 1.5;
     }
 
     /* ---------- Options grid ---------- */
@@ -555,30 +564,32 @@ interface DirectChannel {
 
     .opt-label {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.16em;
+      font-size: 0.8125rem; letter-spacing: 0.10em;
       text-transform: uppercase; font-weight: 700;
       color: var(--opt-accent);
+      line-height: 1.5;
     }
     .opt-title {
       font-size: 1.25rem;
-      font-weight: 800; letter-spacing: -0.02em;
-      line-height: 1.15;
+      font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.2;
       margin: 0;
       color: var(--text);
     }
     .opt-desc {
       color: var(--text-soft);
-      font-size: 0.93rem;
-      line-height: 1.55;
+      font-size: 0.9375rem;
+      line-height: 1.6;
       margin: 0 0 0.4rem;
     }
     .opt-pick {
       margin-top: auto;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.12em;
+      font-size: 0.8125rem; letter-spacing: 0.10em;
       text-transform: uppercase; font-weight: 600;
       color: var(--opt-accent);
       display: inline-flex; align-items: center; gap: 0.4rem;
+      line-height: 1.5;
       transition: gap 0.2s ease;
     }
     .option-card:hover .opt-pick { gap: 0.65rem; }
@@ -612,9 +623,10 @@ interface DirectChannel {
 
     .field label {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.68rem; letter-spacing: 0.16em;
+      font-size: 0.8125rem; letter-spacing: 0.10em;
       text-transform: uppercase; font-weight: 700;
       color: var(--text-muted);
+      line-height: 1.5;
     }
 
     .field input,
@@ -625,14 +637,15 @@ interface DirectChannel {
       border: 1px solid var(--border);
       border-radius: 12px;
       font: inherit;
-      font-size: 0.96rem;
+      font-size: 1rem;
+      line-height: 1.5;
       color: var(--text);
       transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       font-family: var(--font-sans, inherit);
     }
     .field textarea {
       resize: vertical; min-height: 140px;
-      line-height: 1.55;
+      line-height: 1.6;
     }
     .field input::placeholder,
     .field textarea::placeholder {
@@ -655,10 +668,11 @@ interface DirectChannel {
 
     .field-err {
       margin: 0;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem;
+      font-size: 0.875rem;
+      font-weight: 600;
       color: #b91c1c;
-      letter-spacing: 0.04em;
+      letter-spacing: 0;
+      line-height: 1.5;
     }
 
     .form-foot {
@@ -666,11 +680,12 @@ interface DirectChannel {
       gap: 1rem;
       margin-top: 0.3rem;
     }
-    .form-foot .btn { padding: 0.9rem 1.5rem; font-size: 0.95rem; }
+    .form-foot .btn { padding: 0.9rem 1.5rem; font-size: 0.9375rem; }
     .form-hint {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; letter-spacing: 0.08em;
+      font-size: 0.8125rem; letter-spacing: 0.04em;
       color: var(--text-muted);
+      line-height: 1.5;
     }
 
     .success-banner {
@@ -680,8 +695,9 @@ interface DirectChannel {
       border: 1px solid rgba(34, 197, 94, 0.35);
       color: #14532d;
       border-radius: 999px;
-      font-size: 0.9rem;
+      font-size: 0.9375rem;
       font-weight: 600;
+      line-height: 1.5;
       margin-bottom: 1.1rem;
       box-shadow: var(--shadow-sm);
     }
@@ -728,28 +744,30 @@ interface DirectChannel {
     .ch-label {
       grid-area: label;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.68rem; letter-spacing: 0.16em;
+      font-size: 0.8125rem; letter-spacing: 0.10em;
       text-transform: uppercase; font-weight: 700;
       color: var(--primary);
+      line-height: 1.5;
     }
     .ch-value {
       grid-area: value;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1rem;
-      letter-spacing: -0.01em;
+      letter-spacing: 0;
       color: var(--text);
+      line-height: 1.4;
     }
     .ch-note {
       grid-area: note;
       color: var(--text-soft);
-      font-size: 0.85rem;
-      line-height: 1.5;
+      font-size: 0.9375rem;
+      line-height: 1.55;
       margin-top: 0.25rem;
     }
     .ch-arrow {
       grid-area: arrow;
       align-self: center;
-      font-size: 1.1rem;
+      font-size: 1.125rem;
       color: var(--text-muted);
       transition: transform 0.2s ease, color 0.2s ease;
     }

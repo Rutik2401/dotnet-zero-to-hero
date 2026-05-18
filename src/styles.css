@@ -120,6 +120,41 @@
   /* Fonts */
   --font-sans: "Inter", "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", Consolas, "Courier New", monospace;
+
+  /* Type scale — modular ratio ~1.2, fluid where it matters */
+  --fs-2xs:        0.75rem;   /* 12px — micro UI floor (badges, tags) */
+  --fs-xs:         0.8125rem; /* 13px — eyebrow / caps floor */
+  --fs-sm:         0.875rem;  /* 14px — secondary UI text */
+  --fs-base:       1rem;      /* 16px — body / inputs (iOS-safe) */
+  --fs-md:         1.0625rem; /* 17px — lead intro */
+  --fs-lg:         1.125rem;  /* 18px */
+  --fs-xl:         1.25rem;   /* 20px — secondary heading */
+  --fs-2xl:        1.5rem;    /* 24px — h3 */
+  --fs-3xl:        1.875rem;  /* 30px — h2 */
+  --fs-4xl:        2.25rem;   /* 36px — h1 */
+  --fs-5xl:        3rem;      /* 48px — hero */
+  --fs-6xl:        3.75rem;   /* 60px — display */
+
+  /* Fluid display sizes for hero / section titles */
+  --fs-hero:        clamp(2rem, 4.4vw, 3.4rem);      /* page heroes */
+  --fs-hero-lg:     clamp(2.2rem, 5vw, 3.75rem);     /* hub hero */
+  --fs-section:     clamp(1.65rem, 3.4vw, 2.5rem);   /* section titles */
+  --fs-section-lg:  clamp(1.85rem, 4vw, 2.8rem);     /* larger section titles */
+
+  /* Leading scale */
+  --lh-display:    1.1;    /* hero / display titles */
+  --lh-tight:      1.2;    /* h2/h3 */
+  --lh-snug:       1.35;   /* card titles */
+  --lh-normal:     1.5;    /* UI / labels */
+  --lh-relaxed:    1.65;   /* body / long-form */
+
+  /* Tracking scale */
+  --tr-tighter:   -0.03em;
+  --tr-tight:     -0.02em;
+  --tr-snug:      -0.01em;
+  --tr-normal:     0;
+  --tr-wide:       0.08em;
+  --tr-wider:      0.12em;
 }
 
 
@@ -136,8 +171,8 @@ body {
   color: var(--text);
   font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.7;
-  letter-spacing: -0.005em;
+  line-height: 1.65;
+  letter-spacing: 0;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -327,13 +362,14 @@ svg {
 }
 
 .sidebar-title {
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.10em;
   color: var(--text-muted);
   margin: 0 0 var(--space-3);
   padding-left: var(--space-2);
+  line-height: var(--lh-normal);
 }
 
 .sidebar-list {
@@ -351,7 +387,8 @@ svg {
   min-height: 38px;
   border-radius: var(--radius-sm);
   color: var(--text-soft);
-  font-size: 0.92rem;
+  font-size: 0.9375rem;
+  line-height: var(--lh-normal);
   transition: background var(--dur-fast) var(--ease),
     color var(--dur-fast) var(--ease);
 }
@@ -399,48 +436,53 @@ h2,
 h3,
 h4 {
   color: var(--text);
-  line-height: 1.2;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  line-height: var(--lh-tight);
+  font-weight: 700;
+  letter-spacing: var(--tr-tight);
 }
 
 h1 {
   font-size: clamp(1.85rem, 2.8vw, 2.3rem);
   margin: 0 0 var(--space-2);
-  letter-spacing: -0.03em;
+  letter-spacing: var(--tr-tighter);
+  font-weight: 800;
+  line-height: var(--lh-display);
 }
 
 h2 {
-  font-size: clamp(1.35rem, 2.1vw, 1.65rem);
+  font-size: clamp(1.45rem, 2.4vw, 1.875rem);
   margin: var(--space-10) 0 var(--space-4);
   padding-bottom: var(--space-3);
   border-bottom: 1px solid var(--border-chrome);
+  font-weight: 700;
 }
 
 h3 {
-  font-size: 1.22rem;
+  font-size: 1.25rem;
   margin: var(--space-6) 0 var(--space-2);
   color: var(--text);
+  font-weight: 700;
 }
 
 h4 {
-  font-size: 1rem;
+  font-size: 1.0625rem;
   margin: var(--space-5) 0 var(--space-2);
   color: var(--text);
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: var(--tr-snug);
 }
 
 p {
   margin: var(--space-2) 0 var(--space-3);
   color: var(--text-soft);
-  line-height: 1.7;
+  line-height: var(--lh-relaxed);
 }
 
 ul,
 ol {
   color: var(--text-soft);
   padding-left: 1.4rem;
-  line-height: 1.7;
+  line-height: var(--lh-relaxed);
 }
 
 li {
@@ -457,16 +499,17 @@ strong {
 }
 
 em {
-  color: var(--primary);
+  color: var(--text);
   font-style: italic;
+  font-weight: 500;
 }
 
 
 /* ===== 6. Reusable primitives — pills, callouts, buttons ========= */
 .lead {
-  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
   color: var(--text-soft);
-  line-height: 1.65;
+  line-height: var(--lh-relaxed);
   margin-bottom: var(--space-6);
   max-width: 68ch;
 }
@@ -480,12 +523,13 @@ em {
   border: 1px solid rgba(139, 92, 246, 0.22);
   padding: 0.25rem 0.65rem;
   border-radius: var(--radius-pill);
-  font-size: 0.76rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   margin-right: var(--space-2);
   margin-bottom: var(--space-2);
   white-space: nowrap;
+  line-height: var(--lh-normal);
 }
 
 .pill-soon {
@@ -493,7 +537,7 @@ em {
   color: var(--warn);
   border-color: rgba(180, 83, 9, 0.28);
   margin-left: var(--space-1);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   padding: 0.12rem 0.5rem;
 }
 
@@ -502,7 +546,7 @@ em {
   color: var(--accent);
   border-color: rgba(4, 120, 87, 0.28);
   margin-left: var(--space-1);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   padding: 0.12rem 0.5rem;
 }
 
@@ -547,11 +591,12 @@ em {
   padding: 0.7rem 1.2rem;
   border-radius: var(--radius-pill);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
+  line-height: var(--lh-normal);
   border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
-  letter-spacing: 0.005em;
+  letter-spacing: 0;
   transition: transform var(--dur-fast) var(--ease),
     box-shadow var(--dur) var(--ease),
     background var(--dur-fast) var(--ease),
@@ -669,7 +714,7 @@ pre::after {
   right: 96px;
   text-align: center;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8125rem;
   color: rgba(199, 210, 254, 0.6);
   letter-spacing: 0.02em;
   z-index: 2;
@@ -798,13 +843,14 @@ pre code {
   gap: 5px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(199, 210, 254, 0.78);
+  color: rgba(199, 210, 254, 0.85);
   padding: 4px 9px;
   border-radius: 6px;
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.02em;
+  line-height: var(--lh-normal);
   cursor: pointer;
   transition: background var(--dur-fast) var(--ease),
     color var(--dur-fast) var(--ease),
@@ -848,23 +894,25 @@ pre code {
 }
 
 .topic-card .topic-title {
-  font-size: 1.55rem;
+  font-size: clamp(1.35rem, 2.4vw, 1.55rem);
   margin: 0 0 var(--space-2);
   color: var(--text);
-  line-height: 1.25;
-  letter-spacing: -0.02em;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight);
+  font-weight: 700;
 }
 
 .section-label {
   display: block;
   width: fit-content;
   max-width: 100%;
-  font-size: 0.74rem;
+  font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--primary);
   margin: var(--space-6) 0 var(--space-2);
+  line-height: var(--lh-normal);
 }
 
 .qa {
@@ -919,7 +967,7 @@ pre code {
 }
 
 .toc-title {
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.10em;
   text-transform: uppercase;
@@ -927,13 +975,15 @@ pre code {
   margin: 0 0 var(--space-4);
   padding-bottom: var(--space-3);
   border-bottom: 1px solid var(--border-chrome);
+  line-height: var(--lh-normal);
 }
 
 .toc-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 0.86rem;
+  font-size: 0.9rem;
+  line-height: var(--lh-normal);
 }
 
 .toc-list li {
@@ -1002,7 +1052,7 @@ pre code {
 .back-top {
   display: inline-block;
   margin-top: var(--space-5);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
   transition: color var(--dur-fast) var(--ease);
 }
@@ -1022,11 +1072,12 @@ pre code {
 }
 
 .hero-title {
-  font-size: clamp(1.95rem, 4.5vw, 2.85rem);
+  font-size: clamp(2rem, 4.4vw, 2.85rem);
   margin: var(--space-3) 0;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  letter-spacing: var(--tr-tighter);
+  line-height: var(--lh-display);
   color: var(--text);
+  font-weight: 800;
 }
 
 .brand-text {
@@ -1037,9 +1088,9 @@ pre code {
 }
 
 .hero-sub {
-  font-size: clamp(1.02rem, 1.45vw, 1.15rem);
+  font-size: clamp(1.0625rem, 1.45vw, 1.15rem);
   color: var(--text-soft);
-  line-height: 1.6;
+  line-height: var(--lh-relaxed);
   max-width: 720px;
   margin-bottom: var(--space-6);
 }
@@ -1090,7 +1141,8 @@ pre code {
 .rapid-a {
   margin: 0;
   color: var(--text-soft);
-  font-size: 0.95rem;
+  font-size: 1rem;
+  line-height: var(--lh-relaxed);
 }
 
 
@@ -1110,7 +1162,8 @@ pre code {
   padding: var(--space-2) 1rem;
   border-radius: var(--radius-pill);
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.9375rem;
+  line-height: var(--lh-normal);
   cursor: pointer;
   transition: background var(--dur-fast) var(--ease),
     transform var(--dur-fast) var(--ease),
@@ -1400,7 +1453,7 @@ pre.code-output code {
   }
 
   .topic-card .topic-title {
-    font-size: 1.28rem;
+    font-size: 1.3rem;
   }
 
   .topic-index {
@@ -1413,7 +1466,7 @@ pre.code-output code {
   }
 
   .hero-sub {
-    font-size: 1rem;
+    font-size: 1.0625rem;
   }
 
   .hero-cta {
@@ -1455,32 +1508,35 @@ pre.code-output code {
   }
 
   .pill {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     padding: 0.18rem 0.55rem;
   }
 }
 
 @media (max-width: 480px) {
   body {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   h1 {
-    font-size: 1.7rem;
+    font-size: 1.85rem;
+    line-height: var(--lh-display);
   }
 
   h2 {
-    font-size: 1.32rem;
+    font-size: 1.45rem;
     margin-top: var(--space-7);
     padding-bottom: var(--space-2);
+    line-height: var(--lh-tight);
   }
 
   h3 {
-    font-size: 1.08rem;
+    font-size: 1.1875rem;
+    line-height: var(--lh-tight);
   }
 
   .lead {
-    font-size: 1rem;
+    font-size: 1.0625rem;
   }
 
   .app-header {
@@ -1498,7 +1554,7 @@ pre.code-output code {
   }
 
   .topic-card .topic-title {
-    font-size: 1.15rem;
+    font-size: 1.1875rem;
   }
 
   .topic-index {
@@ -1520,12 +1576,12 @@ pre.code-output code {
   }
 
   .btn {
-    font-size: 0.88rem;
+    font-size: 0.9375rem;
     padding: 0.6rem 1rem;
   }
 
   .btn-output {
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     padding: 0.45rem 0.85rem;
   }
 
@@ -1540,7 +1596,8 @@ pre.code-output code {
 
   .qa .q,
   .qa .a {
-    font-size: 0.95rem;
+    font-size: 1rem;
+    line-height: var(--lh-relaxed);
   }
 
   .rapid-fire {

@@ -37,38 +37,40 @@ import { LandingFooterComponent } from '../../shared/landing-footer/landing-foot
     .hero-text { min-width: 0; }
     .page-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.16em; color: var(--primary);
+      font-size: 0.8125rem; letter-spacing: 0.10em; color: var(--primary);
       text-transform: uppercase; margin: 0 0 1.1rem; font-weight: 600;
+      line-height: 1.5;
     }
     .page-title {
-      font-size: clamp(1.85rem, 4.4vw, 3.4rem);
-      font-weight: 800; letter-spacing: -0.035em; line-height: 1.04;
+      font-size: clamp(1.85rem, 4.4vw, 3rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
       margin: 0 0 1.5rem; max-width: 820px; text-wrap: balance;
       color: var(--text);
     }
     .accent-mark { display: inline-block; }
     .page-sub {
       color: var(--text-soft);
-      font-size: clamp(1.05rem, 1.5vw, 1.18rem);
+      font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
       line-height: 1.65; max-width: 640px; margin: 0 0 1.85rem;
     }
     .page-cta { display: flex; flex-wrap: wrap; gap: 0.7rem; }
-    .page-cta .btn { padding: 0.9rem 1.5rem; font-size: 0.95rem; }
+    .page-cta .btn { padding: 0.9rem 1.5rem; font-size: 0.9375rem; }
 
     .page-section { padding: clamp(2rem, 6vh, 4rem) 0 clamp(4rem, 8vh, 6rem); }
     .page-seclabel {
       display: inline-flex; align-items: center; gap: 0.85rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.14em; color: var(--primary);
+      font-size: 0.8125rem; letter-spacing: 0.10em; color: var(--primary);
       text-transform: uppercase; margin: 0 0 0.5rem; font-weight: 600;
+      line-height: 1.5;
     }
     .page-seclabel::before {
       content: ''; display: inline-block;
       width: 36px; height: 1px; background: rgba(109, 40, 217, 0.4);
     }
     .page-sectitle {
-      font-size: clamp(1.85rem, 4vw, 2.6rem);
-      font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+      font-size: clamp(1.65rem, 3.4vw, 2.25rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.15;
       margin: 0 0 1.75rem; color: var(--text);
       padding: 0; border: 0;
     }
@@ -85,6 +87,9 @@ import { LandingFooterComponent } from '../../shared/landing-footer/landing-foot
       border-radius: 12px;
       color: var(--text-soft);
       box-shadow: var(--shadow-sm);
+      font-size: 1.0625rem;
+      font-weight: 500;
+      line-height: 1.5;
       transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
     .post-list li:hover {
@@ -143,28 +148,30 @@ import { LandingFooterComponent } from '../../shared/landing-footer/landing-foot
     }
     .hv-tag {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.10em;
       text-transform: uppercase;
       color: var(--primary);
       background: rgba(109, 40, 217, 0.10);
       border: 1px solid rgba(109, 40, 217, 0.28);
       padding: 0.18rem 0.55rem;
       border-radius: 999px;
+      line-height: 1.5;
     }
     .hv-meta {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em;
       color: var(--text-muted);
+      line-height: 1.5;
     }
     .hv-post-title {
       font-size: clamp(1.05rem, 1.4vw, 1.25rem);
-      font-weight: 800; line-height: 1.2; letter-spacing: -0.015em;
+      font-weight: 700; line-height: 1.25; letter-spacing: -0.015em;
       color: var(--text);
       margin: 0 0 0.85rem;
       text-wrap: balance;
     }
     .hv-post-line {
-      font-size: 0.84rem; line-height: 1.6;
+      font-size: 0.9375rem; line-height: 1.6;
       color: var(--text-soft);
       margin: 0 0 0.7rem;
       opacity: 0;
@@ -211,9 +218,10 @@ import { LandingFooterComponent } from '../../shared/landing-footer/landing-foot
       border: 1px solid var(--border);
       border-radius: 999px;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
       color: var(--text);
       box-shadow: var(--shadow-md);
+      line-height: 1.5;
       opacity: 0;
       transform: translateY(8px);
       animation: hv-badge-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;

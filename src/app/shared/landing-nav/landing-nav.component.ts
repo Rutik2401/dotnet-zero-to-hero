@@ -168,8 +168,9 @@ interface ResourceItem {
       filter: drop-shadow(0 4px 10px rgba(109, 40, 217, 0.32));
     }
     .lnav-name {
-      font-size: 1.05rem;
+      font-size: 1.0625rem;
       letter-spacing: -0.015em;
+      line-height: 1.4;
       color: #0a0a0a;
     }
     .lnav-name-soft { font-weight: 500; opacity: 0.85; }
@@ -198,8 +199,9 @@ interface ResourceItem {
       align-items: center;
       gap: 0.35rem;
       padding: 0.5rem 0.95rem;
-      font-size: 0.88rem;
+      font-size: 0.9375rem;
       font-weight: 600;
+      line-height: 1.4;
       color: #44403c;
       text-decoration: none;
       border-radius: 999px;
@@ -214,7 +216,7 @@ interface ResourceItem {
     .lnav-link.active { color: #f5f1e8; background: #0a0a0a; }
     .lnav-link-tag {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.58rem;
+      font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -222,6 +224,7 @@ interface ResourceItem {
       border-radius: 999px;
       background: rgba(10, 10, 10, 0.08);
       color: #57534e;
+      line-height: 1.4;
     }
     .lnav-link.active .lnav-link-tag {
       background: rgba(245, 241, 232, 0.18);
@@ -324,17 +327,19 @@ interface ResourceItem {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      font-size: 0.92rem;
-      font-weight: 700;
+      font-size: 0.9375rem;
+      font-weight: 600;
       color: #0a0a0a;
-      letter-spacing: -0.005em;
+      letter-spacing: 0;
+      line-height: 1.4;
     }
     .lnav-drop-desc {
-      font-size: 0.78rem;
+      font-size: 0.875rem;
       color: #78716c;
       font-weight: 500;
       letter-spacing: 0;
       margin-top: 2px;
+      line-height: 1.45;
     }
     .lnav-drop-arrow {
       color: #a8a29e;
@@ -344,12 +349,13 @@ interface ResourceItem {
     }
     .lnav-drop-tag {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.58rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.10em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 0.1rem 0.4rem;
       border-radius: 999px;
+      line-height: 1.4;
     }
     .lnav-drop-tag-live {
       background: rgba(4, 120, 87, 0.10);
@@ -380,8 +386,9 @@ interface ResourceItem {
       align-items: center;
       gap: 0.55rem;
       padding: 0.5rem 0.7rem 0.5rem 0.85rem;
-      font-size: 0.86rem;
+      font-size: 0.9375rem;
       font-weight: 500;
+      line-height: 1.4;
       color: #44403c;
       background: rgba(255, 255, 255, 0.82);
       border: 1px solid rgba(10, 10, 10, 0.08);
@@ -407,13 +414,14 @@ interface ResourceItem {
       gap: 1px;
       padding: 0.18rem 0.42rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem;
+      font-size: 0.8125rem;
       font-weight: 600;
       color: #78716c;
       background: rgba(10, 10, 10, 0.05);
       border: 1px solid rgba(10, 10, 10, 0.10);
       border-radius: 6px;
-      letter-spacing: 0;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
     }
     .lnav-kbd-plus { opacity: 0.6; margin: 0 1px; }
 
@@ -440,9 +448,10 @@ interface ResourceItem {
     .lnav-subscribe {
       display: inline-flex;
       align-items: center;
-      padding: 0.6rem 1.15rem;
-      font-size: 0.88rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9375rem;
       font-weight: 700;
+      line-height: 1.4;
       color: #f5f1e8;
       background: #0a0a0a;
       border-radius: 999px;
@@ -467,14 +476,14 @@ interface ResourceItem {
       .lnav { gap: 0.6rem; }
       .lnav-name { display: none; }
       .lnav-pill { padding: 0.26rem; gap: 0.1rem; }
-      .lnav-link { padding: 0.4rem 0.7rem; font-size: 0.82rem; }
+      .lnav-link { padding: 0.4rem 0.7rem; font-size: 0.875rem; }
       .lnav-link-tag { display: none; }
       .lnav-kbd { display: none; }
       .lnav-drop-panel { width: 320px; }
     }
     @media (max-width: 640px) {
       .lnav-pill { display: none; }
-      .lnav-subscribe { padding: 0.5rem 0.85rem; font-size: 0.8rem; }
+      .lnav-subscribe { padding: 0.5rem 0.95rem; font-size: 0.875rem; }
     }
   `]
 })

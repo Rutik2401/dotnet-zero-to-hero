@@ -121,20 +121,22 @@ import { SearchService, SearchEntry } from './search.service';
       border: 0;
       background: transparent;
       color: #0a0a0a;
-      font-size: 1rem;
+      font-size: 1.0625rem;
+      line-height: 1.5;
       outline: none;
       font-family: inherit;
     }
     .sm-input::placeholder { color: #a8a29e; }
     .sm-esc {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem;
+      font-size: 0.8125rem;
       padding: 0.28rem 0.55rem;
       color: #78716c;
       background: rgba(10, 10, 10, 0.05);
       border: 1px solid rgba(10, 10, 10, 0.08);
       border-radius: 6px;
       cursor: pointer;
+      line-height: 1.4;
       transition: background 0.15s, color 0.15s;
     }
     .sm-esc:hover { background: rgba(10, 10, 10, 0.08); color: #0a0a0a; }
@@ -148,7 +150,8 @@ import { SearchService, SearchEntry } from './search.service';
       text-align: center;
       padding: 2.5rem 1rem;
       color: #78716c;
-      font-size: 0.94rem;
+      font-size: 1rem;
+      line-height: 1.6;
       margin: 0;
     }
     .sm-row {
@@ -170,20 +173,21 @@ import { SearchService, SearchEntry } from './search.service';
     }
     .sm-kind {
       flex-shrink: 0;
-      width: 44px;
+      width: 50px;
       height: 32px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.66rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       color: #6d28d9;
       background: rgba(139, 92, 246, 0.10);
       border: 1px solid rgba(139, 92, 246, 0.22);
       border-radius: 8px;
       text-transform: uppercase;
+      line-height: 1.4;
     }
     .sm-kind[data-kind="phase"] { color: #b45309; background: rgba(180, 83, 9, 0.08); border-color: rgba(180, 83, 9, 0.20); }
     .sm-kind[data-kind="note"]  { color: #047857; background: rgba(4, 120, 87, 0.08); border-color: rgba(4, 120, 87, 0.22); }
@@ -197,17 +201,17 @@ import { SearchService, SearchEntry } from './search.service';
     .sm-title {
       color: #0a0a0a;
       font-weight: 600;
-      font-size: 0.94rem;
-      line-height: 1.3;
-      letter-spacing: -0.005em;
+      font-size: 1rem;
+      line-height: 1.35;
+      letter-spacing: 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .sm-sub {
       color: #78716c;
-      font-size: 0.82rem;
-      line-height: 1.3;
+      font-size: 0.8125rem;
+      line-height: 1.4;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -215,7 +219,7 @@ import { SearchService, SearchEntry } from './search.service';
     .sm-arrow {
       flex-shrink: 0;
       color: #a8a29e;
-      font-size: 0.95rem;
+      font-size: 1rem;
       opacity: 0;
       transition: opacity 0.15s;
     }
@@ -230,8 +234,9 @@ import { SearchService, SearchEntry } from './search.service';
       background: #faf8f2;
       border-top: 1px solid rgba(10, 10, 10, 0.06);
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem;
+      font-size: 0.8125rem;
       color: #78716c;
+      line-height: 1.5;
     }
     .sm-foot kbd {
       display: inline-block;
@@ -242,8 +247,9 @@ import { SearchService, SearchEntry } from './search.service';
       border-bottom-width: 2px;
       border-radius: 4px;
       font-family: inherit;
-      font-size: 0.7rem;
+      font-size: 0.8125rem;
       color: #44403c;
+      line-height: 1.4;
     }
 
     @keyframes smFade { from { opacity: 0; } to { opacity: 1; } }
@@ -254,7 +260,7 @@ import { SearchService, SearchEntry } from './search.service';
 
     @media (max-width: 520px) {
       .sm-shell { padding-top: 3rem; }
-      .sm-foot { font-size: 0.68rem; gap: 0.5rem; }
+      .sm-foot { font-size: 0.75rem; gap: 0.5rem; }
     }
   `]
 })

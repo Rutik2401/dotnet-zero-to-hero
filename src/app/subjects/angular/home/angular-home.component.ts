@@ -77,24 +77,26 @@ import { LandingFooterComponent } from '../../../shared/landing-footer/landing-f
     .hero { padding: clamp(2.5rem, 8vh, 5rem) 0 clamp(2rem, 5vh, 4rem); }
     .eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.18em; color: var(--danger);
+      font-size: 0.8125rem; letter-spacing: 0.12em; color: var(--danger);
       text-transform: uppercase; margin: 0 0 1.2rem; font-weight: 700;
+      line-height: 1.5;
     }
     .title {
-      font-size: clamp(2.6rem, 7.5vw, 5.25rem);
-      font-weight: 800; letter-spacing: -0.04em; line-height: 0.98;
+      font-size: clamp(2.2rem, 5.5vw, 3.75rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
       margin: 0 0 1.5rem; max-width: 820px; text-wrap: balance;
       color: var(--text);
     }
     .accent { color: var(--danger); }
     .sub {
       color: var(--text-soft);
-      font-size: clamp(1.05rem, 1.5vw, 1.18rem);
+      font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
       line-height: 1.65; max-width: 640px; margin: 0 0 1.75rem;
     }
     .stats {
       display: flex; flex-wrap: wrap; align-items: center;
-      gap: 0.5rem 0.85rem; color: var(--text-soft); font-size: 0.94rem;
+      gap: 0.5rem 0.85rem; color: var(--text-soft); font-size: 0.9375rem;
+      line-height: 1.5;
       margin-bottom: 1.85rem;
     }
     .stats strong { color: var(--text); font-weight: 700; }
@@ -107,22 +109,23 @@ import { LandingFooterComponent } from '../../../shared/landing-footer/landing-f
     }
 
     .cta-row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
-    .cta-row .btn { padding: 0.9rem 1.5rem; font-size: 0.95rem; }
+    .cta-row .btn { padding: 0.9rem 1.5rem; font-size: 0.9375rem; }
 
     .section { padding: clamp(2rem, 6vh, 4rem) 0 clamp(4rem, 8vh, 6rem); }
     .sec-label {
       display: inline-flex; align-items: center; gap: 0.85rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.14em; color: var(--danger);
+      font-size: 0.8125rem; letter-spacing: 0.10em; color: var(--danger);
       text-transform: uppercase; margin: 0 0 0.5rem; font-weight: 600;
+      line-height: 1.5;
     }
     .sec-label::before {
       content: ''; display: inline-block;
       width: 36px; height: 1px; background: rgba(185, 28, 28, 0.45);
     }
     .sec-title {
-      font-size: clamp(1.85rem, 4vw, 2.6rem);
-      font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+      font-size: clamp(1.65rem, 3.4vw, 2.25rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.15;
       margin: 0 0 1.85rem; color: var(--text);
       padding: 0; border: 0;
     }
@@ -140,6 +143,8 @@ import { LandingFooterComponent } from '../../../shared/landing-footer/landing-f
       border-radius: 12px;
       color: var(--text-soft);
       box-shadow: var(--shadow-sm);
+      font-size: 1rem;
+      line-height: 1.5;
       transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
     .phase-list li:hover {
@@ -149,8 +154,9 @@ import { LandingFooterComponent } from '../../../shared/landing-footer/landing-f
     }
     .phase-num {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.85rem; font-weight: 800; letter-spacing: 0.04em;
-      color: var(--danger); min-width: 28px;
+      font-size: 0.9375rem; font-weight: 700; letter-spacing: 0.04em;
+      color: var(--text-muted); min-width: 28px;
+      line-height: 1.5;
     }
   `]
 })

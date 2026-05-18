@@ -209,21 +209,23 @@ interface ContextStrip {
     .lfoot-strip-text { min-width: 0; }
     .lfoot-strip-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.18em;
+      font-size: 0.8125rem; letter-spacing: 0.12em;
       text-transform: uppercase; font-weight: 600;
       color: #a78bfa;
       margin: 0 0 0.4rem;
+      line-height: 1.5;
     }
     .lfoot-strip-title {
-      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-      font-weight: 700; line-height: 1.35;
+      font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+      font-weight: 700; line-height: 1.3;
       color: #f5f1e8;
-      margin: 0; letter-spacing: -0.01em;
+      margin: 0; letter-spacing: -0.015em;
     }
     .lfoot-strip-cta {
       display: inline-flex; align-items: center; gap: 0.45rem;
-      padding: 0.7rem 1.25rem;
-      font-size: 0.88rem; font-weight: 700;
+      padding: 0.7rem 1.3rem;
+      font-size: 0.9375rem; font-weight: 700;
+      line-height: 1.5;
       color: #1e1b4b;
       background: #f5f1e8;
       border-radius: 999px;
@@ -268,8 +270,9 @@ interface ContextStrip {
       filter: drop-shadow(0 4px 14px rgba(139, 92, 246, 0.55));
     }
     .lfoot-wordmark {
-      font-size: 1.1rem;
+      font-size: 1.125rem;
       letter-spacing: -0.015em;
+      line-height: 1.4;
       color: #f5f1e8;
     }
     .lfoot-wordmark-soft { font-weight: 500; opacity: 0.78; }
@@ -278,7 +281,7 @@ interface ContextStrip {
     .lfoot-tagline {
       margin: 1rem 0 1.2rem;
       max-width: 340px;
-      font-size: 0.92rem;
+      font-size: 0.9375rem;
       line-height: 1.65;
       color: #b8b2d1;
     }
@@ -287,12 +290,13 @@ interface ContextStrip {
       display: inline-flex; align-items: center; gap: 0.5rem;
       padding: 0.4rem 0.8rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; letter-spacing: 0.04em;
+      font-size: 0.8125rem; letter-spacing: 0.04em;
       color: #c4f0d8;
       background: rgba(16, 185, 129, 0.12);
       border: 1px solid rgba(16, 185, 129, 0.30);
       border-radius: 999px;
       margin-bottom: 1.2rem;
+      line-height: 1.5;
     }
     .lfoot-status-dot {
       width: 7px; height: 7px; border-radius: 50%;
@@ -337,12 +341,13 @@ interface ContextStrip {
     .lfoot-col { min-width: 0; }
     .lfoot-coltitle {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
+      font-size: 0.8125rem;
+      letter-spacing: 0.12em;
       color: #a78bfa;
       text-transform: uppercase;
       margin: 0 0 1.1rem;
       font-weight: 700;
+      line-height: 1.5;
     }
     .lfoot-list {
       list-style: none;
@@ -355,7 +360,8 @@ interface ContextStrip {
     .lfoot-link {
       display: inline-flex; align-items: center; gap: 0.5rem;
       color: #c4bce0;
-      font-size: 0.92rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
       transition: color 0.2s ease, transform 0.2s ease;
       text-decoration: none;
     }
@@ -366,9 +372,9 @@ interface ContextStrip {
     }
     .lfoot-badge {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.6rem; font-weight: 700;
-      letter-spacing: 0.10em; text-transform: uppercase;
-      padding: 0.12rem 0.42rem;
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.12rem 0.5rem;
       border-radius: 999px;
       line-height: 1.4;
     }
@@ -400,20 +406,20 @@ interface ContextStrip {
     }
     .lfoot-copy {
       margin: 0;
-      font-size: 0.82rem;
+      font-size: 0.875rem;
       color: #8a82a5;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      letter-spacing: 0.02em;
+      letter-spacing: 0;
+      line-height: 1.5;
     }
-    .lfoot-copy strong { color: #d4cfe8; font-weight: 700; }
+    .lfoot-copy strong { color: #d4cfe8; font-weight: 600; }
 
     .lfoot-meta {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       flex-wrap: wrap;
-      font-size: 0.82rem;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
     }
     .lfoot-meta-link {
       color: #b8b2d1;

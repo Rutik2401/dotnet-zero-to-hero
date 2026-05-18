@@ -204,9 +204,10 @@ interface ComingTopic {
     .hero-text { min-width: 0; }
     .hero-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.78rem; letter-spacing: 0.22em;
+      font-size: 0.8125rem; letter-spacing: 0.12em;
       color: var(--primary); text-transform: uppercase;
       margin: 0 0 1.5rem; font-weight: 700;
+      line-height: 1.5;
     }
 
     /* ─── HERO VISUAL — animated code editor card ─── */
@@ -265,25 +266,26 @@ interface ComingTopic {
     .hv-file {
       margin-left: 0.55rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.76rem;
-      color: rgba(245, 241, 232, 0.55);
+      font-size: 0.8125rem;
+      color: rgba(245, 241, 232, 0.65);
     }
     .hv-tag {
       margin-left: auto;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.12em;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.10em;
       padding: 0.2rem 0.55rem;
       border-radius: 999px;
       color: #c4b5fd;
       background: rgba(139, 92, 246, 0.16);
       border: 1px solid rgba(139, 92, 246, 0.32);
+      line-height: 1.5;
     }
 
     .hv-code {
       padding: 1.15rem 1.25rem 1.45rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.88rem;
-      line-height: 1.7;
+      font-size: 0.9375rem;
+      line-height: 1.55;
       color: #d1d5db;
     }
     .hv-c-line {
@@ -323,9 +325,10 @@ interface ComingTopic {
       border: 1px solid var(--border);
       border-radius: 999px;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
       color: var(--text);
       box-shadow: var(--shadow-md);
+      line-height: 1.5;
       opacity: 0;
       transform: translateY(8px);
       animation: hv-badge-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
@@ -370,10 +373,10 @@ interface ComingTopic {
       .hv-c-line { opacity: 1; transform: none; }
     }
     .hero-title {
-      font-size: clamp(1.85rem, 4.4vw, 3.4rem);
+      font-size: clamp(1.85rem, 4.4vw, 3rem);
       font-weight: 800;
-      letter-spacing: -0.035em;
-      line-height: 1.02;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
       margin: 0 0 1.25rem;
       max-width: 760px;
       color: var(--text);
@@ -381,7 +384,7 @@ interface ComingTopic {
     }
     .hero-sub {
       color: var(--text-soft);
-      font-size: clamp(1.02rem, 1.35vw, 1.18rem);
+      font-size: clamp(1.0625rem, 1.35vw, 1.1875rem);
       line-height: 1.65; max-width: 640px;
       margin: 0 0 1.75rem;
     }
@@ -389,8 +392,9 @@ interface ComingTopic {
       display: flex; flex-wrap: wrap; align-items: center;
       gap: 0.55rem 0.75rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.78rem; letter-spacing: 0.1em;
+      font-size: 0.8125rem; letter-spacing: 0.10em;
       color: var(--text-muted); text-transform: uppercase;
+      line-height: 1.5;
     }
     .hero-stats .stat-dot { color: var(--text-muted); }
     .hero-stats .stat-free { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent); font-weight: 700; }
@@ -418,23 +422,25 @@ interface ComingTopic {
     .sec-label {
       display: inline-flex; align-items: center; gap: 0.65rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.16em;
+      font-size: 0.8125rem; letter-spacing: 0.10em;
       color: var(--primary);
       text-transform: uppercase; margin: 0; font-weight: 600;
+      line-height: 1.5;
     }
     .sec-label-warn { color: var(--warn); }
     .sec-meta {
       display: inline-flex; align-items: center; gap: 0.5rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.14em; color: var(--text-muted);
+      font-size: 0.75rem; letter-spacing: 0.10em; color: var(--text-muted);
+      line-height: 1.5;
     }
     .sec-divider {
       border: 0; border-top: 1px solid var(--border);
       margin: 0 0 clamp(1.25rem, 2.5vw, 1.75rem);
     }
     .sec-title {
-      font-size: clamp(2.2rem, 5.5vw, 4rem);
-      font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+      font-size: clamp(1.85rem, 4vw, 2.6rem);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
       margin: 0 0 clamp(1.75rem, 3vw, 2.5rem);
       color: var(--text);
       padding: 0; border: 0;
@@ -475,8 +481,8 @@ interface ComingTopic {
     }
     .cover-initials {
       position: relative; z-index: 1;
-      font-size: 4.25rem; font-weight: 900;
-      letter-spacing: -0.04em; line-height: 0.85;
+      font-size: 3.5rem; font-weight: 800;
+      letter-spacing: -0.03em; line-height: 0.95;
       color: rgba(255, 255, 255, 0.96);
       text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
       align-self: flex-start;
@@ -484,21 +490,23 @@ interface ComingTopic {
     .cover-tag {
       position: relative; z-index: 1;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.75rem; letter-spacing: 0.10em; text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
       align-self: flex-end;
       padding: 0.3rem 0.65rem;
       background: rgba(0, 0, 0, 0.32);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 999px;
+      line-height: 1.5;
     }
 
     .body { padding: 1.4rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
     .meta {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.12em; color: var(--text-muted);
+      font-size: 0.75rem; letter-spacing: 0.10em; color: var(--text-muted);
       text-transform: uppercase; margin: 0 0 0.85rem;
+      line-height: 1.5;
     }
     .meta .meta-dot {
       display: inline-block; width: 3px; height: 3px; border-radius: 50%;
@@ -506,15 +514,16 @@ interface ComingTopic {
     }
     .meta .free { color: var(--accent); font-weight: 700; }
     .name {
-      font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em;
+      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em;
       margin: 0 0 0.9rem; color: var(--text);
+      line-height: 1.25;
     }
     .hr { border: 0; border-top: 1px solid var(--border-chrome); margin: 0 0 1rem; }
     .foot {
       display: flex; align-items: center; justify-content: space-between;
       margin-top: auto;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.82rem; letter-spacing: 0.04em; color: var(--text-muted);
+      font-size: 0.8125rem; letter-spacing: 0.04em; color: var(--text-muted);
     }
     .cta {
       display: inline-flex; align-items: center; gap: 0.4rem;
@@ -561,12 +570,13 @@ interface ComingTopic {
     .chip-icon {
       display: inline-flex; align-items: center; justify-content: center;
       width: 24px; height: 24px;
-      color: var(--primary); font-size: 0.9rem;
+      color: var(--primary); font-size: 0.9375rem;
       flex-shrink: 0;
     }
     .chip-label {
-      font-size: 0.92rem; font-weight: 700; letter-spacing: -0.01em;
+      font-size: 0.9375rem; font-weight: 600; letter-spacing: 0;
       color: var(--text);
+      line-height: 1.5;
     }
 
     /* notify card */
@@ -580,25 +590,27 @@ interface ComingTopic {
     }
     .notify-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.18em;
+      font-size: 0.8125rem; letter-spacing: 0.10em;
       color: var(--primary); text-transform: uppercase;
       margin: 0 0 1rem; font-weight: 700;
+      line-height: 1.5;
     }
     .notify-title {
-      font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em;
-      line-height: 1.15; margin: 0 0 0.85rem;
+      font-size: clamp(1.4rem, 2.4vw, 1.6rem); font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.2; margin: 0 0 0.85rem;
       color: var(--text);
     }
     .notify-body {
       color: var(--text-soft);
-      font-size: 0.96rem; line-height: 1.6;
+      font-size: 1rem; line-height: 1.6;
       margin: 0 0 1.5rem;
     }
     .notify-btn {
       display: inline-flex; align-items: center; gap: 0.45rem;
       padding: 0.9rem 1.4rem;
       background: var(--text); color: var(--text-on-dark);
-      font-weight: 700; font-size: 0.95rem;
+      font-weight: 700; font-size: 0.9375rem;
+      line-height: 1.5;
       border: 0; border-radius: 999px;
       text-decoration: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, gap 0.2s ease;
@@ -611,7 +623,8 @@ interface ComingTopic {
     }
     .notify-foot {
       margin: 1.2rem 0 0;
-      font-size: 0.88rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
       color: var(--text-muted);
     }
     .notify-foot strong { color: var(--text); font-weight: 700; }
@@ -626,7 +639,7 @@ interface ComingTopic {
     }
     @media (max-width: 520px) {
       .chip-grid { grid-template-columns: 1fr; }
-      .hero-stats { font-size: 0.72rem; gap: 0.45rem 0.6rem; }
+      .hero-stats { font-size: 0.75rem; gap: 0.45rem 0.6rem; }
     }
   `]
 })

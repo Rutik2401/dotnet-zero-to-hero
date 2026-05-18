@@ -113,15 +113,17 @@ interface NoteCard {
       background: var(--warn);
       color: #fff;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+      line-height: 1.5;
     }
     .hv-file {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.78rem;
+      font-size: 0.8125rem;
       color: var(--text-soft);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      line-height: 1.5;
     }
     .hv-pages {
       margin-left: auto;
@@ -131,8 +133,9 @@ interface NoteCard {
       border: 1px solid rgba(180, 83, 9, 0.22);
       color: var(--warn);
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.10em;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
       white-space: nowrap;
+      line-height: 1.5;
     }
 
     .hv-body {
@@ -141,10 +144,11 @@ interface NoteCard {
     }
     .hv-doc-eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.66rem; letter-spacing: 0.18em;
+      font-size: 0.75rem; letter-spacing: 0.12em;
       color: var(--warn); text-transform: uppercase;
       font-weight: 700;
       margin: 0 0 0.85rem;
+      line-height: 1.5;
     }
     .hv-toc {
       list-style: none;
@@ -174,23 +178,26 @@ interface NoteCard {
       flex-shrink: 0;
       width: 22px;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; font-weight: 700;
+      font-size: 0.8125rem; font-weight: 700;
       color: var(--warn);
+      line-height: 1.5;
     }
     .hv-toc-text {
       flex: 1; min-width: 0;
-      font-size: 0.86rem;
+      font-size: 0.9375rem;
       font-weight: 500;
       color: var(--text);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      line-height: 1.5;
     }
     .hv-toc-page {
       flex-shrink: 0;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; font-weight: 700;
+      font-size: 0.8125rem; font-weight: 700;
       color: var(--text-muted);
+      line-height: 1.5;
     }
 
     .hv-badge {
@@ -206,9 +213,10 @@ interface NoteCard {
       border: 1px solid var(--border);
       border-radius: 999px;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
       color: var(--text);
       box-shadow: var(--shadow-md);
+      line-height: 1.5;
       opacity: 0;
       transform: translateY(8px);
       animation: hv-badge-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
@@ -253,26 +261,28 @@ interface NoteCard {
     }
     .eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.18em; color: var(--warn);
+      font-size: 0.8125rem; letter-spacing: 0.12em; color: var(--warn);
       text-transform: uppercase; margin: 0 0 1.25rem; font-weight: 700;
+      line-height: 1.5;
     }
     .title {
-      font-size: clamp(2.6rem, 8.5vw, 6rem);
-      font-weight: 800; letter-spacing: -0.04em; line-height: 0.98;
+      font-size: clamp(2.2rem, 5.5vw, 3.75rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
       margin: 0 0 1.6rem; max-width: 920px; text-wrap: balance;
       color: var(--text);
     }
     .accent { color: var(--warn); }
     .sub {
       color: var(--text-soft);
-      font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+      font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
       line-height: 1.65; max-width: 640px; margin: 0 0 1.75rem;
     }
     .stats {
       display: flex; flex-wrap: wrap; align-items: center;
       gap: 0.5rem 0.85rem;
       color: var(--text-soft);
-      font-size: 0.94rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
     }
     .stats strong { color: var(--text); font-weight: 700; }
     .stats .dot { color: var(--text-muted); }
@@ -291,8 +301,9 @@ interface NoteCard {
     .sec-label {
       display: inline-flex; align-items: center; gap: 0.85rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.74rem; letter-spacing: 0.14em; color: var(--warn);
+      font-size: 0.8125rem; letter-spacing: 0.10em; color: var(--warn);
       text-transform: uppercase; margin: 0; font-weight: 600;
+      line-height: 1.5;
     }
     .sec-label::before {
       content: ''; display: inline-block;
@@ -300,11 +311,12 @@ interface NoteCard {
     }
     .sec-meta {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.12em; color: var(--text-muted);
+      font-size: 0.75rem; letter-spacing: 0.10em; color: var(--text-muted);
+      line-height: 1.5;
     }
     .sec-title {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800; letter-spacing: -0.035em; line-height: 1;
+      font-size: clamp(1.85rem, 4vw, 2.6rem);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
       margin: 0 0 clamp(1.75rem, 3vw, 2.5rem);
       color: var(--text);
       padding: 0; border: 0;
@@ -342,8 +354,8 @@ interface NoteCard {
     }
     .cover-initials {
       position: relative; z-index: 1;
-      font-size: 4.25rem; font-weight: 900;
-      letter-spacing: -0.04em; line-height: 0.85;
+      font-size: 3.5rem; font-weight: 800;
+      letter-spacing: -0.03em; line-height: 0.95;
       color: rgba(255, 255, 255, 0.96);
       text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
       align-self: flex-start;
@@ -351,22 +363,24 @@ interface NoteCard {
     .cover-vol {
       position: relative; z-index: 1;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.75rem; letter-spacing: 0.10em; text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
       align-self: flex-end;
       padding: 0.3rem 0.65rem;
       background: rgba(0, 0, 0, 0.32);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 999px;
+      line-height: 1.5;
     }
 
     .body { padding: 1.4rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
     .meta {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem; letter-spacing: 0.12em;
+      font-size: 0.75rem; letter-spacing: 0.10em;
       color: var(--text-muted);
       text-transform: uppercase; margin: 0 0 0.75rem;
+      line-height: 1.5;
     }
     .meta .free { color: var(--accent); font-weight: 700; }
     .meta .meta-dot {
@@ -374,30 +388,32 @@ interface NoteCard {
       background: var(--text-muted); margin: 0 0.45rem; vertical-align: middle;
     }
     .name {
-      font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em;
+      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em;
       line-height: 1.25; margin: 0 0 0.55rem; color: var(--text);
     }
     .desc {
       color: var(--text-soft);
-      font-size: 0.94rem; line-height: 1.55;
+      font-size: 0.9375rem; line-height: 1.6;
       margin: 0 0 1rem;
     }
     .topics { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0 0 1.25rem; }
     .topic {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.66rem; letter-spacing: 0.06em;
+      font-size: 0.75rem; letter-spacing: 0.04em;
       padding: 0.22rem 0.55rem; border-radius: 999px;
       background: rgba(10, 10, 10, 0.05);
       color: var(--text-soft);
       border: 1px solid rgba(10, 10, 10, 0.08);
+      line-height: 1.5;
     }
     .hr { border: 0; border-top: 1px solid rgba(10, 10, 10, 0.06); margin: 0 0 1rem; }
     .stats-row {
       display: flex; gap: 1.25rem; margin: 0 0 1.25rem;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.78rem; color: var(--text-muted);
+      font-size: 0.8125rem; color: var(--text-muted);
+      line-height: 1.5;
     }
-    .stats-row strong { color: var(--text); display: block; font-weight: 700; font-size: 0.95rem; }
+    .stats-row strong { color: var(--text); display: block; font-weight: 700; font-size: 1rem; }
 
     .actions { margin-top: auto; display: flex; align-items: center; gap: 0.75rem; }
     .btn-download {
@@ -410,7 +426,8 @@ interface NoteCard {
       font-weight: 700;
       text-decoration: none;
       border-radius: 12px;
-      font-size: 0.92rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       box-shadow: 0 6px 16px rgba(10, 10, 10, 0.18);
     }
@@ -422,8 +439,9 @@ interface NoteCard {
     }
     .size {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem; color: var(--text-muted);
+      font-size: 0.8125rem; color: var(--text-muted);
       letter-spacing: 0.04em;
+      line-height: 1.5;
     }
   `]
 })

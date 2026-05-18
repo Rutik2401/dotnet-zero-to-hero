@@ -412,8 +412,17 @@ interface MethodStep   { step: string; title: string; desc: string; }
       .stuck-cta { width: 100%; }
       .stuck-cta .btn { flex: 1 1 auto; justify-content: center; min-width: 0; }
       .nl-form { flex-direction: column; padding: 0.5rem; border-radius: 18px; }
-      .nl-input { width: 100%; text-align: center; }
-      .nl-submit { width: 100%; justify-content: center; }
+      .nl-input {
+        flex: 0 0 auto;
+        width: 100%;
+        text-align: center;
+        padding: 0.85rem 1rem;
+      }
+      .nl-submit {
+        flex: 0 0 auto;
+        width: 100%;
+        justify-content: center;
+      }
     }
     @media (max-width: 520px) {
       .hero-cta { flex-direction: column; width: 100%; align-items: stretch; }

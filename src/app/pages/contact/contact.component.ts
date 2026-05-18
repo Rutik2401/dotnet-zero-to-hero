@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, inject, signal } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject, signal, DestroyRef, afterNextRender } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { LandingNavComponent } from '../../shared/landing-nav/landing-nav.component';
 import { LandingFooterComponent } from '../../shared/landing-footer/landing-footer.component';
@@ -17,6 +17,23 @@ interface DirectChannel {
   note: string;
   href: string;
 }
+
+interface ChatMessage {
+  dir: 'in' | 'out';
+  time: string;
+  text: string;
+  typingMs: number;
+}
+
+const CHAT_SCRIPT: ChatMessage[] = [
+  { dir: 'in',  time: '10:42', text: 'Hey — saw your .NET roadmap. Mind if I sponsor a phase on auth?', typingMs: 1100 },
+  { dir: 'out', time: '10:43', text: "Sure — happy to chat. Free Thursday at 4pm IST?",                 typingMs: 1300 },
+  { dir: 'in',  time: '10:44', text: "Perfect. Sending the brief tonight.",                             typingMs: 1100 },
+  { dir: 'out', time: '10:45', text: "Catch you then.",                                                 typingMs: 1100 },
+];
+
+const READ_PAUSE_MS = 1500;
+const LOOP_PAUSE_MS = 2200;
 
 @Component({
   selector: 'app-contact',
@@ -52,20 +69,24 @@ interface DirectChannel {
               <span class="hv-thread-tag">DM</span>
             </header>
 
-            <div class="hv-thread-body">
-              <div class="hv-msg hv-msg-in">
-                <span class="hv-msg-time">10:42</span>
-                <p>Hey — saw your .NET roadmap. Mind if I sponsor a phase on auth?</p>
-              </div>
-              <div class="hv-msg hv-msg-out">
-                <span class="hv-msg-time">10:43</span>
-                <p>Sure — happy to chat. Free Thursday at 4pm IST?</p>
-              </div>
-              <div class="hv-typing" aria-hidden="true">
-                <span class="hv-typing-dot"></span>
-                <span class="hv-typing-dot"></span>
-                <span class="hv-typing-dot"></span>
-              </div>
+            <div class="hv-thread-body" #threadBody>
+              @for (m of visibleMessages(); track $index) {
+                <div class="hv-msg"
+                     [class.hv-msg-in]="m.dir === 'in'"
+                     [class.hv-msg-out]="m.dir === 'out'">
+                  <span class="hv-msg-time">{{ m.time }}</span>
+                  <p>{{ m.text }}</p>
+                </div>
+              }
+              @if (typing(); as t) {
+                <div class="hv-typing"
+                     [class.hv-typing-out]="t === 'out'"
+                     aria-hidden="true">
+                  <span class="hv-typing-dot"></span>
+                  <span class="hv-typing-dot"></span>
+                  <span class="hv-typing-dot"></span>
+                </div>
+              }
             </div>
           </div>
 
@@ -345,7 +366,21 @@ interface DirectChannel {
       display: flex;
       flex-direction: column;
       gap: 0.55rem;
+      max-height: 260px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(10, 10, 10, 0.18) transparent;
+      mask-image: linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 4px), transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 4px), transparent 100%);
     }
+    .hv-thread-body::-webkit-scrollbar { width: 6px; }
+    .hv-thread-body::-webkit-scrollbar-track { background: transparent; }
+    .hv-thread-body::-webkit-scrollbar-thumb {
+      background: rgba(10, 10, 10, 0.14);
+      border-radius: 8px;
+    }
+    .hv-thread-body::-webkit-scrollbar-thumb:hover { background: rgba(10, 10, 10, 0.26); }
 
     .hv-msg {
       max-width: 82%;
@@ -356,7 +391,8 @@ interface DirectChannel {
       color: var(--text);
       opacity: 0;
       transform: translateY(6px);
-      animation: hv-type 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: hv-msg-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      flex-shrink: 0;
     }
     .hv-msg p { margin: 0; }
     .hv-msg-time {
@@ -372,13 +408,11 @@ interface DirectChannel {
       align-self: flex-start;
       background: #f5f1e8;
       border: 1px solid var(--border);
-      animation-delay: 0.55s;
     }
     .hv-msg-out {
       align-self: flex-end;
       background: linear-gradient(135deg, var(--primary), var(--accent-2));
       color: #f5f1e8;
-      animation-delay: 0.90s;
     }
     .hv-msg-out .hv-msg-time { color: rgba(245, 241, 232, 0.7); }
 
@@ -390,10 +424,17 @@ interface DirectChannel {
       background: #f5f1e8;
       border: 1px solid var(--border);
       border-radius: 14px;
+      flex-shrink: 0;
       opacity: 0;
       transform: translateY(6px);
-      animation: hv-type 0.5s cubic-bezier(0.22, 1, 0.36, 1) 1.3s forwards;
+      animation: hv-msg-enter 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
+    .hv-typing-out {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--primary), var(--accent-2));
+      border-color: transparent;
+    }
+    .hv-typing-out .hv-typing-dot { background: rgba(245, 241, 232, 0.75); }
     .hv-typing-dot {
       width: 6px; height: 6px;
       background: var(--text-muted);
@@ -402,6 +443,11 @@ interface DirectChannel {
     }
     .hv-typing-dot:nth-child(2) { animation-delay: 0.15s; }
     .hv-typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes hv-msg-enter {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
     .hv-badge {
       position: absolute;
@@ -794,10 +840,77 @@ interface DirectChannel {
 })
 export class ContactComponent {
   private readonly fb = inject(FormBuilder);
+  private readonly destroyRef = inject(DestroyRef);
 
   @ViewChild('formEl') formEl?: ElementRef<HTMLFormElement>;
+  @ViewChild('threadBody') threadBody?: ElementRef<HTMLElement>;
 
   readonly submitted = signal(false);
+
+  readonly visibleMessages = signal<ChatMessage[]>([]);
+  readonly typing = signal<'in' | 'out' | null>(null);
+  private chatTimers: number[] = [];
+
+  constructor() {
+    afterNextRender(() => this.startChatLoop());
+    this.destroyRef.onDestroy(() => this.stopChatLoop());
+  }
+
+  private startChatLoop(): void {
+    if (typeof window === 'undefined') return;
+    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      this.visibleMessages.set([...CHAT_SCRIPT]);
+      this.typing.set(null);
+      requestAnimationFrame(() => this.scrollToBottom());
+      return;
+    }
+    this.runCycle();
+  }
+
+  private runCycle(): void {
+    this.stopChatLoop();
+    this.visibleMessages.set([]);
+    this.typing.set(null);
+
+    let acc = 700;
+    for (const m of CHAT_SCRIPT) {
+      const showTypingAt = acc;
+      this.schedule(() => {
+        this.typing.set(m.dir);
+        this.scrollToBottom();
+      }, showTypingAt);
+      acc += m.typingMs;
+
+      const pushMessageAt = acc;
+      this.schedule(() => {
+        this.typing.set(null);
+        this.visibleMessages.update(arr => [...arr, m]);
+        this.scrollToBottom();
+      }, pushMessageAt);
+      acc += READ_PAUSE_MS;
+    }
+
+    this.schedule(() => this.runCycle(), acc + LOOP_PAUSE_MS);
+  }
+
+  private schedule(fn: () => void, delayMs: number): void {
+    const id = window.setTimeout(fn, delayMs);
+    this.chatTimers.push(id);
+  }
+
+  private stopChatLoop(): void {
+    this.chatTimers.forEach(id => clearTimeout(id));
+    this.chatTimers = [];
+  }
+
+  private scrollToBottom(): void {
+    const el = this.threadBody?.nativeElement;
+    if (!el) return;
+    requestAnimationFrame(() => {
+      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    });
+  }
 
   readonly form = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],

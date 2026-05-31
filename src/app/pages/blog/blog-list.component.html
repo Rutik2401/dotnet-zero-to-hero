@@ -1,0 +1,47 @@
+<div class="page-grid" aria-hidden="true"></div>
+
+<div class="page-wrap">
+  <app-landing-nav />
+
+  <header class="blog-hero">
+    <p class="page-eyebrow">The Blog</p>
+    <h1 class="blog-title">Short Notes,<br><span class="accent-mark">Deep Takes.</span></h1>
+    <p class="blog-sub">
+      Tutorials, post-mortems and field notes on .NET, Angular and what I'm
+      building, breaking and shipping.
+    </p>
+  </header>
+
+  <section class="blog-section">
+    @if (posts.length === 0) {
+      <p class="empty">No posts published yet — check back soon!</p>
+    } @else {
+      <ul class="card-grid">
+        @for (post of posts; track post.slug) {
+          <li class="card">
+            <a class="card-link" [routerLink]="['/blog', post.slug]">
+              <span class="card-cover" [class.has-img]="!!post.coverUrl">
+                @if (post.coverUrl) {
+                  <img [src]="post.coverUrl" [alt]="post.coverAlt" loading="lazy" />
+                } @else {
+                  <span class="card-cover-icon" aria-hidden="true">{{ post.category || '★' }}</span>
+                }
+                <span class="card-tag">{{ post.tag }}</span>
+              </span>
+              <span class="card-body">
+                @if (post.category) { <span class="card-cat">{{ post.category }}</span> }
+                <span class="card-title">{{ post.title }}</span>
+                <span class="card-excerpt">{{ post.excerpt }}</span>
+                <span class="card-meta">
+                  @if (post.publishedAt) { {{ post.publishedAt | date: 'MMM d, y' }} · }{{ post.readMins }} min read
+                </span>
+              </span>
+            </a>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+</div>
+
+<app-landing-footer />

@@ -1,6 +1,17 @@
 {
-  "buildCommand": "ng build",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist/learn-hub/browser",
+  "redirects": [
+    { "source": "/dotnet/phase-0", "destination": "/dotnet/programming-fundamentals", "permanent": true },
+    { "source": "/dotnet/phase-1", "destination": "/dotnet/csharp-deep-dive", "permanent": true },
+    { "source": "/dotnet/phase-2", "destination": "/dotnet/aspnet-core", "permanent": true },
+    { "source": "/dotnet/phase-3", "destination": "/dotnet/sql-entity-framework-core", "permanent": true },
+    { "source": "/dotnet/phase-4", "destination": "/dotnet/advanced-system-design", "permanent": true },
+    { "source": "/dotnet/phase-5", "destination": "/dotnet/modern-angular", "permanent": true },
+    { "source": "/dotnet/phase-6", "destination": "/dotnet/devops-deployment", "permanent": true },
+    { "source": "/dotnet/phase-7", "destination": "/dotnet/dotnet-projects", "permanent": true },
+    { "source": "/dotnet/phase-8", "destination": "/dotnet/dotnet-interview-questions", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]

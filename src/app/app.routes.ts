@@ -29,8 +29,7 @@ export const routes: Routes = [
   },
   {
     path: 'blog',
-    loadComponent: () => import('./pages/blog/blog.component').then(m => m.BlogComponent),
-    title: 'Blog — Learn Hub'
+    loadChildren: () => import('./pages/blog/blog.routes').then(m => m.BLOG_ROUTES)
   },
   {
     path: 'contact',

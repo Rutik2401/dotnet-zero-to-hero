@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dotnet-zero-to-heroo.vercel.app/sitemap.xml

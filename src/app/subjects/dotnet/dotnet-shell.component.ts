@@ -5,12 +5,14 @@ import { PhaseTocComponent } from './shared/phase-toc/phase-toc.component';
 import { PhaseTocService } from './shared/phase-toc/phase-toc.service';
 import { LandingNavComponent } from '../../shared/landing-nav/landing-nav.component';
 import { LandingFooterComponent } from '../../shared/landing-footer/landing-footer.component';
+import { TopicNavComponent } from './shared/topic-nav/topic-nav.component';
+import { TOPICS_IN_ORDER } from './dotnet-topics';
 
 const SIDEBAR_KEY = 'roadmap-sidebar-open';
 
 @Component({
   selector: 'app-dotnet-shell',
-  imports: [RouterOutlet, SidebarComponent, PhaseTocComponent, LandingNavComponent, LandingFooterComponent],
+  imports: [RouterOutlet, SidebarComponent, PhaseTocComponent, LandingNavComponent, LandingFooterComponent, TopicNavComponent],
   templateUrl: './dotnet-shell.component.html'
 })
 export class DotnetShellComponent {
@@ -20,17 +22,15 @@ export class DotnetShellComponent {
 
   hasToc = computed(() => this.toc.topics().length > 0);
 
+  /* Sidebar list — derived from the topic registry. New tutorials appear
+     automatically; labels use the readable topic name, never "Phase N". */
   phases: PhaseLink[] = [
-    { path: '/dotnet',         label: 'Home',                                ready: true, exact: true },
-    { path: '/dotnet/phase-0', label: 'Phase 0 — Programming + OOP',         ready: true  },
-    { path: '/dotnet/phase-1', label: 'Phase 1 — C# Deep Dive',              ready: true  },
-    { path: '/dotnet/phase-2', label: 'Phase 2 — ASP.NET Core',              ready: true  },
-    { path: '/dotnet/phase-3', label: 'Phase 3 — SQL + EF Core',             ready: true  },
-    { path: '/dotnet/phase-4', label: 'Phase 4 — Advanced + System Design',  ready: true  },
-    { path: '/dotnet/phase-5', label: 'Phase 5 — Modern Angular',            ready: true  },
-    { path: '/dotnet/phase-6', label: 'Phase 6 — DevOps + Deployment',       ready: true  },
-    { path: '/dotnet/phase-7', label: 'Phase 7 — Projects',                  ready: false },
-    { path: '/dotnet/phase-8', label: 'Phase 8 — Interview Preparation',     ready: false }
+    { path: '/dotnet', label: 'Home', ready: true, exact: true },
+    ...TOPICS_IN_ORDER.map(t => ({
+      path: `/dotnet/${t.slug}`,
+      label: t.navLabel,
+      ready: t.ready
+    }))
   ];
 
   toggleSidebar(): void {

@@ -52,6 +52,7 @@ export class Phase2Component implements AfterViewInit {
   }
 
   private async highlightCodeBlocks(): Promise<void> {
+    if (typeof document === 'undefined') return; // skip during server prerender
     const hljs = await loadCSharpHighlighter();
     const blocks: NodeListOf<HTMLElement> =
       this.host.nativeElement.querySelectorAll('.topic-card pre:not(.code-output) code');

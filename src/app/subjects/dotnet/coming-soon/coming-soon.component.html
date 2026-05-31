@@ -6,20 +6,22 @@
     <p class="lead">{{ info.scope }}</p>
 
     <div class="callout warn">
-      <strong>This phase is being authored.</strong>
-      Phase 0 is fully ready — start there if you haven't already.
-      Each phase will follow the same structure: real-life example → step-by-step → code with output → interview Q&A → pro tip.
+      <strong>This tutorial is being authored.</strong>
+      @if (firstReady) { The {{ firstReady.navLabel }} tutorial is fully ready — start there if you haven't already. }
+      Each tutorial follows the same structure: real-life example → step-by-step → code with output → interview Q&A → pro tip.
     </div>
 
     @if (info.topics.length > 0) {
-      <h2>What this phase will cover</h2>
+      <h2>What this tutorial will cover</h2>
       <ul>
         @for (t of info.topics; track t) { <li>{{ t }}</li> }
       </ul>
     }
 
     <div class="cta-row">
-      <a class="btn btn-primary" routerLink="/dotnet/phase-0">← Go to Phase 0 (ready)</a>
+      @if (firstReady) {
+        <a class="btn btn-primary" [routerLink]="['/dotnet', firstReady.slug]">← Start {{ firstReady.navLabel }} (ready)</a>
+      }
       <a class="btn btn-ghost" routerLink="/dotnet">Back to .NET home</a>
     </div>
   </section>

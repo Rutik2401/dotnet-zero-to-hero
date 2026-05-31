@@ -133,8 +133,10 @@
   <!-- ─── CTA BAND ─── -->
   <section class="cta-band">
     <h3>Ready when you are.</h3>
-    <p>Phase 0 covers Programming + OOP — the foundation every other phase quietly assumes.</p>
-    <a routerLink="phase-0">Start Phase 0 <span aria-hidden="true">→</span></a>
+    @if (firstTopic; as first) {
+      <p>{{ first.title }} covers {{ first.desc }}</p>
+      <a [routerLink]="first.link">Start with {{ first.title }} <span aria-hidden="true">→</span></a>
+    }
   </section>
 
 </div>

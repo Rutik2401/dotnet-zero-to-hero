@@ -50,6 +50,7 @@ export class Phase6Component implements AfterViewInit {
   }
 
   private async highlightCodeBlocks(): Promise<void> {
+    if (typeof document === 'undefined') return; // skip during server prerender
     const hljs = await loadMultiHighlighter();
     const blocks: NodeListOf<HTMLElement> =
       this.host.nativeElement.querySelectorAll('.topic-card pre:not(.code-output) code');

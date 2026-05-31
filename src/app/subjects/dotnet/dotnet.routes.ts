@@ -1,8 +1,33 @@
 import { Routes } from '@angular/router';
 import { DotnetShellComponent } from './dotnet-shell.component';
+import { DOTNET_TOPICS } from './dotnet-topics';
 
 const comingSoon = () =>
   import('./coming-soon/coming-soon.component').then(m => m.ComingSoonComponent);
+
+/* Topic pages — generated from the registry so adding a tutorial needs no
+   route wiring. Each carries its title + SEO data for the SeoService. */
+const topicRoutes: Routes = DOTNET_TOPICS.map(t => ({
+  path: t.slug,
+  loadComponent: t.loadComponent ?? comingSoon,
+  title: t.title,
+  data: {
+    seo: {
+      description: t.metaDescription,
+      keywords: t.keywords,
+      type: 'article' as const
+    }
+  }
+}));
+
+/* Backwards-compatible client-side redirects from the old phase URLs.
+   The authoritative HTTP 301s are emitted by Vercel (see vercel.json) — these
+   only catch in-app navigations after the SPA has booted. */
+const legacyRedirects: Routes = DOTNET_TOPICS.map(t => ({
+  path: t.legacyPath,
+  redirectTo: t.slug,
+  pathMatch: 'full' as const
+}));
 
 export const DOTNET_ROUTES: Routes = [
   /* Full-width SaaS landing — no sidebar / app-shell. */
@@ -10,51 +35,21 @@ export const DOTNET_ROUTES: Routes = [
     path: '',
     pathMatch: 'full',
     loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
-    title: '.NET Roadmap — Learn .NET, the practical way'
+    title: '.NET Roadmap — Learn .NET, the practical way',
+    data: {
+      seo: {
+        description:
+          'A practical, interview-focused .NET roadmap: C#, ASP.NET Core, EF Core, system design, Angular and DevOps — with runnable code and expected output.',
+        keywords: '.NET roadmap, learn .NET, C# tutorial, ASP.NET Core, EF Core, .NET interview',
+        type: 'website' as const
+      }
+    }
   },
 
-  /* All phase pages share the dotnet-shell (sidebar + header + TOC). */
+  /* All topic pages share the dotnet-shell (sidebar + header + TOC). */
   {
     path: '',
     component: DotnetShellComponent,
-    children: [
-      {
-        path: 'phase-0',
-        loadComponent: () => import('./phase-0/phase-0.component').then(m => m.Phase0Component),
-        title: 'Phase 0 — Programming + OOP'
-      },
-      {
-        path: 'phase-1',
-        loadComponent: () => import('./phase-1/phase-1.component').then(m => m.Phase1Component),
-        title: 'Phase 1 — C# Deep Dive'
-      },
-      {
-        path: 'phase-2',
-        loadComponent: () => import('./phase-2/phase-2.component').then(m => m.Phase2Component),
-        title: 'Phase 2 — ASP.NET Core'
-      },
-      {
-        path: 'phase-3',
-        loadComponent: () => import('./phase-3/phase-3.component').then(m => m.Phase3Component),
-        title: 'Phase 3 — SQL + EF Core'
-      },
-      {
-        path: 'phase-4',
-        loadComponent: () => import('./phase-4/phase-4.component').then(m => m.Phase4Component),
-        title: 'Phase 4 — Advanced + System Design'
-      },
-      {
-        path: 'phase-5',
-        loadComponent: () => import('./phase-5/phase-5.component').then(m => m.Phase5Component),
-        title: 'Phase 5 — Modern Angular'
-      },
-      {
-        path: 'phase-6',
-        loadComponent: () => import('./phase-6/phase-6.component').then(m => m.Phase6Component),
-        title: 'Phase 6 — DevOps + Deployment'
-      },
-      { path: 'phase-7', loadComponent: comingSoon, title: 'Phase 7 — Projects' },
-      { path: 'phase-8', loadComponent: comingSoon, title: 'Phase 8 — Interview Preparation' }
-    ]
+    children: [...topicRoutes, ...legacyRedirects]
   }
 ];

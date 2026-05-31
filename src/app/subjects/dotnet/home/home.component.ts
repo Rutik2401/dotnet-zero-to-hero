@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LandingNavComponent } from '../../../shared/landing-nav/landing-nav.component';
+import { TOPICS_IN_ORDER } from '../dotnet-topics';
 
 interface PhaseCard {
   vol: string;
@@ -9,7 +10,7 @@ interface PhaseCard {
   desc: string;
   topics: number;
   hours: string;
-  level: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED' | 'ALL LEVELS';
+  level: string;
   link: string;
   ready: boolean;
   coverIcon: string;
@@ -319,93 +320,28 @@ interface PhaseCard {
   `]
 })
 export class HomeComponent {
-  readonly readyCount = 7;
-  readonly totalPhases = 9;
+  /* Cards are generated from the topic registry — one source of truth shared
+     with the routes, sidebar, search and sitemap. */
+  phases: PhaseCard[] = TOPICS_IN_ORDER.map(t => ({
+    vol: t.vol,
+    tag: t.tag,
+    title: t.cardTitle,
+    desc: t.cardDesc,
+    topics: t.topics,
+    hours: t.hours,
+    level: t.level,
+    link: t.slug,
+    ready: t.ready,
+    coverIcon: t.coverIcon,
+    coverGradient: t.coverGradient
+  }));
 
-  phases: PhaseCard[] = [
-    {
-      vol: '00', tag: 'PROGRAMMING + OOP',
-      title: 'Programming + OOP',
-      desc: 'Variables, loops, OOP fundamentals and SOLID. The foundation interviewers test before going deep.',
-      topics: 8, hours: '12', level: 'BEGINNER',
-      link: 'phase-0', ready: true,
-      coverIcon: '0',
-      coverGradient: 'linear-gradient(135deg, #1e293b 0%, #312e81 70%, #4338ca 100%)'
-    },
-    {
-      vol: '01', tag: 'C# DEEP DIVE',
-      title: 'C# Deep Dive',
-      desc: 'CLR internals, value vs reference, LINQ, async/await, collections. The depth interviewers actually probe.',
-      topics: 12, hours: '20', level: 'BEGINNER',
-      link: 'phase-1', ready: true,
-      coverIcon: 'C#',
-      coverGradient: 'linear-gradient(135deg, #1e1b4b 0%, #4f46e5 70%, #8b5cf6 100%)'
-    },
-    {
-      vol: '02', tag: 'ASP.NET CORE',
-      title: 'ASP.NET Core',
-      desc: 'Web API, middleware, DI, JWT auth, filters, model binding. Building real backends, not toy demos.',
-      topics: 14, hours: '28', level: 'INTERMEDIATE',
-      link: 'phase-2', ready: true,
-      coverIcon: '.NET',
-      coverGradient: 'linear-gradient(135deg, #312e81 0%, #6d28d9 60%, #a21caf 100%)'
-    },
-    {
-      vol: '03', tag: 'SQL + EF CORE',
-      title: 'SQL + EF Core',
-      desc: 'Joins, indexes, normalization, EF Core, migrations, N+1, tracking vs no-tracking, real query optimisation.',
-      topics: 12, hours: '22', level: 'INTERMEDIATE',
-      link: 'phase-3', ready: true,
-      coverIcon: 'SQL',
-      coverGradient: 'linear-gradient(135deg, #0c4a6e 0%, #0891b2 70%, #06b6d4 100%)'
-    },
-    {
-      vol: '04', tag: 'ADVANCED + DESIGN',
-      title: 'Advanced + System Design',
-      desc: 'Caching, Redis, design patterns, CQRS, microservices basics, API gateway, load balancing.',
-      topics: 12, hours: '24', level: 'ADVANCED',
-      link: 'phase-4', ready: true,
-      coverIcon: '◆',
-      coverGradient: 'linear-gradient(135deg, #4c1d95 0%, #7c3aed 60%, #c026d3 100%)'
-    },
-    {
-      vol: '05', tag: 'MODERN ANGULAR',
-      title: 'Modern Angular',
-      desc: 'Standalone, signals, control flow, RxJS, OnPush, SSR. Angular as senior engineers actually write it.',
-      topics: 10, hours: '14', level: 'INTERMEDIATE',
-      link: 'phase-5', ready: true,
-      coverIcon: 'NG',
-      coverGradient: 'linear-gradient(135deg, #7f1d1d 0%, #dd0031 70%, #ef4444 100%)'
-    },
-    {
-      vol: '06', tag: 'DEVOPS + DEPLOY',
-      title: 'DevOps + Deployment',
-      desc: 'Git, CI/CD, GitHub Actions, Docker, IIS hosting, Azure App Service. End-to-end shipping.',
-      topics: 9, hours: '15', level: 'INTERMEDIATE',
-      link: 'phase-6', ready: true,
-      coverIcon: '⚙',
-      coverGradient: 'linear-gradient(135deg, #134e4a 0%, #0d9488 70%, #14b8a6 100%)'
-    },
-    {
-      vol: '07', tag: 'PROJECTS',
-      title: 'Portfolio Projects',
-      desc: 'Three real projects — E-commerce API, Employee Management, Microservice — each with auth, logging, caching.',
-      topics: 3, hours: '40', level: 'ALL LEVELS',
-      link: 'phase-7', ready: false,
-      coverIcon: '◑',
-      coverGradient: 'linear-gradient(135deg, #1f2937 0%, #374151 70%, #4b5563 100%)'
-    },
-    {
-      vol: '08', tag: 'INTERVIEW PREP',
-      title: 'Interview Preparation',
-      desc: 'DSA daily, .NET Q&A drilling, project explanation drills, whiteboard coding, mock interviews.',
-      topics: 50, hours: '20', level: 'ALL LEVELS',
-      link: 'phase-8', ready: false,
-      coverIcon: '★',
-      coverGradient: 'linear-gradient(135deg, #1f2937 0%, #374151 70%, #4b5563 100%)'
-    }
-  ];
+  readonly totalPhases = this.phases.length;
+  readonly readyCount = this.phases.filter(p => p.ready).length;
 
   get activePhases(): PhaseCard[]   { return this.phases.filter(p => p.ready); }
   get upcomingPhases(): PhaseCard[] { return this.phases.filter(p => !p.ready); }
+
+  /** First ready topic — drives the hero CTA so it never points at a stale slug. */
+  get firstTopic(): PhaseCard | undefined { return this.activePhases[0]; }
 }

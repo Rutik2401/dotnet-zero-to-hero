@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { TOPICS_IN_ORDER } from '../../subjects/dotnet/dotnet-topics';
 
 export interface SearchEntry {
   title: string;
@@ -7,6 +8,15 @@ export interface SearchEntry {
   kind: 'page' | 'phase' | 'note' | 'phase-deep';
   badge?: string;
 }
+
+/** .NET topic entries, generated from the registry so search stays in sync. */
+const DOTNET_TOPIC_ENTRIES: SearchEntry[] = TOPICS_IN_ORDER.map(t => ({
+  title: t.navLabel,
+  subtitle: t.searchSubtitle,
+  path: `/dotnet/${t.slug}`,
+  kind: 'phase' as const,
+  ...(t.ready ? {} : { badge: 'SOON' })
+}));
 
 /**
  * Lightweight search index over the public pages, the .NET phases and the
@@ -26,15 +36,7 @@ export class SearchService {
     { title: 'React Roadmap',    subtitle: 'Hooks · Next.js · Server Components (coming soon)', path: '/react',     kind: 'page',  badge: 'SOON'  },
     { title: 'Blog',             subtitle: 'Writing · field notes · teardowns',                 path: '/blog',      kind: 'page',  badge: 'PAGE'  },
 
-    { title: 'Phase 0 — Programming + OOP',         subtitle: 'Variables · loops · OOP · SOLID',           path: '/dotnet/phase-0', kind: 'phase' },
-    { title: 'Phase 1 — C# Deep Dive',              subtitle: 'CLR · LINQ · async/await · collections',    path: '/dotnet/phase-1', kind: 'phase' },
-    { title: 'Phase 2 — ASP.NET Core',              subtitle: 'Web API · middleware · DI · JWT',           path: '/dotnet/phase-2', kind: 'phase' },
-    { title: 'Phase 3 — SQL + EF Core',             subtitle: 'Joins · indexes · migrations · N+1',        path: '/dotnet/phase-3', kind: 'phase' },
-    { title: 'Phase 4 — Advanced + System Design',  subtitle: 'Caching · CQRS · microservices · gateway',  path: '/dotnet/phase-4', kind: 'phase' },
-    { title: 'Phase 5 — Modern Angular',            subtitle: 'Standalone · signals · OnPush · SSR',       path: '/dotnet/phase-5', kind: 'phase' },
-    { title: 'Phase 6 — DevOps + Deployment',       subtitle: 'Git · CI/CD · Docker · Azure App Service',  path: '/dotnet/phase-6', kind: 'phase' },
-    { title: 'Phase 7 — Projects',                  subtitle: 'E-commerce · Employee Mgmt · Microservice', path: '/dotnet/phase-7', kind: 'phase', badge: 'SOON' },
-    { title: 'Phase 8 — Interview Preparation',     subtitle: 'DSA · Q&A drilling · mock interviews',      path: '/dotnet/phase-8', kind: 'phase', badge: 'SOON' },
+    ...DOTNET_TOPIC_ENTRIES,
 
     { title: 'Angular Notes PDF',     subtitle: 'Angular interview prep',     path: '/notes#angular',     kind: 'note', badge: 'PDF' },
     { title: '.NET Senior Notes PDF', subtitle: '.NET senior interview prep', path: '/notes#dotnet-sr',   kind: 'note', badge: 'PDF' },

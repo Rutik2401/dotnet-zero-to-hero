@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SearchModalComponent } from './shared/landing-nav/search-modal.component';
+import { SeoService } from './shared/seo/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,9 @@ import { SearchModalComponent } from './shared/landing-nav/search-modal.componen
 })
 export class AppComponent {
   title = 'Learn Hub';
+
+  constructor() {
+    // Start managing canonical + Open Graph/Twitter tags on every navigation.
+    inject(SeoService).init();
+  }
 }

@@ -41,3 +41,15 @@ testem.log
 .DS_Store
 Thumbs.db
 .vercel
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Deploy logs / scratch output
+deploy*.log
+deploy_result.txt
+
+# Sanity Studio build artifacts / cache
+studio/.sanity/
+studio/dist/
+studio/*.log

@@ -141,13 +141,41 @@ interface ResourceItem {
     </nav>
   `,
   styles: [`
-    :host { display: block; position: relative; z-index: 30; }
+    :host {
+      display: block;
+      position: relative;
+      z-index: 30;
+      /* Break out of whatever page wrapper we're dropped into (home 1180px,
+         blog-list 1100px, blog-post 780px…) so the header renders at one
+         identical width on every page. body has overflow-x:hidden, so the
+         100vw band never adds a horizontal scrollbar. */
+      width: 100vw;
+      left: 50%;
+      margin-left: -50vw;
+    }
+
+    /* Inside the .NET roadmap shell the nav sits in its own flex header bar
+       next to the burger button — keep it in normal flow there. */
+    :host(.app-header-nav) {
+      width: auto;
+      left: auto;
+      margin-left: 0;
+    }
 
     .lnav {
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 0.85rem 0;
+      /* One canonical width + side padding, centered, on every page. */
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0.85rem clamp(1rem, 4vw, 2rem);
+    }
+
+    :host(.app-header-nav) .lnav {
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     /* ─── Brand ─── */

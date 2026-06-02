@@ -48,8 +48,3 @@ Thumbs.db
 # Deploy logs / scratch output
 deploy*.log
 deploy_result.txt
-
-# Sanity Studio build artifacts / cache
-studio/.sanity/
-studio/dist/
-studio/*.log

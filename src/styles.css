@@ -1612,35 +1612,3 @@ pre.code-output code {
     margin-bottom: var(--space-1);
   }
 }
-
-
-/* =================================================================
-   16. Blog post body (Sanity-rendered HTML)
-   -----------------------------------------------------------------
-   The blog post body is injected via [innerHTML], so it can't use a
-   component's scoped styles — these GLOBAL rules style the figures and
-   images that the CMS renderer emits. Headings, paragraphs, code blocks
-   and callouts already inherit the global typography above.
-   ================================================================= */
-.post-body > :first-child {
-  margin-top: 0;
-}
-
-.post-figure {
-  margin: var(--space-6) 0;
-}
-
-.post-figure img {
-  width: 100%;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--bg-card);
-  box-shadow: var(--shadow-sm);
-}
-
-.post-figure figcaption {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: var(--fs-sm);
-  margin-top: var(--space-2);
-}

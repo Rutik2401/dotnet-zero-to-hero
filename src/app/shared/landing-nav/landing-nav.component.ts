@@ -145,10 +145,10 @@ interface ResourceItem {
       display: block;
       position: relative;
       z-index: 30;
-      /* Break out of whatever page wrapper we're dropped into (home 1180px,
-         blog-list 1100px, blog-post 780px…) so the header renders at one
-         identical width on every page. body has overflow-x:hidden, so the
-         100vw band never adds a horizontal scrollbar. */
+      /* Break out of whatever page wrapper we're dropped into (e.g. home
+         1180px…) so the header renders at one identical width on every page.
+         body has overflow-x:hidden, so the 100vw band never adds a horizontal
+         scrollbar. */
       width: 100vw;
       left: 50%;
       margin-left: -50vw;
@@ -524,7 +524,6 @@ export class LandingNavComponent {
     { label: 'Home',    path: '/',        exact: true },
     { label: 'Courses', path: '/courses' },
     { label: 'Notes',   path: '/notes' },
-    { label: 'Blog',    path: '/blog' },
     { label: 'Contact', path: '/contact' }
   ];
 
@@ -542,12 +541,6 @@ export class LandingNavComponent {
       path:  '/notes',
       icon:  'pdf',
       tag:   'free'
-    },
-    {
-      title: 'Blog & Field Notes',
-      desc:  'Post-Mortems, Write-Ups, Ship Logs',
-      path:  '/blog',
-      icon:  'box'
     },
     {
       title: 'Newsletter',

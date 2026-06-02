@@ -4,8 +4,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "blog:fetch": "node scripts/fetch-blog.mjs",
-    "prebuild": "node scripts/fetch-blog.mjs",
     "build": "ng build",
     "postbuild": "node scripts/generate-sitemap.mjs",
     "watch": "ng build --watch --configuration development",
@@ -32,9 +30,6 @@
     "@angular/compiler-cli": "^19.2.0",
     "@angular/platform-server": "19.2.21",
     "@angular/ssr": "19.2.21",
-    "@portabletext/to-html": "^5.0.2",
-    "@sanity/client": "^7.22.1",
-    "@sanity/image-url": "^2.1.1",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",

@@ -9,7 +9,7 @@ interface FooterCol  { title: string; links: FooterLink[]; }
 
 interface Social { label: string; href: string; icon: IconName; }
 
-type PageContext = 'home' | 'dotnet' | 'phase' | 'notes' | 'blog' | 'angular' | 'react' | 'default';
+type PageContext = 'home' | 'dotnet' | 'phase' | 'notes' | 'angular' | 'react' | 'default';
 
 interface ContextStrip {
   eyebrow: string;
@@ -474,7 +474,6 @@ export class LandingFooterComponent {
     if (u.startsWith('/dotnet/phase')) return 'phase';
     if (u.startsWith('/dotnet')) return 'dotnet';
     if (u.startsWith('/notes')) return 'notes';
-    if (u.startsWith('/blog')) return 'blog';
     if (u.startsWith('/angular')) return 'angular';
     if (u.startsWith('/react')) return 'react';
     return 'default';
@@ -507,14 +506,6 @@ export class LandingFooterComponent {
           ctaLabel: 'Browse Roadmaps',
           ctaPath: '/'
         };
-      case 'blog':
-        return {
-          eyebrow: 'Field Notes',
-          title:  'Every Post Starts as a Draft in the Newsletter. Want the Early Version? Subscribe.',
-          ctaLabel: 'Subscribe',
-          ctaPath: '/',
-          ctaFragment: 'newsletter'
-        };
       case 'home':
       default:
         return {
@@ -532,8 +523,7 @@ export class LandingFooterComponent {
     {
       title: 'Product',
       links: [
-        { label: 'Courses', path: '/courses', live: true },
-        { label: 'Blog',    path: '/blog' }
+        { label: 'Courses', path: '/courses', live: true }
       ]
     },
     {

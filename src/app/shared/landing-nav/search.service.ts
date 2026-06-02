@@ -34,7 +34,6 @@ export class SearchService {
     { title: 'Notes & PDFs',     subtitle: '4 interview-ready PDFs · 475+ pages',               path: '/notes',     kind: 'page',  badge: 'PAGE'  },
     { title: 'Angular Roadmap',  subtitle: 'Standalone · signals · RxJS · SSR (coming soon)',   path: '/angular',   kind: 'page',  badge: 'SOON'  },
     { title: 'React Roadmap',    subtitle: 'Hooks · Next.js · Server Components (coming soon)', path: '/react',     kind: 'page',  badge: 'SOON'  },
-    { title: 'Blog',             subtitle: 'Writing · field notes · teardowns',                 path: '/blog',      kind: 'page',  badge: 'PAGE'  },
 
     ...DOTNET_TOPIC_ENTRIES,
 

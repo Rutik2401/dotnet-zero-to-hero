@@ -1,7 +1,13 @@
 # Git & GitHub — New Course Plan (Basic → Advanced)
 
-> **Status:** PROPOSAL / DOC ONLY. No code written yet. Awaiting your "yes" + CSS decision.
+> **Status:** ✅ COMPLETE — all 9 lessons live at `/git`. CSS = global, no Tailwind.
 > **Author:** Claude • **Date:** 2026-06-02
+>
+> **Shipped (9/9):** Fundamentals · Repo→Push · Branching & Merging · Merge vs Rebase ·
+> Undoing/reflog · Remotes & GitHub Flow · PRs & Code Review · Advanced Git (incl. leaked-secret
+> scrub) · Interview Q&A + Scenarios. All routes prerendered (SSG), content + JSON-LD + the
+> right-side "On this page" TOC baked into static HTML, sitemap updated, linked from `/courses`.
+> Build passes (35 routes prerendered).
 
 ---
 
@@ -59,6 +65,7 @@ Single registry file `git-topics.ts` → `GIT_TOPICS[]`. Proposed 8 topics:
 | 5 | `undoing-things` | Undo: reset, revert, restore, reflog | Intermediate | `reset --hard` losing work; revert vs reset mixup |
 | 6 | `pull-requests-review` | PRs, Code Review & Protected Branches | Advanced | giant PRs; no branch protection; squash misuse |
 | 7 | `advanced-git` | Stash, Cherry-pick, Bisect, Hooks, Submodules | Advanced | leaked secrets in history; broken `.gitignore` timing |
+| 8 | `interview-questions` | Interview Q&A + Real-World Scenarios | All levels | the questions everyone gets wrong (see §8) |
 
 > Topic list is a starting point — easy to add/reorder later (just edit the array).
 > We can ship topics 0–2 "ready" first and mark the rest `ready: false`
@@ -117,36 +124,64 @@ Reuses your existing [SeoService](src/app/shared/seo/seo.service.ts) +
 
 ---
 
-## 6. ⚠️ CSS DECISION — needs your call
+## 6. ✅ CSS DECISION — LOCKED
 
-Your site today = **one global `src/styles.css`** (custom utilities + semantic
-classes), components set to `style: "none"`. **Tailwind is not installed.**
+**Decision (2026-06-02): Keep external/global CSS only. NO Tailwind.**
 
-Three options:
+The Git course will use the existing global `src/styles.css` with the same
+naming convention as the `/dotnet` course (custom utilities + semantic classes,
+components stay `style: "none"`). Zero new dependencies, fully consistent with
+the rest of the site, smallest possible diff, and "small scalable CSS" as asked.
 
-**A. Match the existing convention (no new dep).**
-Add Git-course classes to the existing global CSS using the same naming style as
-the `/dotnet` course. → Zero new tooling, perfectly consistent with the rest of
-the site, smallest diff. *Recommended for consistency.*
-
-**B. Add Tailwind (what you said you want).**
-Install `tailwindcss` + PostCSS, add `tailwind.config.js`, enable it in the
-build, then write the Git course with utility classes. → You get Tailwind, but it
-**only** styles the new course while the rest of the site stays on global CSS
-(two systems coexisting), bigger setup, slightly larger first diff.
-
-**C. Add Tailwind AND keep it scoped cleanly.**
-Same as B but we prefix/scope so it never fights the existing CSS, and we treat
-it as the go-forward standard for future courses too.
-
-> I'll implement whichever you pick. Tell me A, B, or C (and your final
-> topic list tweaks), then I'll build it.
+*(Tailwind was considered and declined — it is not installed and the rest of the
+site does not use it.)*
 
 ---
 
 ## 7. Out of scope (confirming your "without BE")
 - No server/API, no database, no auth, no comments, no search backend.
 - Everything is static + build-time. Hosting stays on Vercel static output.
+
+---
+
+## 8. Interview & Scenario topic (the finale — "no one teaches it like this")
+
+A dedicated last topic `/git/interview-questions`, grounded in official docs
+([git-scm.com](https://git-scm.com/doc), [GitHub Docs](https://docs.github.com))
+and common interview sources. It answers the questions juniors actually get
+asked + the real situations they panic in:
+
+**Core Q&A**
+- **Git vs GitHub** — Git = distributed VCS, runs locally / any server, no
+  internet needed. GitHub = a web host for Git repos + collaboration (PRs,
+  issues, Actions). One is the tool, the other is a place to keep & share repos.
+- **Repo creation → first push, step by step** (the full happy path):
+  `git init` → `git add .` → `git commit -m` → create empty repo on GitHub →
+  `git remote add origin <url>` → `git branch -M main` → `git push -u origin main`.
+- **How do I delete the last commit?** — the answer interviewers want is
+  "it depends if it's pushed":
+  - not pushed, keep changes: `git reset --soft HEAD~1`
+  - not pushed, discard changes: `git reset --hard HEAD~1`
+  - already pushed/shared: `git revert HEAD` (new commit, safe, no history rewrite)
+
+**Scenario / "what do you do when…" cards** (junior dev panics, solved):
+- I committed to `main` but it should've been a feature branch
+- I `reset --hard` and lost work → `git reflog` recovery
+- I committed a password / `.env` → remove from history + rotate the secret
+- Merge conflict mid-pull — how to read it and finish (or `--abort`)
+- I committed `node_modules` — fix `.gitignore` + `git rm -r --cached`
+- "Pull is rejected (non-fast-forward)" — fetch, rebase/merge, then push
+- Detached HEAD — what it means and how to get back safely
+
+Each renders as the same **❌ Mistake / ✅ Fix / 💡 Why** card, so it reads like
+a rescue manual, not a command dictionary.
+
+---
+
+## 9. Sources (for content accuracy)
+- Official Git docs — https://git-scm.com/doc
+- Official GitHub docs — https://docs.github.com
+- Cross-checked against common interview compilations (reset vs revert, GitHub flow).
 ```
 ```
 ```

@@ -33,12 +33,23 @@ export type IconName =
     @switch (name()) {
       @case ('brand') {
         <svg [attr.viewBox]="'0 0 32 32'" [attr.width]="size()" [attr.height]="size()" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <!-- The site's brand gradient (135°, #6d28d9 → #8b5cf6); the dark-bg
+                 "bright" variant shifts one step lighter so it reads on plum. -->
+            <linearGradient [attr.id]="'lhmark-' + tone()" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+              <stop offset="0" [attr.stop-color]="tone() === 'bright' ? '#8b5cf6' : '#6d28d9'"/>
+              <stop offset="1" [attr.stop-color]="tone() === 'bright' ? '#a78bfa' : '#8b5cf6'"/>
+            </linearGradient>
+          </defs>
           <path d="M16 2.5 L28.5 9.75 V22.25 L16 29.5 L3.5 22.25 V9.75 Z"
-                [attr.fill]="tone() === 'bright' ? '#8b5cf6' : '#6d28d9'"
+                [attr.fill]="'url(#lhmark-' + tone() + ')'"
                 [attr.stroke]="tone() === 'bright' ? '#a78bfa' : '#5b21b6'"
-                stroke-width="1" stroke-linejoin="round"/>
-          <path d="M11 11 V21 M11 16 H17 M17 11 V21"
-                stroke="#f5f1e8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- Soft top sheen for a modern, glassy mark. -->
+          <path d="M16 2.5 L28.5 9.75 L16 16 L3.5 9.75 Z" fill="#ffffff" opacity="0.14"/>
+          <!-- Centered "H" monogram. -->
+          <path d="M11.5 10.5 V21.5 M11.5 16 H20.5 M20.5 10.5 V21.5"
+                stroke="#f5f1e8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       }
       @case ('search') {

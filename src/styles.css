@@ -1008,6 +1008,14 @@ pre code {
   text-decoration: none;
 }
 
+/* Scroll-spy: the section currently in view stays highlighted. */
+.toc-list a.active {
+  background: var(--bg-hover);
+  color: var(--primary);
+  border-left-color: var(--primary);
+  font-weight: 650;
+}
+
 .topic-index {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -1356,7 +1364,7 @@ pre.code-output code {
     grid-template-columns: 0 1fr;
   }
 
-  app-phase-toc,
+  app-page-toc,
   .app-toc {
     display: none;
   }

@@ -24,6 +24,10 @@ export const routes: Routes = [
     loadChildren: () => import('./subjects/react/react.routes').then(m => m.REACT_ROUTES)
   },
   {
+    path: 'git',
+    loadChildren: () => import('./subjects/git/git.routes').then(m => m.GIT_ROUTES)
+  },
+  {
     path: 'notes',
     loadChildren: () => import('./subjects/notes/notes.routes').then(m => m.NOTES_ROUTES)
   },

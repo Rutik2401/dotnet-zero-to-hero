@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
-import { PhaseTocService } from '../shared/phase-toc/phase-toc.service';
+import { PageTocService } from '../../../shared/page-toc/page-toc.service';
 import { loadCSharpHighlighter } from '../../../shared/highlight/code-highlighter';
 import { phase2Topics } from './phase-2.data';
 
@@ -25,7 +25,7 @@ export class Phase2Component implements AfterViewInit {
       queueMicrotask(() => this.highlightCodeBlocks());
     });
 
-    const toc = inject(PhaseTocService);
+    const toc = inject(PageTocService);
     toc.setTopics(this.topics.map(t => ({ id: t.id, title: t.title })));
     inject(DestroyRef).onDestroy(() => toc.clear());
   }

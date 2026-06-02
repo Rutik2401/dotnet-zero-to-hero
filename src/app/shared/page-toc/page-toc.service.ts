@@ -6,14 +6,14 @@ export interface TocItem {
 }
 
 /**
- * Tiny shared store for the right-side phase TOC.
+ * Shared store for the right-side "On this page" TOC, used by every course shell.
  *
- * Each phase component sets its topics on init and clears them on destroy.
- * The shell-level <app-phase-toc> reads the signal and renders the list.
- * When topics() is empty, the TOC column collapses (e.g. on home / coming-soon).
+ * A page component sets its sections on init and clears them on destroy. The
+ * shell-level <app-page-toc> reads the signal, renders the list, and runs the
+ * scroll-spy. When topics() is empty the TOC column collapses (home / coming-soon).
  */
 @Injectable({ providedIn: 'root' })
-export class PhaseTocService {
+export class PageTocService {
   private readonly _topics = signal<TocItem[]>([]);
   readonly topics = this._topics.asReadonly();
 

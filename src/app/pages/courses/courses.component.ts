@@ -42,7 +42,7 @@ interface ComingTopic {
             example from a real GitHub repo, built around production patterns I ship.
           </p>
           <div class="hero-stats">
-            <span class="stat">2 courses</span>
+            <span class="stat">3 courses</span>
             <span class="stat-dot" aria-hidden="true">·</span>
             <span class="stat">100+ lessons</span>
             <span class="stat-dot" aria-hidden="true">·</span>
@@ -657,6 +657,16 @@ export class CoursesComponent {
     },
     {
       vol: '02',
+      title: 'Git & GitHub — Basic to Advanced',
+      link: '/git',
+      lessons: '9 lessons',
+      hours: 'mistake-driven',
+      coverInitials: 'git',
+      coverTag: 'GIT · ZERO TO HERO',
+      coverGradient: 'linear-gradient(135deg, #7f1d1d 0%, #b91c1c 65%, #f97316 100%)'
+    },
+    {
+      vol: '03',
       title: 'Interview Notes & PDFs',
       link: '/notes',
       lessons: '4 PDFs',

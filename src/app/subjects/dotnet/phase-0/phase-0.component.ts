@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
-import { PhaseTocService } from '../shared/phase-toc/phase-toc.service';
+import { PageTocService } from '../../../shared/page-toc/page-toc.service';
 import { loadCSharpHighlighter } from '../../../shared/highlight/code-highlighter';
 import { phase0Topics } from './phase-0.data';
 
@@ -26,7 +26,7 @@ export class Phase0Component implements AfterViewInit {
     });
 
     // Publish topics to the shell-level right TOC; clear when the route is destroyed.
-    const toc = inject(PhaseTocService);
+    const toc = inject(PageTocService);
     toc.setTopics(this.topics.map(t => ({ id: t.id, title: t.title })));
     inject(DestroyRef).onDestroy(() => toc.clear());
   }

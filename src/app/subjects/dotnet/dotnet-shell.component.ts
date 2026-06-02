@@ -1,10 +1,9 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent, PhaseLink } from './shared/sidebar/sidebar.component';
-import { PhaseTocComponent } from './shared/phase-toc/phase-toc.component';
-import { PhaseTocService } from './shared/phase-toc/phase-toc.service';
+import { PageTocComponent } from '../../shared/page-toc/page-toc.component';
+import { PageTocService } from '../../shared/page-toc/page-toc.service';
 import { LandingNavComponent } from '../../shared/landing-nav/landing-nav.component';
-import { LandingFooterComponent } from '../../shared/landing-footer/landing-footer.component';
 import { TopicNavComponent } from './shared/topic-nav/topic-nav.component';
 import { TOPICS_IN_ORDER } from './dotnet-topics';
 
@@ -12,11 +11,11 @@ const SIDEBAR_KEY = 'roadmap-sidebar-open';
 
 @Component({
   selector: 'app-dotnet-shell',
-  imports: [RouterOutlet, SidebarComponent, PhaseTocComponent, LandingNavComponent, LandingFooterComponent, TopicNavComponent],
+  imports: [RouterOutlet, SidebarComponent, PageTocComponent, LandingNavComponent, TopicNavComponent],
   templateUrl: './dotnet-shell.component.html'
 })
 export class DotnetShellComponent {
-  private readonly toc = inject(PhaseTocService);
+  private readonly toc = inject(PageTocService);
 
   sidebarOpen = signal(this.readSidebarState());
 

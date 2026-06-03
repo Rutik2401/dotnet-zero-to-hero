@@ -3,6 +3,7 @@ import { GitLesson } from '../topic.types';
 const lesson: GitLesson = {
   id: 'branching-merging',
   title: 'Git Branching & Merging — Feature Branches Without the Fear',
+  tldr: 'A branch is just a movable pointer to a commit, so branching is instant and cheap. Merge ties two histories together; a fast-forward simply slides the pointer. Keep main releasable — never build directly on it.',
   whatIsThis: [
     'A branch is a lightweight, movable pointer to a commit. When you create a branch you get an independent line of work, so you can build a feature without touching the stable code on main. Switching branches just moves which line you are working on.',
     'Merging takes the work from one branch and combines it into another. If the target branch has not moved, Git can simply "fast-forward" the pointer; if both branches have new commits, Git creates a merge commit that ties the two histories together.'
@@ -72,6 +73,15 @@ Deleted branch feature/login (was a1b2c3d).
       fixCommand: 'git stash            # shelve changes\ngit switch other-branch\ngit switch -          # back to previous branch\ngit stash pop         # restore changes',
       why: 'Git protects you from silently overwriting unsaved edits. `git stash` cleanly shelves work-in-progress so you can move between branches, then `pop` brings it back exactly where you left off.'
     }
+  ],
+  cheatsheet: [
+    { cmd: 'git switch -c feature/x', what: 'Create and switch to a new branch.' },
+    { cmd: 'git switch main', what: 'Switch back to the main branch.' },
+    { cmd: 'git merge feature/x', what: 'Merge a branch into the current one.' },
+    { cmd: 'git branch', what: 'List your local branches.' },
+    { cmd: 'git branch -d feature/x', what: 'Safely delete a merged branch (-D forces).' },
+    { cmd: 'git merge --no-ff feature/x', what: 'Force a merge commit so the feature stays visible as a unit.' },
+    { cmd: 'git stash', what: 'Shelve uncommitted changes before switching branches.' }
   ],
   interviewQuestions: [
     {

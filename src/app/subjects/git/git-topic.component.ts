@@ -1,11 +1,12 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CodeBlockComponent } from '../../shared/code-block/code-block.component';
 import { PageTocService, TocItem } from '../../shared/page-toc/page-toc.service';
 import { SITE_URL } from '../../shared/site.config';
 import { GitLesson } from './topic.types';
 import { GitTopic, adjacentGitTopics, gitTopicBySlug } from './git-topics';
+import { GitCmdComponent } from './shared/git-cmd.component';
 
 /** Every Git lesson shares the same section skeleton, so the TOC is fixed. */
 const LESSON_SECTIONS: TocItem[] = [
@@ -14,20 +15,33 @@ const LESSON_SECTIONS: TocItem[] = [
   { id: 'real-life',      title: 'Real-life picture' },
   { id: 'how-it-works',   title: 'How it works' },
   { id: 'try-it',         title: 'Try it' },
+  { id: 'cheatsheet',     title: 'Command cheatsheet' },
   { id: 'mistakes',       title: 'Mistakes → fixes' },
   { id: 'interview',      title: 'Interview questions' }
 ];
 
 @Component({
   selector: 'app-git-topic',
-  imports: [RouterLink, CodeBlockComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [RouterLink, CodeBlockComponent, GitCmdComponent],
   template: `
     @if (lesson(); as l) {
       <article class="lesson">
         <header class="lesson-head">
           <p class="lesson-eyebrow">{{ topic?.tag }} · LESSON {{ topic?.vol }}</p>
           <h1 class="lesson-title">{{ l.title }}</h1>
+          <div class="lesson-meta" aria-label="Lesson details">
+            <span class="chip chip-level">{{ topic?.level }}</span>
+            <span class="chip">⏱ {{ topic?.minutes }} min read</span>
+            <span class="chip">🛠 {{ l.mistakeFixes.length }} fixes</span>
+            <span class="chip">⌘ {{ l.cheatsheet.length }} commands</span>
+          </div>
         </header>
+
+        <aside class="tldr">
+          <span class="tldr-label">TL;DR</span>
+          <p>{{ l.tldr }}</p>
+        </aside>
 
         <section class="block" id="what-is-this">
           <h2 class="block-h">What is this?</h2>
@@ -59,8 +73,22 @@ const LESSON_SECTIONS: TocItem[] = [
           }
         </section>
 
+        <section class="block" id="cheatsheet">
+          <h2 class="block-h">Command cheatsheet</h2>
+          <p class="block-lead">Every command in this lesson, ready to copy. Hover a row and hit the copy icon.</p>
+          <div class="cheat">
+            @for (c of l.cheatsheet; track c.cmd) {
+              <div class="cheat-row">
+                <git-cmd class="cheat-cmd" [cmd]="c.cmd" tone="neutral" />
+                <p class="cheat-what">{{ c.what }}</p>
+              </div>
+            }
+          </div>
+        </section>
+
         <section class="block" id="mistakes">
           <h2 class="block-h">❌ Where devs actually go wrong → ✅ the fix</h2>
+          <p class="block-lead">The exact slip-ups developers make on the job — and the copy-paste fix for each.</p>
           <div class="mf-grid">
             @for (m of l.mistakeFixes; track m.mistake) {
               <div class="mf-card">
@@ -68,14 +96,14 @@ const LESSON_SECTIONS: TocItem[] = [
                   <span class="mf-tag mf-tag-bad">Mistake</span>
                   <div class="mf-body">
                     <p>{{ m.mistake }}</p>
-                    @if (m.badCommand) { <code class="mf-cmd mf-cmd-bad">{{ m.badCommand }}</code> }
+                    @if (m.badCommand) { <git-cmd [cmd]="m.badCommand" tone="bad" /> }
                   </div>
                 </div>
                 <div class="mf-row mf-good">
                   <span class="mf-tag mf-tag-good">Fix</span>
                   <div class="mf-body">
                     <p>{{ m.fix }}</p>
-                    @if (m.fixCommand) { <code class="mf-cmd mf-cmd-good">{{ m.fixCommand }}</code> }
+                    @if (m.fixCommand) { <git-cmd [cmd]="m.fixCommand" tone="good" /> }
                   </div>
                 </div>
                 <div class="mf-row mf-why">
@@ -139,11 +167,52 @@ const LESSON_SECTIONS: TocItem[] = [
       text-wrap: balance;
     }
 
-    .block { margin: 0 0 2.25rem; }
-    .block-h {
-      font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em;
-      color: var(--text); margin: 0 0 0.9rem; line-height: 1.3;
+    /* ── Meta chips ── */
+    .lesson-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.72rem; letter-spacing: 0.04em; font-weight: 600;
+      color: var(--text-soft); background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: 0.3rem 0.7rem; line-height: 1.5;
     }
+    .chip-level { color: var(--primary); border-color: rgba(109, 40, 217, 0.3); background: rgba(109, 40, 217, 0.06); }
+
+    /* ── TL;DR callout ── */
+    .tldr {
+      display: flex; gap: 0.85rem; align-items: flex-start;
+      margin: 0 0 2.5rem; padding: 1.1rem 1.3rem;
+      background: linear-gradient(180deg, rgba(109,40,217,0.06), rgba(109,40,217,0.02));
+      border: 1px solid rgba(109, 40, 217, 0.22); border-radius: 14px;
+    }
+    .tldr-label {
+      flex-shrink: 0; font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem; letter-spacing: 0.08em; font-weight: 800;
+      color: #fff; background: var(--primary); padding: 0.3rem 0.55rem;
+      border-radius: 7px; line-height: 1.4; margin-top: 0.1rem;
+    }
+    .tldr p { margin: 0; color: var(--text); font-size: 1.0625rem; line-height: 1.6; font-weight: 500; }
+
+    /* ── Sections (auto-numbered) ── */
+    .lesson { counter-reset: sec; }
+    .block { margin: 0 0 2.5rem; }
+    .block-h {
+      counter-increment: sec;
+      display: flex; align-items: baseline; gap: 0.6rem;
+      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em;
+      color: var(--text); margin: 0 0 0.5rem; line-height: 1.3;
+    }
+    .block-h::before {
+      content: counter(sec, decimal-leading-zero);
+      flex-shrink: 0;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.8125rem; font-weight: 700; color: var(--primary);
+      background: rgba(109, 40, 217, 0.08); border: 1px solid rgba(109, 40, 217, 0.18);
+      border-radius: 7px; padding: 0.15rem 0.45rem; line-height: 1.4;
+      position: relative; top: -0.15rem;
+    }
+    .block-lead { color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; margin: 0 0 1.1rem; }
     .prose { color: var(--text-soft); font-size: 1.0625rem; line-height: 1.7; margin: 0 0 0.85rem; }
     .steps { color: var(--text-soft); font-size: 1.0625rem; line-height: 1.7; margin: 0; padding-left: 1.3rem; }
     .steps li { margin: 0 0 0.55rem; }
@@ -177,13 +246,24 @@ const LESSON_SECTIONS: TocItem[] = [
     .mf-tag-why  { color: var(--primary); background: rgba(109, 40, 217, 0.12); }
     .mf-body { min-width: 0; }
     .mf-body p { margin: 0; color: var(--text); font-size: 0.9875rem; line-height: 1.6; }
-    .mf-cmd {
-      display: inline-block; margin-top: 0.5rem; padding: 0.35rem 0.6rem;
-      font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.8125rem;
-      border-radius: 8px; white-space: pre-wrap; word-break: break-word;
+    .mf-body git-cmd { display: block; margin-top: 0.6rem; }
+
+    /* ── Command cheatsheet ── */
+    .cheat {
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+      background: var(--bg-card);
     }
-    .mf-cmd-bad  { background: rgba(220, 38, 38, 0.1); color: #b91c1c; }
-    .mf-cmd-good { background: #0a0e1a; color: #67e8f9; }
+    .cheat-row {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: 1rem; align-items: center;
+      padding: 0.8rem 1rem; border-bottom: 1px solid var(--border);
+    }
+    .cheat-row:last-child { border-bottom: 0; }
+    .cheat-cmd { min-width: 0; }
+    .cheat-what { margin: 0; color: var(--text-soft); font-size: 0.9375rem; line-height: 1.55; }
+    @media (max-width: 600px) {
+      .cheat-row { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
 
     /* ── Interview Q&A ── */
     .qa-list { display: grid; gap: 0.6rem; }

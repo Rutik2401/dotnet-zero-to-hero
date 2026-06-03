@@ -21,6 +21,14 @@ export interface MistakeFix {
   why: string;
 }
 
+/** One row of the quick command cheatsheet: a copyable command + what it does. */
+export interface CmdRef {
+  /** The command (single or multi-line). */
+  cmd: string;
+  /** A short plain-English description of what it does. */
+  what: string;
+}
+
 /**
  * One lesson's full content. Lives in its own lazy-loaded data file so each
  * topic ships as a separate JS chunk (per-topic lazy loading).
@@ -28,6 +36,8 @@ export interface MistakeFix {
 export interface GitLesson {
   id: string;
   title: string;
+  /** One-sentence "the big idea" — shown as a TL;DR callout under the title. */
+  tldr: string;
   /** Plain-language "what is this". */
   whatIsThis: string[];
   /** Why it matters in real work. */
@@ -42,6 +52,8 @@ export interface GitLesson {
   codeOutput?: string;
   /** The mistake → fix → why cards (the course's differentiator). */
   mistakeFixes: MistakeFix[];
+  /** Quick, copyable command reference for this lesson. */
+  cheatsheet: CmdRef[];
   /** Interview questions for this topic. */
   interviewQuestions: QA[];
   /** One memorable pro tip. */

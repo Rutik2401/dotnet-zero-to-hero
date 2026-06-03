@@ -1,5 +1,6 @@
 import {
   afterNextRender,
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -31,6 +32,7 @@ interface MethodStep   { step: string; title: string; desc: string; }
 
 @Component({
   selector: 'app-hub-home',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, FormsModule, LandingNavComponent, LandingFooterComponent],
   templateUrl: './hub-home.component.html',
   styles: [`
@@ -361,6 +363,12 @@ interface MethodStep   { step: string; title: string; desc: string; }
       border: 1px solid var(--border);
       border-radius: 999px;
       box-shadow: var(--shadow-md);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    /* The email input is borderless; surface focus on the wrapper instead. */
+    .nl-form:focus-within {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md), 0 0 0 4px rgba(109, 40, 217, 0.18);
     }
     .nl-input {
       flex: 1 1 200px; min-width: 0;

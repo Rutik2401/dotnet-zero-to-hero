@@ -1,4 +1,4 @@
-import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, startWith } from 'rxjs/operators';
@@ -21,6 +21,7 @@ interface ContextStrip {
 
 @Component({
   selector: 'app-landing-footer',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, IconComponent],
   template: `
     <footer class="lfoot" aria-labelledby="lfoot-heading">

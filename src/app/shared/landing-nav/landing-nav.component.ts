@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
@@ -32,6 +33,7 @@ interface ResourceItem {
 
 @Component({
   selector: 'app-landing-nav',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, RouterLinkActive, NgTemplateOutlet, IconComponent],
   template: `
     <nav class="lnav" aria-label="Primary">
@@ -71,17 +73,18 @@ interface ResourceItem {
           </button>
 
           @if (resourcesOpen()) {
+            <!-- A disclosure of navigation links (not role="menu", which is for
+                 command menus and would demand roving-tabindex arrow handling).
+                 As plain anchors these are already in the Tab order. -->
             <div class="lnav-drop-panel"
                  id="lnav-resources-panel"
-                 role="menu"
                  (mouseleave)="hoverClose()">
               @for (r of resources; track r.title) {
                 @if (r.external) {
                   <a class="lnav-drop-item"
                      [href]="r.path"
                      target="_blank"
-                     rel="noopener"
-                     role="menuitem"
+                     rel="noopener noreferrer"
                      (click)="closeResources()">
                     <ng-container *ngTemplateOutlet="dropContent; context: { $implicit: r }"></ng-container>
                   </a>
@@ -89,14 +92,12 @@ interface ResourceItem {
                   <a class="lnav-drop-item"
                      [routerLink]="r.path"
                      [fragment]="r.fragment"
-                     role="menuitem"
                      (click)="closeResources()">
                     <ng-container *ngTemplateOutlet="dropContent; context: { $implicit: r }"></ng-container>
                   </a>
                 } @else {
                   <a class="lnav-drop-item"
                      [routerLink]="r.path"
-                     role="menuitem"
                      (click)="closeResources()">
                     <ng-container *ngTemplateOutlet="dropContent; context: { $implicit: r }"></ng-container>
                   </a>
@@ -577,7 +578,13 @@ export class LandingNavComponent {
   }
 
   hoverClose(): void {
-    this.hoverCloseTimer = setTimeout(() => this.resourcesOpen.set(false), 160);
+    this.hoverCloseTimer = setTimeout(() => {
+      // Don't rip the panel away from a keyboard user whose focus is inside it
+      // just because the mouse drifted off.
+      const root = this.dropRoot()?.nativeElement;
+      if (root && root.contains(document.activeElement)) return;
+      this.resourcesOpen.set(false);
+    }, 160);
   }
 
   closeResources(): void {

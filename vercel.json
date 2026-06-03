@@ -1,6 +1,7 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist/learn-hub/browser",
+  "trailingSlash": false,
   "redirects": [
     { "source": "/dotnet/phase-0", "destination": "/dotnet/programming-fundamentals", "permanent": true },
     { "source": "/dotnet/phase-1", "destination": "/dotnet/csharp-deep-dive", "permanent": true },
@@ -10,7 +11,20 @@
     { "source": "/dotnet/phase-5", "destination": "/dotnet/modern-angular", "permanent": true },
     { "source": "/dotnet/phase-6", "destination": "/dotnet/devops-deployment", "permanent": true },
     { "source": "/dotnet/phase-7", "destination": "/dotnet/dotnet-projects", "permanent": true },
-    { "source": "/dotnet/phase-8", "destination": "/dotnet/dotnet-interview-questions", "permanent": true }
+    { "source": "/dotnet/phase-8", "destination": "/dotnet/dotnet-interview-questions", "permanent": true },
+    { "source": "/blog", "destination": "/", "permanent": true },
+    { "source": "/blog/(.*)", "destination": "/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+      ]
+    }
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }

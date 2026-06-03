@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, inject, signal, DestroyRef, afterNextRender } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, inject, signal, DestroyRef, afterNextRender } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { LandingNavComponent } from '../../shared/landing-nav/landing-nav.component';
 import { LandingFooterComponent } from '../../shared/landing-footer/landing-footer.component';
@@ -38,6 +38,7 @@ const LOOP_PAUSE_MS = 2200;
 @Component({
   selector: 'app-contact',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule, LandingNavComponent, LandingFooterComponent],
   template: `
     <div class="page-grid" aria-hidden="true"></div>
@@ -45,7 +46,7 @@ const LOOP_PAUSE_MS = 2200;
     <div class="page-wrap">
       <app-landing-nav />
 
-      <section class="page-hero">
+      <section class="page-hero" id="main-content" tabindex="-1">
         <div class="hero-text">
           <p class="page-eyebrow">Contact</p>
           <h1 class="page-title">

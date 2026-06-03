@@ -32,7 +32,7 @@ interface ComingTopic {
       <app-landing-nav />
 
       <!-- ─── HERO ─── -->
-      <section class="hero">
+      <section class="hero" id="main-content" tabindex="-1">
         <div class="hero-text">
           <p class="hero-eyebrow">COURSES</p>
           <h1 class="hero-title">deep-dive courses,<br />the practical way.</h1>

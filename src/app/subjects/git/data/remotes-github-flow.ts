@@ -3,6 +3,7 @@ import { GitLesson } from '../topic.types';
 const lesson: GitLesson = {
   id: 'remotes-github-flow',
   title: 'Remotes, Pull/Fetch & GitHub Flow — Collaborate Safely',
+  tldr: 'A remote is a hosted copy of your repo; origin is just its default name. fetch downloads without touching your files, pull downloads and merges. Branch → push → PR → merge is the GitHub flow — and you never force-push a shared branch.',
   whatIsThis: [
     'A remote is a version of your repository hosted somewhere else — usually on GitHub. `origin` is the default name for the remote you cloned from. Your local branches and the remote’s branches are separate; commands like push, fetch and pull move commits between them.',
     'GitHub flow is the lightweight team workflow built on this: branch off main, push the branch, open a pull request, get it reviewed, merge to main, deploy. main is always deployable; all work happens on short-lived branches.'
@@ -66,6 +67,15 @@ From https://github.com/you/app
       fixCommand: 'git fetch --prune\n# or set it as default:\ngit config --global fetch.prune true',
       why: 'Deleting a branch on the remote does not automatically remove your local `origin/<branch>` reference. `--prune` cleans up tracking branches that no longer exist upstream, keeping your branch list honest.'
     }
+  ],
+  cheatsheet: [
+    { cmd: 'git remote -v', what: 'List the configured remotes and their URLs.' },
+    { cmd: 'git push -u origin <branch>', what: 'Push a new branch and start tracking it.' },
+    { cmd: 'git fetch', what: 'Download upstream changes without touching your files.' },
+    { cmd: 'git pull --rebase', what: 'Integrate upstream changes and keep history linear.' },
+    { cmd: 'git log --oneline origin/main', what: 'Inspect remote commits before merging.' },
+    { cmd: 'git fetch --prune', what: 'Drop tracking branches that were deleted upstream.' },
+    { cmd: 'git config --global pull.rebase true', what: 'Make rebase the default for every pull.' }
   ],
   interviewQuestions: [
     {

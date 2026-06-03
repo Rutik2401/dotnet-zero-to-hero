@@ -5,6 +5,8 @@
     <button class="btn-burger"
             type="button"
             (click)="toggleSidebar()"
+            [attr.aria-expanded]="sidebarOpen()"
+            aria-controls="app-sidebar"
             [attr.aria-label]="sidebarOpen() ? 'Collapse phase list' : 'Open phase list'"
             [title]="sidebarOpen() ? 'Collapse phase list' : 'Open phase list'">
       @if (sidebarOpen()) { <span aria-hidden="true">✕</span> }
@@ -13,14 +15,14 @@
     <app-landing-nav class="app-header-nav" />
   </header>
 
-  <app-sidebar [phases]="phases" [open]="sidebarOpen()" />
+  <app-sidebar id="app-sidebar" [phases]="phases" [open]="sidebarOpen()" />
 
   <!-- Backdrop: tap outside the drawer to close it on mobile -->
   <div class="sidebar-backdrop"
        (click)="toggleSidebar()"
        aria-hidden="true"></div>
 
-  <main class="app-main">
+  <main class="app-main" id="main-content" tabindex="-1">
     <router-outlet />
     <app-topic-nav />
   </main>

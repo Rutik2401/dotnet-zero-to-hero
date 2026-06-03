@@ -19,6 +19,8 @@ const SIDEBAR_KEY = 'git-sidebar-open';
         <button class="btn-burger"
                 type="button"
                 (click)="toggleSidebar()"
+                [attr.aria-expanded]="sidebarOpen()"
+                aria-controls="app-sidebar"
                 [attr.aria-label]="sidebarOpen() ? 'Collapse lesson list' : 'Open lesson list'"
                 [title]="sidebarOpen() ? 'Collapse lesson list' : 'Open lesson list'">
           @if (sidebarOpen()) { <span aria-hidden="true">✕</span> }
@@ -27,11 +29,11 @@ const SIDEBAR_KEY = 'git-sidebar-open';
         <app-landing-nav class="app-header-nav" />
       </header>
 
-      <app-sidebar [phases]="phases" [open]="sidebarOpen()" />
+      <app-sidebar id="app-sidebar" [phases]="phases" [open]="sidebarOpen()" />
 
       <div class="sidebar-backdrop" (click)="toggleSidebar()" aria-hidden="true"></div>
 
-      <main class="app-main">
+      <main class="app-main" id="main-content" tabindex="-1">
         <router-outlet />
       </main>
 

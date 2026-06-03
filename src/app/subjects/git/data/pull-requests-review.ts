@@ -3,6 +3,7 @@ import { GitLesson } from '../topic.types';
 const lesson: GitLesson = {
   id: 'pull-requests-review',
   title: 'Pull Requests & Code Review — Protected Branches Done Right',
+  tldr: 'A pull request is a GitHub feature, not a Git command — it gates every change behind review and CI. Keep PRs small and single-purpose, and protect main so nothing merges unreviewed.',
   whatIsThis: [
     'A pull request (PR) is a GitHub feature — not a Git command — that proposes merging one branch into another and opens it for discussion, review and automated checks before it is merged. It is the gate every change passes through on a healthy team.',
     'Protected branches are rules on a branch (usually main) that enforce that gate: require reviews, require passing CI, and block direct or force pushes. Together, PRs and protection are how teams keep main always-releasable.'
@@ -67,6 +68,15 @@ Deleted branch feature/coupon (was 9a1c2f3).`,
       fix: 'Require review from someone else, and as a reviewer actually run/read the change. Use "Request changes" when needed, not just "Approve".',
       why: 'Self-review misses the bugs you are blind to — that is exactly why review exists. A genuine second set of eyes catches logic errors, edge cases and security issues before they reach main.'
     }
+  ],
+  cheatsheet: [
+    { cmd: 'git switch -c feature/x', what: 'Branch for the change you will open a PR for.' },
+    { cmd: 'git push -u origin feature/x', what: 'Push the branch so you can open a PR.' },
+    { cmd: 'gh pr create --base main --head feature/x', what: 'Open a pull request from the CLI (GitHub CLI).' },
+    { cmd: 'gh pr status', what: 'Check your PR’s review and CI status.' },
+    { cmd: 'git switch main\ngit pull', what: 'Get the merged result locally after the PR merges.' },
+    { cmd: 'git branch -d feature/x', what: 'Delete the merged branch.' },
+    { cmd: 'git push --force-with-lease', what: 'Safely update a PR branch after a rebase.' }
   ],
   interviewQuestions: [
     {

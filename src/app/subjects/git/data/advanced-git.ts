@@ -3,6 +3,7 @@ import { GitLesson } from '../topic.types';
 const lesson: GitLesson = {
   id: 'advanced-git',
   title: 'Advanced Git — Stash, Cherry-pick, Bisect, Hooks & Secrets',
+  tldr: 'The power tools: stash to shelve, cherry-pick to copy one commit, bisect to binary-search a bug, hooks to automate. And for a leaked secret — rotate it first, then scrub history; deleting the file is never enough.',
   whatIsThis: [
     'The power tools you reach for once the basics are second nature: `stash` to shelve work, `cherry-pick` to copy a single commit, `bisect` to binary-search for the commit that introduced a bug, hooks to automate checks, and submodules to nest one repo inside another.',
     'And the high-stakes one every developer eventually faces: removing a secret (password, API key, `.env`) that was committed and pushed — which requires rewriting history, not just deleting the file.'
@@ -71,6 +72,16 @@ Bisecting: 6 revisions left to test after this (roughly 3 steps)
       fixCommand: 'git clone --recurse-submodules <url>\n# or after a normal clone:\ngit submodule update --init --recursive',
       why: 'A submodule is a pointer to another repo at a specific commit; a plain clone does not fetch its contents, leaving empty directories. The `--recurse-submodules` / `update --init` step is required, and forgetting it is a classic "works on my machine" trap.'
     }
+  ],
+  cheatsheet: [
+    { cmd: 'git stash\ngit stash pop', what: 'Shelve work-in-progress, then restore it later.' },
+    { cmd: 'git stash list', what: 'See all stashed changes on the stack.' },
+    { cmd: 'git cherry-pick <sha>', what: 'Copy a single commit onto the current branch.' },
+    { cmd: 'git bisect start', what: 'Begin a binary search for the commit that broke things.' },
+    { cmd: 'git bisect good <sha>\ngit bisect bad', what: 'Mark known-good and known-bad points during a bisect.' },
+    { cmd: 'git bisect reset', what: 'End the bisect session and return to where you were.' },
+    { cmd: 'git filter-repo --path .env --invert-paths', what: 'Purge a file (e.g. a leaked secret) from all history.' },
+    { cmd: 'git clone --recurse-submodules <url>', what: 'Clone a repo together with its submodules.' }
   ],
   interviewQuestions: [
     {

@@ -13,7 +13,7 @@ import { LandingFooterComponent } from '../../../shared/landing-footer/landing-f
     <div class="wrap">
       <app-landing-nav />
 
-      <section class="hero">
+      <section class="hero" id="main-content" tabindex="-1">
         <p class="eyebrow">In progress · Coming soon</p>
         <h1 class="title">
           Modern React,<br>

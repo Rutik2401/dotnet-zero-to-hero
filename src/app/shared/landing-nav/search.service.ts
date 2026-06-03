@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { TOPICS_IN_ORDER } from '../../subjects/dotnet/dotnet-topics';
+import { GIT_TOPICS_IN_ORDER } from '../../subjects/git/git-topics';
 
 export interface SearchEntry {
   title: string;
@@ -18,6 +19,15 @@ const DOTNET_TOPIC_ENTRIES: SearchEntry[] = TOPICS_IN_ORDER.map(t => ({
   ...(t.ready ? {} : { badge: 'SOON' })
 }));
 
+/** Git lesson entries, generated from the Git registry (kept in sync the same way). */
+const GIT_TOPIC_ENTRIES: SearchEntry[] = GIT_TOPICS_IN_ORDER.map(t => ({
+  title: t.navLabel,
+  subtitle: t.cardDesc,
+  path: `/git/${t.slug}`,
+  kind: 'phase' as const,
+  badge: t.ready ? 'GIT' : 'SOON'
+}));
+
 /**
  * Lightweight search index over the public pages, the .NET phases and the
  * PDF note packs. Topic-level search is intentionally out of scope to keep
@@ -31,11 +41,13 @@ export class SearchService {
   readonly index: SearchEntry[] = [
     { title: 'Hub Home',         subtitle: 'Tracks · subjects · roadmaps',                      path: '/',          kind: 'page',  badge: 'PAGE'  },
     { title: '.NET Roadmap',     subtitle: '9 phases · interview-ready · live',                 path: '/dotnet',    kind: 'page',  badge: 'PAGE'  },
+    { title: 'Git & GitHub',     subtitle: 'Basic → advanced · real fixes · interview Q&A',     path: '/git',       kind: 'page',  badge: 'PAGE'  },
     { title: 'Notes & PDFs',     subtitle: '4 interview-ready PDFs · 475+ pages',               path: '/notes',     kind: 'page',  badge: 'PAGE'  },
     { title: 'Angular Roadmap',  subtitle: 'Standalone · signals · RxJS · SSR (coming soon)',   path: '/angular',   kind: 'page',  badge: 'SOON'  },
     { title: 'React Roadmap',    subtitle: 'Hooks · Next.js · Server Components (coming soon)', path: '/react',     kind: 'page',  badge: 'SOON'  },
 
     ...DOTNET_TOPIC_ENTRIES,
+    ...GIT_TOPIC_ENTRIES,
 
     { title: 'Angular Notes PDF',     subtitle: 'Angular interview prep',     path: '/notes#angular',     kind: 'note', badge: 'PDF' },
     { title: '.NET Senior Notes PDF', subtitle: '.NET senior interview prep', path: '/notes#dotnet-sr',   kind: 'note', badge: 'PDF' },

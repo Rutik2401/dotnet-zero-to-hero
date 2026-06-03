@@ -3,6 +3,7 @@ import { GitLesson } from '../topic.types';
 const lesson: GitLesson = {
   id: 'merge-vs-rebase',
   title: 'Git Merge vs Rebase — When to Use Which (and Conflicts)',
+  tldr: 'Merge keeps the true, branching history; rebase rewrites your commits into one clean line. The golden rule: never rebase commits you have already pushed. Reset/rebase what is private, never rewrite what is public.',
   whatIsThis: [
     'Merge and rebase both integrate changes from one branch into another — they reach the same destination by different routes. Merge ties two histories together with a new merge commit, keeping the exact record of what happened. Rebase replays your commits one by one on top of another branch, producing a single straight line of history.',
     'The trade-off is honesty vs tidiness. Merge keeps a truthful, branching record. Rebase rewrites your commits (new SHAs) to make the log read as if you had worked sequentially. Neither is "better" — they fit different situations.'
@@ -67,6 +68,15 @@ Resolve all conflicts manually, then run "git rebase --continue".`,
       fixCommand: 'git pull --rebase\n# make it the default:\ngit config --global pull.rebase true',
       why: 'A plain `git pull` is fetch + merge, so every sync can add a "Merge branch main" commit. `--rebase` replays your local commits on top instead, keeping the log clean. This is safe because it only rebases YOUR local, unpushed commits.'
     }
+  ],
+  cheatsheet: [
+    { cmd: 'git merge main', what: 'Combine main into your branch (safe for shared work).' },
+    { cmd: 'git rebase main', what: 'Replay your commits on top of main for a linear history.' },
+    { cmd: 'git rebase --continue', what: 'Resume a rebase after staging conflict fixes.' },
+    { cmd: 'git rebase --abort', what: 'Cancel the entire rebase and return to the start.' },
+    { cmd: 'git pull --rebase', what: 'Pull upstream changes without noisy merge commits.' },
+    { cmd: 'git push --force-with-lease', what: 'Force-push your branch without clobbering others’ work.' },
+    { cmd: 'git config --global rerere.enabled true', what: 'Remember and reuse conflict resolutions.' }
   ],
   interviewQuestions: [
     {

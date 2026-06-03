@@ -3,6 +3,7 @@ import { GitLesson } from '../topic.types';
 const lesson: GitLesson = {
   id: 'git-fundamentals',
   title: 'Git Fundamentals — What Git Really Is (and isn’t GitHub)',
+  tldr: 'Git is a local tool that snapshots your code; GitHub is just a website that hosts those snapshots. Once the working-directory → staging → commit flow clicks, every other command makes sense.',
   whatIsThis: [
     'Git is a version control system. It is a tool that runs on your own computer and records snapshots of your project over time, so you can see what changed, go back to any earlier version, and work without fear of breaking things.',
     'GitHub is not Git. GitHub is a website that hosts your Git repositories online so you can back them up and collaborate. Git is the tool; GitHub is one place to keep what the tool produces. You can use Git with zero internet, and you can host on GitLab, Bitbucket or your own server instead.'
@@ -67,6 +68,14 @@ Changes to be committed:
       fixCommand: 'git config --global user.name "Your Name"\ngit config --global user.email "you@example.com"',
       why: 'Every commit is stamped with an author. Without it, your contribution graph is wrong and some servers reject the push entirely.'
     }
+  ],
+  cheatsheet: [
+    { cmd: 'git config --global user.name "Your Name"', what: 'Set your commit author name (once per machine).' },
+    { cmd: 'git init', what: 'Turn the current folder into a Git repository.' },
+    { cmd: 'git status', what: 'See what is changed, staged, or untracked.' },
+    { cmd: 'git add <file>', what: 'Stage a file for the next commit.' },
+    { cmd: 'git commit -m "message"', what: 'Save a snapshot of the staged changes.' },
+    { cmd: 'git log --oneline', what: 'View the commit history, one line per commit.' }
   ],
   interviewQuestions: [
     {

@@ -3,6 +3,7 @@ import { GitLesson } from '../topic.types';
 const lesson: GitLesson = {
   id: 'interview-questions',
   title: 'Git & GitHub Interview Questions + Real-World Scenarios',
+  tldr: 'The questions everyone gets asked — Git vs GitHub, delete the last commit, reset vs revert — plus the real "what do I do when…" panics, each with a copy-paste rescue.',
   whatIsThis: [
     'A focused finale: the Git and GitHub questions juniors actually get asked in interviews, plus the "what do you do when…" scenarios that you will hit on a real team in your first month.',
     'Treat the mistake/fix cards below as a rescue manual — each is a situation a developer panics in, with the calm, correct way out.'
@@ -69,6 +70,16 @@ git rm -r --cached node_modules  # untrack already-committed files`,
       fixCommand: '# keep work made here:\ngit switch -c fix/from-detached\n# or just go back:\ngit switch main',
       why: 'Detached HEAD means you checked out a specific commit instead of a branch. Commits made there are not on any branch and can be lost — making a branch attaches them so they are safe.'
     }
+  ],
+  cheatsheet: [
+    { cmd: 'git reset --soft HEAD~1', what: 'Undo the last (unpushed) commit, keep changes.' },
+    { cmd: 'git revert HEAD', what: 'Safely undo a pushed commit with a new commit.' },
+    { cmd: 'git reflog', what: 'Recover lost commits after a bad reset.' },
+    { cmd: 'git switch -c feature/x', what: 'Create and switch to a new branch.' },
+    { cmd: 'git pull --rebase origin main', what: 'Fix a rejected (non-fast-forward) push.' },
+    { cmd: 'git rm -r --cached node_modules', what: 'Stop tracking files that were committed by mistake.' },
+    { cmd: 'git stash', what: 'Shelve changes to switch context quickly.' },
+    { cmd: 'git filter-repo --path .env --invert-paths', what: 'Remove a leaked secret from the whole history.' }
   ],
   interviewQuestions: [
     {

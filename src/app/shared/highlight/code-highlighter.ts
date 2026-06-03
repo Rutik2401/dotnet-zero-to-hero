@@ -5,12 +5,14 @@
  * share the same module instance (no second download, no double-register).
  */
 
-let csharpPromise:     Promise<any> | null = null;
-let typescriptPromise: Promise<any> | null = null;
-let multiPromise:      Promise<any> | null = null;
+import type { HLJSApi } from 'highlight.js';
+
+let csharpPromise:     Promise<HLJSApi> | null = null;
+let typescriptPromise: Promise<HLJSApi> | null = null;
+let multiPromise:      Promise<HLJSApi> | null = null;
 
 /** hljs core + C# grammar — used by phase-0..phase-4 (C# only). */
-export function loadCSharpHighlighter(): Promise<any> {
+export function loadCSharpHighlighter(): Promise<HLJSApi> {
   if (!csharpPromise) {
     csharpPromise = Promise.all([
       import('highlight.js/lib/core'),
@@ -25,7 +27,7 @@ export function loadCSharpHighlighter(): Promise<any> {
 }
 
 /** hljs core + TypeScript + HTML (xml) — used by phase-5 (Modern Angular). */
-export function loadTypeScriptHighlighter(): Promise<any> {
+export function loadTypeScriptHighlighter(): Promise<HLJSApi> {
   if (!typescriptPromise) {
     typescriptPromise = Promise.all([
       import('highlight.js/lib/core'),
@@ -42,7 +44,7 @@ export function loadTypeScriptHighlighter(): Promise<any> {
 }
 
 /** hljs core + bash/yaml/dockerfile/json/csharp/xml — used by phase-6 (DevOps mixes languages). */
-export function loadMultiHighlighter(): Promise<any> {
+export function loadMultiHighlighter(): Promise<HLJSApi> {
   if (!multiPromise) {
     multiPromise = Promise.all([
       import('highlight.js/lib/core'),

@@ -22,7 +22,7 @@ import { SearchService, SearchEntry } from './search.service';
     @if (svc.isOpen()) {
       <div class="sm-backdrop" (click)="close()" aria-hidden="true"></div>
       <div class="sm-shell" role="dialog" aria-modal="true" aria-label="Search">
-        <div class="sm-card" (click)="$event.stopPropagation()">
+        <div #card class="sm-card" (click)="$event.stopPropagation()">
           <div class="sm-input-row">
             <svg class="sm-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="11" cy="11" r="7"/>
@@ -40,17 +40,26 @@ import { SearchService, SearchEntry } from './search.service';
                    (keydown.escape)="close()"
                    autocomplete="off"
                    spellcheck="false"
+                   role="combobox"
+                   aria-controls="sm-listbox"
+                   aria-autocomplete="list"
+                   [attr.aria-expanded]="results().length > 0"
+                   [attr.aria-activedescendant]="results().length ? 'sm-opt-' + active() : null"
                    aria-label="Search input" />
             <button class="sm-esc" type="button" (click)="close()" aria-label="Close search">esc</button>
           </div>
 
-          <div class="sm-results" role="listbox">
+          <div class="sm-results" id="sm-listbox" role="listbox" aria-label="Search results">
             @if (results().length === 0) {
               <p class="sm-empty">No matches for "<strong>{{ queryModel }}</strong>"</p>
             }
             @for (e of results(); track e.path; let i = $index) {
               <button class="sm-row"
+                      [id]="'sm-opt-' + i"
+                      role="option"
+                      tabindex="-1"
                       [class.is-active]="i === active()"
+                      [attr.aria-selected]="i === active()"
                       type="button"
                       (mouseenter)="active.set(i)"
                       (click)="goTo(e)">
@@ -81,6 +90,7 @@ import { SearchService, SearchEntry } from './search.service';
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       z-index: 100;
+      cursor: pointer;
       animation: smFade 140ms ease-out;
     }
     .sm-shell {
@@ -112,6 +122,12 @@ import { SearchService, SearchEntry } from './search.service';
       gap: 0.6rem;
       padding: 0.95rem 1.1rem;
       border-bottom: 1px solid rgba(10, 10, 10, 0.06);
+    }
+    /* The search input is borderless and auto-focused on open; show a visible
+       focus indicator on the row so keyboard users can see where they are. */
+    .sm-input-row:focus-within {
+      box-shadow: inset 0 0 0 2px var(--primary, #6d28d9);
+      border-radius: 12px 12px 0 0;
     }
     .sm-icon { color: #78716c; flex-shrink: 0; }
     .sm-input {
@@ -268,18 +284,31 @@ export class SearchModalComponent implements AfterViewInit {
   protected readonly svc = inject(SearchService);
   private readonly router = inject(Router);
   @ViewChild('input') private inputEl?: ElementRef<HTMLInputElement>;
+  @ViewChild('card') private cardEl?: ElementRef<HTMLElement>;
+
+  /** The element focused before the modal opened, so we can restore it on close. */
+  private lastFocused: HTMLElement | null = null;
 
   queryModel = '';
   readonly active = signal(0);
   readonly results = computed(() => this.svc.match(this.svc.query()));
 
   constructor() {
-    // When the modal opens, reset active row and focus the input.
+    // Open/close side-effects: focus the input, lock body scroll, and restore
+    // focus to the trigger on close. Guarded for SSR (no document).
     effect(() => {
-      if (this.svc.isOpen()) {
+      const open = this.svc.isOpen();
+      if (typeof document === 'undefined') return;
+      if (open) {
+        this.lastFocused = document.activeElement as HTMLElement | null;
         this.active.set(0);
         this.queryModel = '';
+        document.body.style.overflow = 'hidden';
         queueMicrotask(() => this.inputEl?.nativeElement.focus());
+      } else {
+        document.body.style.overflow = '';
+        this.lastFocused?.focus?.();
+        this.lastFocused = null;
       }
     });
     // Clamp active index when result set shrinks.
@@ -330,5 +359,28 @@ export class SearchModalComponent implements AfterViewInit {
   @HostListener('window:keydown.escape')
   onEsc(): void {
     if (this.svc.isOpen()) this.close();
+  }
+
+  // Keep Tab focus inside the dialog while it is open (the background is not
+  // inert, so without this, focus would escape to the page behind the backdrop).
+  @HostListener('window:keydown.Tab', ['$event'])
+  trapTab(e: Event): void {
+    if (!this.svc.isOpen()) return;
+    const card = this.cardEl?.nativeElement;
+    if (!card) return;
+    const focusable = card.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const shift = (e as KeyboardEvent).shiftKey;
+    if (shift && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!shift && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 }

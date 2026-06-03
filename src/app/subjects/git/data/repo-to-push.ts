@@ -3,6 +3,7 @@ import { GitLesson } from '../topic.types';
 const lesson: GitLesson = {
   id: 'repo-to-push',
   title: 'From Repo Creation to First Push — Every Step',
+  tldr: 'Push a new project in 7 steps: init → add → commit → make an empty GitHub repo → remote add → branch -M main → push -u. Almost every "can’t push" error is a remote, branch-name, or auth problem.',
   whatIsThis: [
     'This is the complete "happy path" every developer does when starting a project: turn a folder into a Git repo, make your first commit, create a matching repo on GitHub, connect the two, and push your code online.',
     'It is the exact sequence interviewers ask juniors to recite, and the one that trips people up at the connect-and-push step.'
@@ -70,6 +71,16 @@ branch 'main' set up to track 'origin/main'.`,
       fixCommand: 'git branch -M main\ngit push -u origin main',
       why: 'GitHub’s default branch is now `main`. If you push `master`, your code is there but not on the branch people look at by default, so the repo looks empty. `-M` renames (force) the current branch.'
     }
+  ],
+  cheatsheet: [
+    { cmd: 'git init', what: 'Start tracking the project locally.' },
+    { cmd: 'git add .', what: 'Stage everything (after adding a .gitignore).' },
+    { cmd: 'git commit -m "Initial commit"', what: 'Create the first snapshot.' },
+    { cmd: 'git remote add origin <url>', what: 'Connect your local repo to the GitHub repo.' },
+    { cmd: 'git branch -M main', what: 'Rename the current branch to main.' },
+    { cmd: 'git push -u origin main', what: 'Push and remember the upstream so later pushes are just "git push".' },
+    { cmd: 'git remote -v', what: 'Show the connected remote URLs.' },
+    { cmd: 'git remote set-url origin <url>', what: 'Fix a wrong remote URL.' }
   ],
   interviewQuestions: [
     {

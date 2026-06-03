@@ -14,7 +14,7 @@ import { GIT_TOPICS_IN_ORDER } from '../git-topics';
     <div class="wrap">
       <app-landing-nav />
 
-      <section class="hero">
+      <section class="hero" id="main-content" tabindex="-1">
         <p class="hero-eyebrow">GIT &amp; GITHUB · BASIC → ADVANCED</p>
         <h1 class="hero-title">
           Git, taught around the <span class="accent">mistakes developers actually make.</span>

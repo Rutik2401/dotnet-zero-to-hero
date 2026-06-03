@@ -3,6 +3,7 @@ import { GitLesson } from '../topic.types';
 const lesson: GitLesson = {
   id: 'undoing-changes',
   title: 'Undoing Things in Git — reset, revert, restore & reflog',
+  tldr: 'How you delete the last commit depends on whether it is pushed: reset (rewrites history) for private work, revert (adds a commit) for shared. And after a bad reset --hard, git reflog brings your commits back.',
   whatIsThis: [
     'This lesson is your "oops" toolkit: how to delete the last commit, throw away changes, unstage a file, and — most importantly — recover work you thought you destroyed.',
     'The four commands that cover almost every undo: `git restore` (discard/unstage file changes), `git reset` (move the branch pointer / undo commits locally), `git revert` (undo a commit by making a new one), and `git reflog` (the safety log that lets you get lost commits back).'
@@ -67,6 +68,15 @@ e4f8c1a HEAD@{1}: commit: Add checkout feature
       fixCommand: '# discard changes to one file\ngit restore src/app.ts\n# unstage a file (keep the edits)\ngit restore --staged src/app.ts',
       why: '`git restore` is the modern, file-scoped tool. It avoids the all-or-nothing risk of `reset --hard` and makes your intent (this file, this state) explicit.'
     }
+  ],
+  cheatsheet: [
+    { cmd: 'git reset --soft HEAD~1', what: 'Undo the last commit, keep changes staged.' },
+    { cmd: 'git reset HEAD~1', what: 'Undo the last commit, keep changes unstaged (default).' },
+    { cmd: 'git reset --hard HEAD~1', what: 'Undo the last commit AND discard the changes (careful).' },
+    { cmd: 'git revert HEAD', what: 'Safely undo a pushed commit by adding a new one.' },
+    { cmd: 'git restore <file>', what: 'Discard working-directory changes to a file.' },
+    { cmd: 'git restore --staged <file>', what: 'Unstage a file but keep the edits.' },
+    { cmd: 'git reflog', what: 'Find lost commits after a bad reset, then reset to the SHA.' }
   ],
   interviewQuestions: [
     {
